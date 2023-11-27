@@ -4,13 +4,13 @@
 Skoða verkefnalýsingu mjög vel og setja allt upp sem að þarf fyrir verkefnið.  
 Allir skoða Git betur til að hafa það alveg á hreinu.
 
-- Ágúst
+- Ágúst  
   Setja upp nýtt project á GitHub til að halda utan um To-Do listann. Bæta requirements í To-Do listann.
-- Ragnar
+- Ragnar  
   Skoða betur hvernig Git virkar, bæta requirements í To-Do listann.
-- Sigurður
+- Sigurður  
   Setja upp dagbók, bæta requirements í To-Do listann.
-- Stefán
+- Stefán  
   Mætti ekki.
-- Teódór
+- Teódór  
   Setja upp og skoða hvernig Git virkar, bæta requirements í To-Do listann.
