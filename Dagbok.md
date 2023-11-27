@@ -2,7 +2,7 @@
 
 ## 27. Nóvember
 - Ágúst 
-  - Ragnar
-  - Sigurður
-  - Stefán
-  - Teódór
+- Ragnar
+- Sigurður
+- Stefán
+- Teódór
