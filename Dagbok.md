@@ -13,5 +13,5 @@ testing testing not not
   Setja upp dagbók, bæta requirements í To-Do listann.
 - Stefán  
   Mætti ekki.
-- Teódór  
+- Theodór  
   Setja upp og skoða hvernig Git virkar, bæta requirements í To-Do listann.
