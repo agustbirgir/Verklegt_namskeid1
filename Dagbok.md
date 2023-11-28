@@ -36,6 +36,6 @@ Ræða meira um hvernig við ætlum að setja verkefnið upp.
 - Stefán  
   Mætti ekki.
 - Theodór  
-  Mætti ekki.
+  vinnur með Ágúst í Use case diagram
 
 ### Lok dags
