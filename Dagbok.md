@@ -4,7 +4,6 @@
 Skoða verkefnalýsingu mjög vel og setja allt upp sem að þarf fyrir verkefnið.  
 Allir skoða Git betur til að hafa það alveg á hreinu.
 
-testing testing not not
 - Ágúst  
   Setja upp nýtt project á GitHub til að halda utan um To-Do listann. Bæta requirements í To-Do listann.
 - Ragnar  
@@ -15,3 +14,21 @@ testing testing not not
   Mætti ekki.
 - Theodór  
   Setja upp og skoða hvernig Git virkar, bæta requirements í To-Do listann.
+
+
+## 28. Nóvember
+blank
+
+- Ágúst
+  
+- Ragnar
+  
+- Sigurður
+  
+- Stefán
+  
+- Theodór
+
+
+
+  
