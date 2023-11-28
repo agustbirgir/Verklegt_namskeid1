@@ -15,9 +15,11 @@ Allir skoða Git betur til að hafa það alveg á hreinu.
 - Theodór  
   Setja upp og skoða hvernig Git virkar, bæta requirements í To-Do listann.
 
+  ### í lok dags þá kláruðum TODO listan og uppsetning á Github síðan vorum við að læra meira á github svo við það verður ekki vandamál í framtíðini
+
 
 ## 28. Nóvember
-blank
+byraj 
 
 - Ágúst
   
