@@ -12,10 +12,10 @@ Allir skoða Git betur til að hafa það alveg á hreinu.
   Skoða betur hvernig Git virkar, bæta requirements í To-Do listann.
 - Sigurður  
   Setja upp dagbók, bæta requirements í To-Do listann.
-- Stefán  
-  Mætti ekki.
 - Theodór  
   Setja upp og skoða hvernig Git virkar, bæta requirements í To-Do listann.
+- Stefán  
+  Mætti ekki.
 
 ### Lok dags
 Við kláruðum TODO listan og uppsetning á Github síðan vorum við að læra meira á github svo við það verður ekki vandamál í framtíðini
@@ -30,16 +30,17 @@ Ræða meira um hvernig við ætlum að setja verkefnið upp.
 - Ágúst  
   Vinna í use case diagram.
 - Ragnar  
-  Negla niður akkúrat hvað við eigum að gera út frá verkefnalýsingu, halda áfram með notendahópagreiningu
+  Negla niður akkúrat hvað við eigum að gera út frá verkefnalýsingu, halda áfram með notendahópagreiningu og hjálpa með use case diagram.
 - Sigurður  
-  Vinna í UML class diagram, bæta requirements í To-Do listann.
+  Vinna í UML class diagram og use case diagram, bæta requirements í To-Do listann.
+- Theodór  
+  Vinnur með Ágúst í Use case diagram, heldur utan um hvaða kröfur við erum búnir með.
 - Stefán  
   Mætti ekki.
-- Theodór  
-  vinnur með Ágúst í Use case diagram
 
 ### Lok dags
-Klárað var user group analysis og Use case diagram og vorum byrjaðir
+Klárað var notendahópaggreininguna, komnir langt með use case diagram og byrjuðum á class diagram sem við munum klára eftir að klára use case diagram-ið.
 
 
 
+## 29. Nóvember
