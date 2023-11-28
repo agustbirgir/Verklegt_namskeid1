@@ -39,3 +39,7 @@ Ræða meira um hvernig við ætlum að setja verkefnið upp.
   vinnur með Ágúst í Use case diagram
 
 ### Lok dags
+Klárað var user group analysis og Use case diagram og vorum byrjaðir
+
+
+
