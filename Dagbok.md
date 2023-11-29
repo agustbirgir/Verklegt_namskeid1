@@ -47,7 +47,7 @@ Klárað var notendahópaggreininguna, komnir langt með use case diagram og byr
 
 ### Morgunfundur
 Gerðum use cases visually sem er vitlaust svo ætlum að breyta því yfir í texta með því að nota kröfulista. Halda áfram með class  
-diagram og klára alveg basic-in.  
+diagram og klára alveg basic-in á því. Síðan ætlum við að byrja á wireframe ef tími gefst.
 
 - Ágúst  
   Vinna í use case diagram.
@@ -61,4 +61,4 @@ diagram og klára alveg basic-in.
   Mætti ekki.
 
 ### Lok dags
-
+Við kláruðum use case diagram og use case diagram og komumst áleiðis með wireframe-ið.
