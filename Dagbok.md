@@ -44,3 +44,21 @@ Klárað var notendahópaggreininguna, komnir langt með use case diagram og byr
 
 
 ## 29. Nóvember
+
+### Morgunfundur
+Gerðum use cases visually sem er vitlaust svo ætlum að breyta því yfir í texta með því að nota kröfulista. Halda áfram með class  
+diagram og klára alveg basic-in.  
+
+- Ágúst  
+  Vinna í use case diagram.
+- Ragnar  
+  Vinna í class diagram.
+- Sigurður  
+  Vinna í class diagram.
+- Theodór  
+  Vinna í use case diagram.
+- Stefán  
+  Mætti ekki.
+
+### Lok dags
+
