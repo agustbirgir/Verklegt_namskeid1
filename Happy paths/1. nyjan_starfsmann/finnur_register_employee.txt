@@ -19,6 +19,7 @@ _|_|______________
                   2. Employee Database
                   3. Update Employee
                   4. Crew Schedules
+                  5. Register new Employee
 
      option:
 ===================================================================================
