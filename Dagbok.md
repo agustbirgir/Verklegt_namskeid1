@@ -1,6 +1,8 @@
 # Dagbók Verklega Námskeið
 
 ## 27. Nóvember
+
+### Morgunfundur
 Skoða verkefnalýsingu mjög vel og setja allt upp sem að þarf fyrir verkefnið.  
 Allir skoða Git betur til að hafa það alveg á hreinu.
 
@@ -10,27 +12,53 @@ Allir skoða Git betur til að hafa það alveg á hreinu.
   Skoða betur hvernig Git virkar, bæta requirements í To-Do listann.
 - Sigurður  
   Setja upp dagbók, bæta requirements í To-Do listann.
-- Stefán  
-  Mætti ekki.
 - Theodór  
   Setja upp og skoða hvernig Git virkar, bæta requirements í To-Do listann.
+- Stefán  
+  Mætti ekki.
 
-  ### í lok dags þá kláruðum TODO listan og uppsetning á Github síðan vorum við að læra meira á github svo við það verður ekki vandamál í framtíðini
+### Lok dags
+Við kláruðum TODO listan og uppsetning á Github síðan vorum við að læra meira á github svo við það verður ekki vandamál í framtíðini
 
 
 ## 28. Nóvember
-byraj 
 
-- Ágúst
-  
-- Ragnar
-  
-- Sigurður
-  
-- Stefán
-  
-- Theodór
+### Morgunfundur
+Halda áfram með class diagram, use case diagram og notendahópagreiningu. Skrá fleiri requirements í To-Do listann.  
+Ræða meira um hvernig við ætlum að setja verkefnið upp.  
+
+- Ágúst  
+  Vinna í use case diagram.
+- Ragnar  
+  Negla niður akkúrat hvað við eigum að gera út frá verkefnalýsingu, halda áfram með notendahópagreiningu og hjálpa með use case diagram.
+- Sigurður  
+  Vinna í UML class diagram og use case diagram, bæta requirements í To-Do listann.
+- Theodór  
+  Vinnur með Ágúst í Use case diagram, heldur utan um hvaða kröfur við erum búnir með.
+- Stefán  
+  Mætti ekki.
+
+### Lok dags
+Klárað var notendahópaggreininguna, komnir langt með use case diagram og byrjuðum á class diagram sem við munum klára eftir að klára use case diagram-ið.
 
 
 
-  
+## 29. Nóvember
+
+### Morgunfundur
+Gerðum use cases visually sem er vitlaust svo ætlum að breyta því yfir í texta með því að nota kröfulista. Halda áfram með class  
+diagram og klára alveg basic-in á því. Síðan ætlum við að byrja á wireframe ef tími gefst.
+
+- Ágúst  
+  Vinna í use case diagram.
+- Ragnar  
+  Vinna í class diagram.
+- Sigurður  
+  Vinna í class diagram.
+- Theodór  
+  Vinna í use case diagram.
+- Stefán  
+  Mætti ekki.
+
+### Lok dags
+Við kláruðum use case diagram og use case diagram og komumst áleiðis með wireframe-ið.
