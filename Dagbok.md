@@ -62,3 +62,21 @@ diagram og klára alveg basic-in á því. Síðan ætlum við að byrja á wire
 
 ### Lok dags
 Við kláruðum use case diagram og use case diagram og komumst áleiðis með wireframe-ið.
+
+## 30. Nóvember
+
+### Morgunfundur 
+--Blank--
+- Ágúst
+
+- Ragnar
+
+- Sigurður
+
+- Theodór
+
+- Stefán
+  mætti ekki :(
+
+### Lok dags
+--blank--
