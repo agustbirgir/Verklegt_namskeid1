@@ -66,15 +66,16 @@ Við kláruðum use case diagram og use case diagram og komumst áleiðis með w
 ## 30. Nóvember
 
 ### Morgunfundur 
---Blank--
-- Ágúst
+Halda áfram með wireframe, fara yfir allt.
 
-- Ragnar
-
+- Ágúst  
+  Vinna í wireframe.
+- Ragnar  
+  Fara yfir allt sem er klárað
 - Sigurður
-
+  Klára class diagram, láta það inn í skýrsluna.
 - Theodór
-
+  Fara yfir allt sem er klárað
 - Stefán
   mætti ekki :(
 
