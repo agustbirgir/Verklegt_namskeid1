@@ -71,12 +71,12 @@ Halda áfram með wireframe, fara yfir allt.
 - Ágúst  
   Vinna í wireframe.
 - Ragnar  
-  Fara yfir allt sem er klárað
-- Sigurður
+  Fara yfir allt sem er klárað.
+- Sigurður  
   Klára class diagram, láta það inn í skýrsluna.
-- Theodór
-  Fara yfir allt sem er klárað
-- Stefán
+- Theodór  
+  Fara yfir allt sem er klárað.
+- Stefán  
   mætti ekki :(
 
 ### Lok dags
