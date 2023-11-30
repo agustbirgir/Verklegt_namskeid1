@@ -13,11 +13,11 @@ _|_|______________
                         Stimplaðu inn alla kröfur
 ===================================================================================
                   
-                      Name:
-                      Kennitala:
-                      Email:
-                      heimilisfang:
-                      gsm-sima:
+                      Name:baldur sigurðsson
+                      Kennitala:2110032-2350
+                      Email:badur@gmail.com
+                      heimilisfang:Nóatún 17
+                      gsm-sima:5865412
                       heimasimi*:
 
 ==================================================================================
