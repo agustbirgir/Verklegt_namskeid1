@@ -15,11 +15,12 @@ _|_|______________
                     Choose which option - Update employee information
 ===================================================================================
                   
-                  Input employee name to update
-                  
-                  
-                  
-
+                      Name:Baldur Sigurðsson(NOT ALLOWED)
+                      Kennitala:2110032-2350(NOT ALLOWED)
+                      Email:baldur@gmail.com
+                      heimilisfang:Nóatún 17
+                      gsm-sima:5865412
+                      heimasimi*:
      option:
 ===================================================================================
                         [Q]uit

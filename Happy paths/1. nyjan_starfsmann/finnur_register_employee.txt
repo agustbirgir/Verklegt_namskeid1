@@ -17,9 +17,8 @@ _|_|______________
                   
                   1. Assign crew to Voyage
                   2. Employee Database
-                  3. Update Employee
+                  3. Update/Register Employee
                   4. Crew Schedules
-                  5. Register new Employee
 
      option:
 ===================================================================================
