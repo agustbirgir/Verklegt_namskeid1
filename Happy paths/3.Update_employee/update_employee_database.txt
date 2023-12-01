@@ -12,14 +12,13 @@ _|_|______________
    /      |      \         
  */       |       \*
 ===================================================================================
-                            Choose which option
+                            Choose which option - update employee database
 ===================================================================================
                   
-                  1. Assign crew to Voyage
-                  2. Employee Database
-                  3. Update Employee
-                  4. Crew Schedules
-                  5. Register new Employee
+                  1. Add Employee
+                  2. Update Employee Information
+                  3. Remove Employee
+                  
 
      option:
 ===================================================================================
