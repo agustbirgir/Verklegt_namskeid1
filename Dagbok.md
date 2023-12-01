@@ -88,19 +88,19 @@ Við kláruðum Wireframe og class diagram okkar.
 Talað var saman um að við allir skildum fara saman yfir öll verkefnin okkar sem við gerðum þessa viku og sjá við getum lagað
 
 - Ágúst
-  Fór yfir með liðinu Hönnnaskýrsluna
+  - Fór yfir með liðinu Hönnnaskýrsluna
 
 - Ragnar
-  Fór yfir með liðinu Hönnnaskýrsluna
+  - Fór yfir með liðinu Hönnnaskýrsluna
 
 - Sigurður
-  Fór yfir með liðinu Hönnnaskýrsluna
+  - Fór yfir með liðinu Hönnnaskýrsluna
 
 - Theodór
-  Fór yfir með liðinu Hönnnaskýrsluna
+  - Fór yfir með liðinu Hönnnaskýrsluna
 
 - Stefán
-  Mætti ekki :(
+  - Mætti ekki :(
 
 ### Lok dags
 Við fórum yfir okkar verkefni og löguðum nokkra hluti og gerðum okkur kláran fyrir næstu viku
