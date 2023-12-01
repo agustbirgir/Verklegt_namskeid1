@@ -80,4 +80,27 @@ Halda áfram með wireframe, fara yfir allt.
   mætti ekki :(
 
 ### Lok dags
---blank--
+Við kláruðum Wireframe og class diagram okkar.
+
+## 1. Desember
+
+### Morgunfundur
+Talað var saman um að við allir skildum fara saman yfir öll verkefnin okkar sem við gerðum þessa viku og sjá við getum lagað
+
+- Ágúst
+  Fór yfir með liðinu Hönnnaskýrsluna
+
+- Ragnar
+  Fór yfir með liðinu Hönnnaskýrsluna
+
+- Sigurður
+  Fór yfir með liðinu Hönnnaskýrsluna
+
+- Theodór
+  Fór yfir með liðinu Hönnnaskýrsluna
+
+- Stefán
+  Mætti ekki :(
+
+### Lok dags
+Við fórum yfir okkar verkefni og löguðum nokkra hluti og gerðum okkur kláran fyrir næstu viku
