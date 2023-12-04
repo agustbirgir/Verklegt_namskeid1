@@ -104,3 +104,23 @@ Talað var saman um að við allir skildum fara saman yfir öll verkefnin okkar 
 
 ### Lok dags
 Við fórum yfir okkar verkefni og löguðum nokkra hluti og gerðum okkur kláran fyrir næstu viku
+
+## 4. Desember
+
+### Morgunfundur
+Skoðum endurgjöfina á hönnunarskýrslunni. Þurfum að laga kröfurnar, happy paths, klasaritið, allt skjalið  
+yfir höfuð og þurfum að byrja á forritinu.  
+
+- Ágúst
+  Laga kröfurnar, skoða kóðann.
+- Ragnar
+  Laga og bæta við happy paths.
+- Sigurður
+  Gera basic uppsetningu á forritinu
+- Theodór
+  Hjálpa að laga docs skjalið.
+- Stefán
+  - Mætti ekki :(
+
+### Lok dags
+
