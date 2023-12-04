@@ -5,7 +5,7 @@ from Models.Employee import Employee
 class DataLayerAPI:
     def __init__(self):
         #print(os.getcwd())
-        self.file_name = "files/employees.csv"
+        self.file_name = "Verklegt_namskeid1/files/employees.csv"
 
     def get_all_employees(self):
         ret_list = []
