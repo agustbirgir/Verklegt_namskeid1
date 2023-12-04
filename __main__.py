@@ -1,3 +1,4 @@
+print("Booting up.....")
 from UiLayer.mainmenu_ui import MainMenuUI
 
 mainmenu = MainMenuUI()
