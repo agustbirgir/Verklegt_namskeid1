@@ -15,11 +15,6 @@ class Crew_UI:
         print("5. Crew schedules")
         print("b to go back")
 
-    def flight_manager_output(self):
-        print("1. Create voyage")
-        print("2. List all destinations")
-        print("3. Show flight info per week")
-
     def input_prompt(self):
         while True:
             self.crew_manager_output()

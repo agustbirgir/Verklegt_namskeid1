@@ -1,7 +1,9 @@
 from LogicLayer.LogicLayerAPI import LogicLayerAPI
 from Models.Employee import Employee
-from UiLayer.crew_ui import Crew_UI
 from LogicLayer.logic_wrapper import Logic_Wrapper
+from UiLayer.crew_ui import Crew_UI
+from UiLayer.flight_ui import Flight_UI
+
 
 class MainMenuUI:
     def __init__(self):
@@ -21,10 +23,10 @@ class MainMenuUI:
             if command == "q":
                 break
             elif command == "1":
-                pass
+                flight = Flight_UI(self.logic_wrapper)
+                flight.input_prompt()
             elif command == "2":
-                menu = Crew_UI(self.logic_wrapper)
-                menu.input_prompt()
-                
+                crew = Crew_UI(self.logic_wrapper)
+                crew.input_prompt()
             else:
-                print("Invalid input try again")
+                print("Invalid input, try again")
