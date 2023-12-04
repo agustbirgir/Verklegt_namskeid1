@@ -123,4 +123,4 @@ yfir höfuð og þurfum að byrja á forritinu.
   - Mætti ekki :(
 
 ### Lok dags
-
+Löguðum flest í docs skjalinu og gerðum uppsetningu forritsins.
