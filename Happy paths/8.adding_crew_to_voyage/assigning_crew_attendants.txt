@@ -14,7 +14,7 @@ _|_|______________
 ===================================================================================
                             Choose which option - Assign crew to Voyage
 ===================================================================================
-                  Current voyage: Nuuk, 5/12/2024 - 5/12/2024
+                  Current voyage: Nuuk, 5/12/2024 - 6/12/2024
                   Assigning crew to nearest unmanned flight 
                   Currently assigned pilots: 2
                   Currently assigned attendants: 0
