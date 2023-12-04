@@ -14,10 +14,12 @@ class DataLayerAPI:
             for row in reader:
                 ret_list.append(Employee(row["name"], row["profession"]))
         return ret_list
-
+    
     def create_employee(self, employee):
         with open(self.file_name, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["name", "profession"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            if csvfile.tell() == 0:
+                writer.writeheader()
 
-            writer.writerow({'name': employee.name, 'profession':employee.profession})
+            writer.writerow({'name': employee.name, 'profession': employee.profession})
