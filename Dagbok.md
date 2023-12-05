@@ -133,7 +133,7 @@ Löguðum flest í docs skjalinu og gerðum uppsetningu forritsins.
 - Ágúst 
   Setti upp Regist New Employee(Komið)
 - Ragnar
-  
+  gerði list all pilots og list all attendants í data, ui, logic og wrapper, er ekki búinn að setja það inn í menu kerfin
 - Sigurður
 
 - Theodór
