@@ -20,7 +20,11 @@ class EmployeeIO:
             if csvfile.tell() == 0:
                 writer.writeheader()
 
-            writer.writerow({'name': employee.name, 'profession': employee.profession, 'ssn': employee.ssn, 'homeAddress': employee.homeAddress, 'gsmNumber': employee.gsmNumber, 'email': employee.email, 'homePhone': employee.homePhone, 'status':employee.status, 'scheduled':employee.scheduled})
+            writer.writerow({'name': employee.name, 'profession': employee.profession, 
+                             'ssn': employee.ssn, 'homeAddress': employee.homeAddress, 
+                             'gsmNumber': employee.gsmNumber, 'email': employee.email, 
+                             'homePhone': employee.homePhone, 'status':employee.status, 
+                             'scheduled':employee.scheduled})
 
     def get_employee_voyage(self, employee):
         ret_list = []

@@ -14,12 +14,12 @@ class EmployeeLL:
 
         return self.data_wrapper.get_all_employees()
     
-    def get_all_pilots(type):
+    def get_all_pilots(self):
         """Returns all pilots"""
 
         return self.data_wrapper.get_all_pilots()
     
-    def get_all_attendants(type):
+    def get_all_attendants(self):
         """Returns all attendants"""
 
         return self.data_wrapper.get_all_attendants()

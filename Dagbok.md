@@ -124,3 +124,19 @@ yfir höfuð og þurfum að byrja á forritinu.
 
 ### Lok dags
 Löguðum flest í docs skjalinu og gerðum uppsetningu forritsins.
+
+## 5. Desember
+
+### Morgunfundur
+ákvað var að byrja á að gera kröfurnar úr skýrsluni og vinna meira í að setja upp föll og skrá
+
+- Ágúst 
+  Setti upp Regist New Employee(Komið)
+- Ragnar
+  
+- Sigurður
+
+- Theodór
+
+- Stefán
+  Mætti ekki :(
