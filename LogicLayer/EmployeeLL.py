@@ -10,4 +10,6 @@ class EmployeeLL:
         self.data_wrapper.add_employee(employee)
 
     def get_all_employees(self):
+        """Returns all employees"""
+
         return self.data_wrapper.get_all_employees()
