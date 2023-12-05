@@ -33,10 +33,6 @@ _|_|______________
     
     def manager_output(self):
         print(self.ascii_art)
-        #print("main menu")
-        #print("1. Flight manager")
-        #print("2. Crew manager")
-        #print("q to exit")
 
     def input_prompt(self):
         while True:
