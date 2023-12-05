@@ -1,12 +1,16 @@
-from DataLayer.DataLayerAPI import DataLayerAPI
+from DataLayer.EmployeeIO import EmployeeIO
+from DataLayer.DestinationIO import DestinationIO
+from DataLayer.VoyageIO import VoyageIO
 
 
 class Data_Wrapper:
     def __init__(self):
-        self.DataLayerAPI = DataLayerAPI()
+        self.EmployeeIO = EmployeeIO()
+        self.DestinationIO = DestinationIO()
+        self.VoyageIO = VoyageIO()
 
     def get_all_employees(self):
-        return self.DataLayerAPI.get_all_employees()
+        return self.EmployeeIO.get_all_employees()
 
-    def create_employee(self, employee):
-        return self.DataLayerAPI.create_employee(employee)
+    def add_employee(self, employee):
+        return self.EmployeeIO.add_employee(employee)
