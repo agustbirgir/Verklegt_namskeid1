@@ -36,11 +36,74 @@ class Crew_UI:
                     e.name = input("Enter the name of the employee: ")
                     try:
                         validate_name(e.name)
+                        break
                     except NameLengthException:
                         print("Name was too long")
-                    break
-                e.profession = input("Enter the profession of the employee: ")
-                #e.name = validate_name(input)
+                
+                profession_menu = {#Profession
+                    "1": "Flugmaður",
+                    "2": "Flugþjónn",
+                    "3": "Flugstjóri",
+                    "4": "Yfirflugstjóri"
+                }
+                print("Select the Profession of the employee")
+                for key, value in profession_menu.items():
+                    print(f"{key}. {value}")
+
+                while True:
+                    profession_choice = input("Enter the profession of the employee: ")
+                    if profession_choice in profession_menu:
+                        e.profession = profession_menu[profession_choice]
+                        break
+                    else:
+                        print("Wrong input has been chosen")#End
+
+                #SSN
+                e.ssn = input("Enter the Social security number: ")
+                while not validate_ssn(e.ssn):
+                    print("Invalid ssn. it must be 8 digit!")
+                    e.ssn = input("Enter the Social security number: ")
+                #End
+
+                #Homeaddress
+                e.homeAddress = input("Enter the home address of the employee: ")
+                #End
+
+                #GSM 
+                e.gsmNumber = input("Enter the Phone number: ")
+                while not validate_phone(e.gsmNumber):
+                    print("Wrong input has been chosen")
+                    e.gsmNumber = input("Enter the Phone number: ")
+                #End
+
+                #Email
+                e.email = input("Enter the Email of the employee: ")
+                while not validate_email(e.email):
+                    print("wrong input need a @ or wrong input")
+                    e.email = input("Enter the Email of the employee: ")
+                #End
+
+                #Homephone
+                e.homePhone = input("input the homephone of the employee(optinal): ")
+                if e.homePhone and not validate_phone(e.homePhone):
+                    print("Input has been left empty")
+                    e.homePhone = ''
+                #End
+
+                #Status
+                e.status = input("Enter the digit of the employee")
+                while not e.status.isdigit():
+                    print("Invalid status. Please enter an integer.")
+                    e.status = input("Enter the digit of the employee ")
+                    e.status = int(e.status)
+                #End
+
+                #Schedule 
+                e.scheduled = input("Enter the scheduled date of the employee (YYYY-MM-DD): ")
+                while not validate_date(e.scheduled):
+                    print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
+                    e.scheduled = input("Enter the scheduled date of the employee (YYYY-MM-DD): ")
+                #End
                 self.logic_wrapper.add_employee(e)
             elif command == "5":
                 pass
