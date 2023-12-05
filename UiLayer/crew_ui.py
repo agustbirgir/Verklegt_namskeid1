@@ -109,3 +109,10 @@ class Crew_UI:
                 pass
             else:
                 print("Invalid input try again")
+
+
+    def list_pilots(self)
+        print(self.logic_wrapper.get_all_pilots())
+
+    def list_attendants(self):
+        print(self.logic_wrapper.get_all_attendants())
