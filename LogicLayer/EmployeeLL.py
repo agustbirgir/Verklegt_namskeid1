@@ -1,14 +1,15 @@
 from Models.Employee import Employee
-from DataLayer.DataLayerAPI import DataLayerAPI
 
-class LogicLayerAPI:
+class EmployeeLL:
     def __init__(self, data_connection):
         self.data_wrapper = data_connection
 
-    def create_employee(self, employee):
+    def add_employee(self, employee):
         """Takes in a customer object and forwards it to the data layer"""
 
-        self.data_wrapper.create_employee(employee)
+        self.data_wrapper.add_employee(employee)
 
     def get_all_employees(self):
+        """Returns all employees"""
+
         return self.data_wrapper.get_all_employees()

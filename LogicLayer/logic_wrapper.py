@@ -1,13 +1,43 @@
-from LogicLayer.LogicLayerAPI import LogicLayerAPI
+from LogicLayer.EmployeeLL import EmployeeLL
+from LogicLayer.DestinationLL import DestinationLL
+from LogicLayer.VoyageLL import VoyageLL
 from DataLayer.data_wrapper import Data_Wrapper
 
 class Logic_Wrapper:
     def __init__(self):
         self.data_wrapper = Data_Wrapper()
-        self.LogicLayerAPI = LogicLayerAPI(self.data_wrapper)
+        self.EmployeeLL = EmployeeLL(self.data_wrapper)
+        self.VoyageLL = VoyageLL(self.data_wrapper)
+        self.DestinationLL = DestinationLL(self.data_wrapper)
 
-    def create_employee(self, employee):
-        return self.LogicLayerAPI.create_employee(employee)
+    # ------ EMPLOYEE ----------
+
+    def add_employee(self, employee):
+        return self.EmployeeLL.add_employee(employee)
     
     def get_all_employees(self):
-        return self.LogicLayerAPI.get_all_employees()
+        return self.EmployeeLL.get_all_employees()
+    
+        
+    # ------- VOYAGE ------------
+
+    def add_voyage(self, voyage):
+        return self.VoyageLL.add_voyage(voyage)
+
+    def get_voyage(self, departure, arrival):
+        return self.VoyageLL.get_voyage(departure, arrival)
+    
+    def get_all_voyages(self):
+        return self.VoyageLL.get_all_voyages()
+    
+
+    # ----- DESTINATION -----------
+
+    def add_destination(self, destination):
+        return self.DestinationLL.add_destination()
+
+    def get_destination(self, country):
+        return self.DestinationLL.get_destination(country)
+
+    def get_all_destinations(self):
+        return self.DestinationLL.get_all_destinations()
