@@ -1,4 +1,3 @@
-from LogicLayer.LogicLayerAPI import LogicLayerAPI
 from Models.Employee import Employee
 from UiLayer.input_validators import *
 
@@ -42,7 +41,7 @@ class Crew_UI:
                     break
                 e.profession = input("Enter the profession of the employee: ")
                 #e.name = validate_name(input)
-                self.logic_wrapper.create_employee(e)
+                self.logic_wrapper.add_employee(e)
             elif command == "5":
                 pass
             else:
