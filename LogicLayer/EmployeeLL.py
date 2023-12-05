@@ -13,3 +13,13 @@ class EmployeeLL:
         """Returns all employees"""
 
         return self.data_wrapper.get_all_employees()
+    
+    def get_all_pilots(type):
+        """Returns all pilots"""
+
+        return self.data_wrapper.get_all_pilots()
+    
+    def get_all_attendants(type):
+        """Returns all attendants"""
+
+        return self.data_wrapper.get_all_attendants()

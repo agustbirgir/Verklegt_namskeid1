@@ -26,3 +26,24 @@ class EmployeeIO:
         ret_list = []
         with open(self.file_name, newline='', encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
+
+
+    def get_all_pilots(self):
+        ret_list = []
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if Employee(row["profession"]) == "Pilot":
+                    ret_list.append(Employee(row["name"]))
+        return ret_list
+
+
+
+    def get_all_attendants(self):
+        ret_list = []
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if Employee(row["profession"]) == "Attendant":
+                    ret_list.append(Employee(row["name"]))
+        return ret_list
