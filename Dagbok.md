@@ -124,3 +124,23 @@ yfir höfuð og þurfum að byrja á forritinu.
 
 ### Lok dags
 Löguðum flest í docs skjalinu og gerðum uppsetningu forritsins.
+
+## 5. Desember
+
+### Morgunfundur
+ákvað var að byrja á að gera kröfurnar úr skýrsluni og vinna meira í að setja upp föll og skrá
+
+- Ágúst 
+  Setti upp Regist New Employee(Komið)
+- Ragnar
+  gerði list all pilots og list all attendants í data, ui, logic og wrapper, er ekki búinn að setja það inn í menu kerfin
+- Sigurður
+  Laga aðeins uppsetningu kóðans og gerði alla add og get klasana sem að logic og storage layerinn vinna með.
+- Theodór
+
+- Stefán
+  Mætti ekki :(
+
+### Lok dags
+Við settum verkefnið betur upp, löguðum class diagram-ið þar sem við höfum núna mikið betri hugmynd hvernig allt  
+á að tengjast sem við vissum alls ekki í byrjun. Við kláruðum mikið af föllum og höldum bara áfram með það í framtíðinni.

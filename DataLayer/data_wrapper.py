@@ -17,6 +17,20 @@ class Data_Wrapper:
     def add_employee(self, employee):
         return self.EmployeeIO.add_employee(employee)
     
+    def get_all_pilots(self):
+        return self.EmployeeIO.get_all_pilots()
+
+    def get_all_attendants(self):
+        return self.EmployeeIO.get_all_attendants()
+    
+    def find_employee_by_ssn(self, ssn):
+        return self.EmployeeIO.find_employee_by_ssn(ssn)
+
+    def update_employee(self, employee):
+        self.EmployeeIO.update_employee(employee)
+
+
+    
     # ------ Destination ---------
 
     def add_destination(self, destination):

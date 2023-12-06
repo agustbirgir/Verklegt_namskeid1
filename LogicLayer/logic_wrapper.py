@@ -9,6 +9,7 @@ class Logic_Wrapper:
         self.EmployeeLL = EmployeeLL(self.data_wrapper)
         self.VoyageLL = VoyageLL(self.data_wrapper)
         self.DestinationLL = DestinationLL(self.data_wrapper)
+        self.employee_logic = EmployeeLL(self.data_wrapper)
 
     # ------ EMPLOYEE ----------
 
@@ -18,7 +19,18 @@ class Logic_Wrapper:
     def get_all_employees(self):
         return self.EmployeeLL.get_all_employees()
     
-        
+    def get_all_pilots(self):
+        return self.EmployeeLL.get_all_pilots()
+    
+    def get_all_attendants(self):
+        return self.EmployeeLL.get_all_attendants()
+    
+    def find_employee_by_ssn(self, ssn):
+        return self.employee_logic.find_employee_by_ssn(ssn)
+    
+    def update_employee(self, ssn):
+        pass
+    
     # ------- VOYAGE ------------
 
     def add_voyage(self, voyage):
