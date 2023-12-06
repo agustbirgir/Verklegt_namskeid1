@@ -202,3 +202,53 @@ class Crew_UI:
 
     def list_attendants(self):
         print(self.logic_wrapper.get_all_attendants())
+
+    def add_crew_to_voyage(self): #this assumes you are inside the menu for it already, i spent too long trying to do both at the same time, so im simplifying it
+        #this is for the process of selecting a specific voyage and then adding the crew
+        #maybe we could split this?
+        #this also assumes we are selecting a empty voyage
+        command1 = input("please enter voyage departure: ")
+        if command1 == "b":
+            break
+    	command2 = input("please enter voyage arrival: ")
+        if command2 == "b":
+            break
+        voyage = self.logic_wrapper.get_voyage(self, command1, command2)
+            
+        if voyage == "Voyage not found":
+            print("Invalid input")
+            #break?
+        else:
+            #kominn með voyage, assignum þá inn í það
+            in_manning = True
+            pilots = []
+            attendants = []
+            first_run = True
+            while in_manning == True:
+                print("if you are finished, write done")
+                crew = input("please insert crew (pilot or attendant) ssn: ") 
+                
+                if crew == "done":
+                    if size(pilots) => 2 and size(attendants) =>1:
+                        print("valid crew assignment, registering crew to flight")
+                        in_manning == False
+                        self.logic_wrapper.voyage_add_pilot(voyage, pilots)
+                        self.logic_wrapper.voyage_add_attendant(voyage, attendants)
+                        
+                    else:
+                        if first_run == True:
+                            print("voyage assignment cancelled")
+                            in_manning == False
+                        else:
+                            exit_prompt = input("invalid manning, would you like to [c]ontinue or [q]uit?")
+                            if exit_prompt == "q":
+                                in_manning == False
+
+                first_run = False
+                Employee = self.logic_wrapper.find_employee_by_ssn(crew)
+
+                if Employee(row["profession"]) == "Pilot":
+                    pilots.append(Employee["name"])
+
+                elif Employee(row["profession"]) == "Attendant":
+                    attendants.append(Employee["name"])
