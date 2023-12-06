@@ -42,6 +42,14 @@ class Logic_Wrapper:
     def get_all_voyages(self):
         return self.VoyageLL.get_all_voyages()
     
+    def voyage_add_pilot(self, voyage, pilot):
+        """Add a pilot to a voyage"""
+        return self.VoyageLL.voyage_add_pilot(voyage, pilot)
+
+    def voyage_add_attendant(self, voyage):
+        """Add an attendant to a voyage"""
+        return self.VoyageLL.voyage_add_attendant(voyage)
+    
 
     # ----- DESTINATION -----------
 

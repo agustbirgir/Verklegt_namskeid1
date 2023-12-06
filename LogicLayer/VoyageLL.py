@@ -22,4 +22,9 @@ class VoyageLL:
 
     def voyage_add_attendant(self, voyage):
         """Add an attendant to a voyage"""
+<<<<<<< HEAD
         self.data_wrapper.voyage_add_attendant(voyage)
+=======
+        self.data_wrapper.voyage_add_attendant(voyage)
+        
+>>>>>>> 08dfe28 (þarf að klara að bæta pilots i lista)
