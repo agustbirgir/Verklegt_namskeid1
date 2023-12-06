@@ -32,3 +32,25 @@ class VoyageIO:
             for row in reader:
                 ret_list.append(Voyage(row["departureFlight"], row["arrivalFlight"]), row["pilots"], row["attendants"])
         return ret_list
+    
+    def voyage_add_pilot(self, ,voyage, pilot):
+        """Add a pilot to a voyage"""
+        ret_list = []
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            fieldnames = ["departureFlight", "arrivalFlight", "pilots", "attendants"]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            if csvfile.tell() == 0:
+                writer.writeheader()
+            
+            
+            writer.writerow({'departureFlight': voyage.departureFlight, 'arrivalFlight': voyage.arrivalFlight,
+                             })
+
+    def voyage_add_attendant(self, voyage):
+        """Add an attendant to a voyage"""
+        ret_list = []
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                ret_list.append(Voyage(row["departureFlight"], row["arrivalFlight"]), row["pilots"], row["attendants"])
+        return ret_list

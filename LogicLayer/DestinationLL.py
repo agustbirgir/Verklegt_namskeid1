@@ -8,7 +8,6 @@ class DestinationLL:
         """Add destination based on location, distance and travel time"""
         self.data_wrapper.add_destination(destination)
 
-
     def get_destination(self, country):
         """Return a specific destination"""
         return self.data_wrapper.get_destination(country)

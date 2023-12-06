@@ -53,3 +53,11 @@ class Data_Wrapper:
     
     def get_all_voyages(self):
         return self.VoyageIO.get_all_voyages()
+
+    def voyage_add_pilot(self, pilot):
+        """Add a pilot to a voyage"""
+        self.VoyageIO.voyage_add_pilot(pilot)
+
+    def voyage_add_attendant(self, attendant):
+        """Add an attendant to a voyage"""
+        self.VoyageIO.voyage_add_attendant(attendant)
