@@ -28,8 +28,8 @@ class Logic_Wrapper:
     def find_employee_by_ssn(self, ssn):
         return self.employee_logic.find_employee_by_ssn(ssn)
     
-    def update_employee(self, ssn):
-        pass
+    def update_employee(self, employee):
+        return self.employee_logic.update_employee(employee)
     
     # ------- VOYAGE ------------
 
