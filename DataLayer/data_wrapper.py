@@ -22,6 +22,12 @@ class Data_Wrapper:
 
     def get_all_attendants(self):
         return self.EmployeeIO.get_all_attendants()
+    
+    def find_employee_by_ssn(self, ssn):
+        return self.EmployeeIO.find_employee_by_ssn(ssn)
+
+    def update_employee(self, employee):
+        self.EmployeeIO.update_employee(employee)
 
 
     
