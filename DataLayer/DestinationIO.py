@@ -3,7 +3,7 @@ from Models.Destination import Destination
 
 class DestinationIO:
     def __init__(self):
-        self.file_name = "Verklegt_namskeid1/files/destinations.csv"
+        self.file_name = "files/destinations.csv"
 
     def add_destination(self, destination):
         """Add destination based on location, distance and travel time"""

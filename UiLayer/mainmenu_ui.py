@@ -36,7 +36,7 @@ _|_|______________
     def input_prompt(self):
         while True:
             self.manager_output()
-            command = input("option: ")
+            command = input("Pick an option: ")
             command = command.lower()
             if command == "q":
                 break
