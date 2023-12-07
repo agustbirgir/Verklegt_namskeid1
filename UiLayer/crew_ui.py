@@ -5,6 +5,44 @@ class Crew_UI:
     def __init__(self, logic_connection):
         self.logic_wrapper = logic_connection
 
+    def list_pilots(self):
+        print(self.logic_wrapper.get_all_pilots())
+
+    def list_attendants(self):
+        print(self.logic_wrapper.get_all_attendants())
+
+    def add_crew_to_voyage(self): 
+        while True:
+            id = input("please enter voyage ID: ")
+            try:
+                id = int(id)
+                break
+            except ValueError:
+                print("Invalid ID, please enter a number.")
+        voyage = self.logic_wrapper.get_voyage(id)
+            
+        if voyage == "Voyage not found":
+            print("Invalid input")
+        else:
+            # Voyage Found
+            print("All employees:")
+            result = self.logic_wrapper.get_all_employees()
+            employee_list = []
+            for elem in result:
+                print(f"name: {elem.name}, profession: {elem.profession}")
+            while True:
+                name = input("Enter the name of an employee to add (q to finish adding to voyage): ")
+                if name == "q":
+                    break
+                else:
+                    employee = self.logic_wrapper.get_employee_by_name(name)
+                    if employee != None:
+                        employee_list.append([employee.name, employee.profession])
+                    else:
+                        print("Employee does not exist, try again")
+            self.logic_wrapper.voyage_add_employee(employee_list, id)
+                
+
     def crew_manager_output(self):
         print("Crew Manager Menu")
         print("1. Assign crew to voyage")
@@ -22,9 +60,8 @@ class Crew_UI:
             if command == "b":
                 break
             elif command == "1":
-                pass
+                self.add_crew_to_voyage()
             elif command == "2":
-                print("e")
                 result = self.logic_wrapper.get_all_employees()
                 for elem in result:
                     print(f"name: {elem.name}, profession: {elem.profession}")
@@ -85,10 +122,10 @@ class Crew_UI:
                         print("Name was too long")
                 
                 profession_menu = {#Profession
-                    "1": "Flugmaður",
-                    "2": "Flugþjónn",
-                    "3": "Flugstjóri",
-                    "4": "Yfirflugstjóri"
+                    "1": "Pilot",
+                    "2": "Flight attendant",
+                    "3": "Head pilot",
+                    "4": "Head flight attendant"
                 }
                 print("Select the Profession of the employee")
                 for key, value in profession_menu.items():
@@ -190,65 +227,8 @@ class Crew_UI:
             
             if choice == "7":
                 new_schedule = input("Enter the new schedule: ")
-                employee.scheduled
+                employee.scheduled = new_schedule
 
             self.logic_wrapper.update_employee(employee)
         else:
             print("Employee not found.")
-
-
-    def list_pilots(self):
-        print(self.logic_wrapper.get_all_pilots())
-
-    def list_attendants(self):
-        print(self.logic_wrapper.get_all_attendants())
-
-    def add_crew_to_voyage(self): #this assumes you are inside the menu for it already, i spent too long trying to do both at the same time, so im simplifying it
-        #this is for the process of selecting a specific voyage and then adding the crew
-        #maybe we could split this?
-        #this also assumes we are selecting a empty voyage
-        command1 = input("please enter voyage departure: ")
-        if command1 == "b":
-            break
-    	command2 = input("please enter voyage arrival: ")
-        if command2 == "b":
-            break
-        voyage = self.logic_wrapper.get_voyage(self, command1, command2)
-            
-        if voyage == "Voyage not found":
-            print("Invalid input")
-            #break?
-        else:
-            #kominn með voyage, assignum þá inn í það
-            in_manning = True
-            pilots = []
-            attendants = []
-            first_run = True
-            while in_manning == True:
-                print("if you are finished, write done")
-                crew = input("please insert crew (pilot or attendant) ssn: ") 
-                
-                if crew == "done":
-                    if size(pilots) => 2 and size(attendants) =>1:
-                        print("valid crew assignment, registering crew to flight")
-                        in_manning == False
-                        self.logic_wrapper.voyage_add_pilot(voyage, pilots)
-                        self.logic_wrapper.voyage_add_attendant(voyage, attendants)
-                        
-                    else:
-                        if first_run == True:
-                            print("voyage assignment cancelled")
-                            in_manning == False
-                        else:
-                            exit_prompt = input("invalid manning, would you like to [c]ontinue or [q]uit?")
-                            if exit_prompt == "q":
-                                in_manning == False
-
-                first_run = False
-                Employee = self.logic_wrapper.find_employee_by_ssn(crew)
-
-                if Employee(row["profession"]) == "Pilot":
-                    pilots.append(Employee["name"])
-
-                elif Employee(row["profession"]) == "Attendant":
-                    attendants.append(Employee["name"])

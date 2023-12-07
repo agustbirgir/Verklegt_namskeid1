@@ -34,6 +34,14 @@ class EmployeeIO:
                 if row["ssn"] == ssn:
                     return Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["status"], row["scheduled"])
         return None
+    
+    def get_employee_by_name(self, name):
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row["name"] == name:
+                    return Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["status"], row["scheduled"])
+        return None
 
     def update_employee(self, updated_employee):
         employees = []
@@ -75,8 +83,8 @@ class EmployeeIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                if Employee(row["profession"]) == "Pilot":
-                    ret_list.append(Employee(row["name"]))
+                if row["profession"] == "Pilot" or row["profession"] == "Head pilot":
+                    ret_list.append(Employee(row["name"], row["profession"]))
         return ret_list
 
 
@@ -86,6 +94,6 @@ class EmployeeIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                if Employee(row["profession"]) == "Attendant":
-                    ret_list.append(Employee(row["name"]))
+                if row["profession"] == "Attendant" or row["profession"] == "Head attendant":
+                    ret_list.append(Employee(row["name"], row["profession"]))
         return ret_list

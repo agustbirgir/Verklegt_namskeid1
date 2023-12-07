@@ -9,6 +9,9 @@ def validate_name(name):
     if len(name) >= 50:
         raise NameLengthException
     
+def validate_id(id):
+    return id.isdigit()
+    
 def validate_ssn(ssn):
     return ssn.isdigit() and len(ssn) == 10
 

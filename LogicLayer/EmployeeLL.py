@@ -25,9 +25,10 @@ class EmployeeLL:
         return self.data_wrapper.get_all_attendants()
     
     def find_employee_by_ssn(self, ssn):
-
         return self.data_wrapper.find_employee_by_ssn(ssn)
+    
+    def get_employee_by_name(self, name):
+        return self.data_wrapper.get_employee_by_name(name)
 
     def update_employee(self, employee):
-        
         self.data_wrapper.update_employee(employee)

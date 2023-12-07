@@ -28,6 +28,9 @@ class Logic_Wrapper:
     def find_employee_by_ssn(self, ssn):
         return self.employee_logic.find_employee_by_ssn(ssn)
     
+    def get_employee_by_name(self, name):
+        return self.employee_logic.get_employee_by_name(name)
+    
     def update_employee(self, employee):
         return self.employee_logic.update_employee(employee)
     
@@ -36,19 +39,14 @@ class Logic_Wrapper:
     def add_voyage(self, voyage):
         return self.VoyageLL.add_voyage(voyage)
 
-    def get_voyage(self, departure, arrival):
-        return self.VoyageLL.get_voyage(departure, arrival)
+    def get_voyage(self, id):
+        return self.VoyageLL.get_voyage(id)
     
     def get_all_voyages(self):
         return self.VoyageLL.get_all_voyages()
     
-    def voyage_add_pilot(self, voyage, pilot):
-        """Add a pilot to a voyage"""
-        return self.VoyageLL.voyage_add_pilot(voyage, pilot)
-
-    def voyage_add_attendant(self, voyage):
-        """Add an attendant to a voyage"""
-        return self.VoyageLL.voyage_add_attendant(voyage)
+    def voyage_add_employee(self, employeeList, id):
+        return self.VoyageLL.voyage_add_employee(employeeList, id)
     
 
     # ----- DESTINATION -----------

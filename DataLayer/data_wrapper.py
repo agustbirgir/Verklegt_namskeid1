@@ -25,6 +25,9 @@ class Data_Wrapper:
     
     def find_employee_by_ssn(self, ssn):
         return self.EmployeeIO.find_employee_by_ssn(ssn)
+    
+    def get_employee_by_name(self, name):
+        return self.EmployeeIO.get_employee_by_name(name)
 
     def update_employee(self, employee):
         self.EmployeeIO.update_employee(employee)
@@ -48,8 +51,11 @@ class Data_Wrapper:
     def add_voyage(self, voyage):
         return self.VoyageIO.add_voyage(voyage)
     
-    def get_voyage(self, departure, arrival):
-        return self.VoyageIO.get_voyage(departure, arrival)
+    def get_voyage(self, id):
+        return self.VoyageIO.get_voyage(id)
     
     def get_all_voyages(self):
         return self.VoyageIO.get_all_voyages()
+    
+    def voyage_add_employee(self, employeeList, id):
+        return self.VoyageIO.voyage_add_employee(employeeList, id)
