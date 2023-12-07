@@ -26,3 +26,53 @@ class Flight_UI:
                 pass
             else:
                 print("Invalid input, try again")
+
+    def add_voyage(self):
+        
+        destination = input("please enter voyage destination: ") #im not checking if its valid, ill have to add that later
+        if destination == "b":
+            break
+        departure = input("please enter voyage departure: ")
+        if departure == "b":
+            break
+    	arrival = input("please enter voyage arrival: ")
+        if arrival == "b":
+            break
+        voyage = [] #this part should not be in the UI, but the rest of the stuff is either unfinished, or i dont understand how we add the voyages... 
+        voyage.append({
+                    'destination': destination, 
+                    'departure': departure, 
+                    'arrival': arrival, 
+                    'pilots': [], 
+                    'attendants': [], 
+                    }) #im making this only for repeat voyage to theoretically work...
+        self.logic_wrapper.add_voyage(voyage)
+
+
+    def repeat_voyage(self):
+        departure = input("please enter voyage departure: ")
+        if departure == "b":
+            break
+    	arrival = input("please enter voyage arrival: ")
+        if arrival == "b":
+            break
+        voyage = self.logic_wrapper.get_voyage(self, departure, arrival)
+            
+        if voyage == "Voyage not found":
+            print("Invalid voyage")
+            #break?
+        
+        repeat_time_frame = input("in how many days do you want to repeat this voyage?: ") #or whatever timeframe we are using, i will leave invalid due to conflicts for later i guess
+        if repeat_time_frame == "b":
+            break
+        departure += repeat_time_frame
+        arrival += repeat_time_frame
+        voyage(1) = departure
+        voyage(2) = arrival
+        self.logic_wrapper.add_voyage(voyage)
+
+
+        
+        
+
+
