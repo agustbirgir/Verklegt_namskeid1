@@ -1,6 +1,7 @@
 class Destination:
-    def __init__(self, country,airport,flytime,distance,contact,contactNumber):
+    def __init__(self, country,city,airport,flytime,distance,contact,contactNumber):
         self.country = country
+        self.city = city
         self.airport = airport
         self.flytime = flytime
         self.distance = distance

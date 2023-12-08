@@ -1,4 +1,3 @@
-from Models.Employee import Employee
 from LogicLayer.logic_wrapper import Logic_Wrapper
 from UiLayer.crew_ui import Crew_UI
 from UiLayer.flight_ui import Flight_UI

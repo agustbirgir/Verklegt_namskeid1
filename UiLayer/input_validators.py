@@ -28,3 +28,13 @@ def validate_date(date_text):
         return True
     except ValueError:
         return False
+
+def validate_voyage_date(date):
+    try:
+        datetime_obj = datetime.strptime(date, '%d-%m-%Y,%H:%M')
+        return True, datetime_obj
+    except ValueError:
+        return False, None
+
+def validate_if_date_after(arrival, departure):
+    return arrival > departure

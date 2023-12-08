@@ -1,6 +1,7 @@
 class Flight:
-    def __init__(self, startingPoint, startingTime, destination, arrivalTime):
+    def __init__(self, startingPoint='', departureTime='', arrivalTime='', destination='', id=0):
         self.startingPoint = startingPoint
-        self.startingTime = startingTime
-        self.destination = destination
+        self.departureTime = departureTime
         self.arrivalTime = arrivalTime
+        self.destination = destination
+        self.id = id
