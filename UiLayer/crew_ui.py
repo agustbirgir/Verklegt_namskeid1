@@ -5,13 +5,22 @@ class Crew_UI:
     def __init__(self, logic_connection):
         self.logic_wrapper = logic_connection
 
-    def list_pilots(self):
-        print(self.logic_wrapper.get_all_pilots())
+    def display_pilot_list(self):
+        result = self.logic_wrapper.get_all_pilots()
+        for elem in result:
+            print(f"name: {elem.name}, profession: {elem.profession}")
 
-    def list_attendants(self):
-        print(self.logic_wrapper.get_all_attendants())
+    def display_attendant_list(self):
+        result = self.logic_wrapper.get_all_attendants()
+        for elem in result:
+            print(f"name: {elem.name}, profession: {elem.profession}")
+    
+    def display_employee_list(self):
+        result = self.logic_wrapper.get_all_employees()
+        for elem in result:
+            print(f"name: {elem.name}, profession: {elem.profession}")
 
-    def add_crew_to_voyage(self): 
+    def display_add_crew_to_voyage_UI(self): 
         while True:
             id = input("please enter voyage ID: ")
             try:
@@ -60,11 +69,9 @@ class Crew_UI:
             if command == "b":
                 break
             elif command == "1":
-                self.add_crew_to_voyage()
+                self.display_add_crew_to_voyage_UI()
             elif command == "2":
-                result = self.logic_wrapper.get_all_employees()
-                for elem in result:
-                    print(f"name: {elem.name}, profession: {elem.profession}")
+                self.display_employee_list()
             elif command == "3":
                 ssn = input("Enter the ssn of the employee to update: ")
                 employee = self.logic_wrapper.find_employee_by_ssn(ssn)
@@ -172,11 +179,8 @@ class Crew_UI:
                 #End
 
                 #Status
-                e.status = input("Enter the digit of the employee")
-                while not e.status.isdigit():
-                    print("Invalid status. Please enter an integer.")
-                    e.status = input("Enter the digit of the employee ")
-                    e.status = int(e.status)
+                e.status = 0
+                
                 #End
 
                 #Schedule 
@@ -193,7 +197,7 @@ class Crew_UI:
 
     # Inside Crew_UI class
 
-    def update_employee(self):
+    def display_update_employee_UI(self):
         ssn = input("Enter the SSN of the employee to update: ")
         employee = self.logic_wrapper.find_employee_by_ssn(ssn)
         if employee:

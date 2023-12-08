@@ -144,3 +144,60 @@ Löguðum flest í docs skjalinu og gerðum uppsetningu forritsins.
 ### Lok dags
 Við settum verkefnið betur upp, löguðum class diagram-ið þar sem við höfum núna mikið betri hugmynd hvernig allt  
 á að tengjast sem við vissum alls ekki í byrjun. Við kláruðum mikið af föllum og höldum bara áfram með það í framtíðinni.
+
+## 6. Desember
+
+### Morgunfundur
+Halda áfram að forrita föll og skoða verkefnalýsingu gá hvort allt sé ekki á hreinu.
+
+- Ágúst 
+  Vinna í UI
+- Ragnar
+  Vinna í logic
+- Sigurður
+  Vinna í logic, data, UI
+- Theodór
+
+- Stefán
+  Mætti ekki :(
+
+### Lok dags
+Náðum að klára nokkur föll og láta þau tengjast við UI
+
+## 7. Desember
+
+### Morgunfundur
+Halda áfram að bæta við föllum sem að við erum að fatta að við þurfum mikið fleiri af eftir að byrja að forrita.
+
+- Ágúst 
+  Vinna í UI
+- Ragnar
+  Vinna í logic, hafa klasa tilbúna
+- Sigurður
+  Vinna í logic, data layer
+- Theodór
+
+- Stefán
+  Mætti ekki :(
+
+### Lok dags
+Unnum bara meira í að klára föll og náðum alveg að klára nokkur
+
+## 8. Desember
+
+### Morgunfundur
+Þurfum að klára docs skjalið alveg út frá athugasemdum og síðan halda áfram að kóða.
+
+- Ágúst 
+  Skoða föll sem við þurfum að gera og vinna í því.
+- Ragnar
+  Fara í gegnum allar athugsamedir varðandi docs skjal og klára að laga það. Vinna í að lista hluti í crew manager.
+- Sigurður
+  Byrja að vinna í flight manager UI og klára öll föllin sem tengjast því í logic og data layer-unum. Laga class diagram eftirá.
+- Theodór
+
+- Stefán
+  Mætti ekki :(
+
+### Lok dags
+Flight manager kominn langa leið, crew manager líka docs skjal klárað, erum á góðri leið.

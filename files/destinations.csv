@@ -1,2 +1,6 @@
-country,airport,flytime,distance,contact,contactNumber
-Keflavík,flugvöllur,6hrs,1000km,helgi,1234
+country,city,airport,flytime,distance,contact,contactNumber
+Iceland,Keflavik,Keflavik Airport,6:20,1000,helgi,87654321
+Greenland,Nuuk,Nuuk Airport,2:40,2000,john,12345678
+Faroe Islands,Thorshavn,Vagar Airport,5:30,4500,joe,13579864
+Shetland Islands,Tingwall,Tingwall Airport,4:55,3400,mark,5432167
+Svalbard,Longyearbyen,Svalbard Airport,4:20,6000,jarl,9324535

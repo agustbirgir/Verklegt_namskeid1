@@ -7,10 +7,10 @@ class VoyageIO:
         self.file_name = "files/voyages.csv"
 
     def add_voyage(self, voyage):
-        """Add destination based on location, distance and travel time"""
+        """Create new voyage"""
         with open(self.file_name, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["departureFlight", "arrivalFlight", "crew", "id"]
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames,delimiter=";")
             if csvfile.tell() == 0:
                 writer.writeheader()
                 
@@ -22,9 +22,10 @@ class VoyageIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                if (row["id"] == id):
+                if int(row["id"]) == int(id):
+                    print("ye")
                     return Voyage(row["departureFlight"], row["arrivalFlight"], row["crew"], row["id"])
-        return ("Voyage not found")
+        return None
 
     def get_all_voyages(self):
         ret_list = []

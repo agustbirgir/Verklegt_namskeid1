@@ -1,6 +1,7 @@
 from LogicLayer.EmployeeLL import EmployeeLL
 from LogicLayer.DestinationLL import DestinationLL
 from LogicLayer.VoyageLL import VoyageLL
+from LogicLayer.FlightLL import FlightLL
 from DataLayer.data_wrapper import Data_Wrapper
 
 class Logic_Wrapper:
@@ -9,7 +10,7 @@ class Logic_Wrapper:
         self.EmployeeLL = EmployeeLL(self.data_wrapper)
         self.VoyageLL = VoyageLL(self.data_wrapper)
         self.DestinationLL = DestinationLL(self.data_wrapper)
-        self.employee_logic = EmployeeLL(self.data_wrapper)
+        self.FlightLL = FlightLL(self.data_wrapper)
 
     # ------ EMPLOYEE ----------
 
@@ -26,13 +27,13 @@ class Logic_Wrapper:
         return self.EmployeeLL.get_all_attendants()
     
     def find_employee_by_ssn(self, ssn):
-        return self.employee_logic.find_employee_by_ssn(ssn)
+        return self.EmployeeLL.find_employee_by_ssn(ssn)
     
     def get_employee_by_name(self, name):
-        return self.employee_logic.get_employee_by_name(name)
+        return self.EmployeeLL.get_employee_by_name(name)
     
     def update_employee(self, employee):
-        return self.employee_logic.update_employee(employee)
+        return self.EmployeeLL.update_employee(employee)
     
     # ------- VOYAGE ------------
 
@@ -52,10 +53,27 @@ class Logic_Wrapper:
     # ----- DESTINATION -----------
 
     def add_destination(self, destination):
-        return self.DestinationLL.add_destination()
+        return self.DestinationLL.add_destination(destination)
 
     def get_destination(self, country):
         return self.DestinationLL.get_destination(country)
 
     def get_all_destinations(self):
         return self.DestinationLL.get_all_destinations()
+    
+    # ------- Flight ----------
+
+    def add_flight(self, flight):
+        return self.FlightLL.add_flight(flight)
+    
+    def get_flight(self, id):
+        return self.FlightLL.get_flight(id)
+    
+    def get_all_flights(self):
+        return self.FlightLL.get_all_flights()
+    
+    def calculate_arrival_time(self, date, time):
+        return self.FlightLL.calculate_arrival_time(date, time)
+    
+    def create_unique_id(self):
+        return self.FlightLL.create_unique_id()
