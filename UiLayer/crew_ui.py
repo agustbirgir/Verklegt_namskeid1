@@ -20,6 +20,42 @@ class Crew_UI:
         for elem in result:
             print(f"name: {elem.name}, profession: {elem.profession}")
 
+    def display_employee(self):
+        while True:
+
+            command = input("search by [name] or [ssn]?")
+            command = command.lower()
+
+            if command =="name" or command =="n":
+                
+                name = input("what is the name of the employee?")
+                if name == "back" or name == "b":
+                    break
+                employee = self.logic_wrapper.get_employee_by_name(name)
+                if employee:
+                    print(f"name: {employee.name}, profession: {employee.profession}")
+                else:
+                    print("name invalid")
+
+            elif command =="ssn" or command =="s":
+
+                ssn = input("what is the ssn of the employee?")
+                if ssn == "back" or ssn == "b":
+                    break
+                employee = self.logic_wrapper.find_employee_by_ssn(ssn)
+                if employee:
+                    print(f"name: {employee.name}, profession: {employee.profession}")
+                else:
+                    print("name invalid")
+
+            elif command == "back" or command == "b":
+                break
+
+            else:
+                print("invalid command")
+
+
+
     def display_add_crew_to_voyage_UI(self): 
         while True:
             id = input("please enter voyage ID: ")
@@ -60,6 +96,7 @@ class Crew_UI:
         print("4. Register employee")
         print("5. Crew schedules")
         print("b to go back")
+
 
     def input_prompt(self):
         while True:
@@ -236,3 +273,7 @@ class Crew_UI:
             self.logic_wrapper.update_employee(employee)
         else:
             print("Employee not found.")
+
+
+
+    
