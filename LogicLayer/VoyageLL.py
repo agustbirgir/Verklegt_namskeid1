@@ -1,4 +1,5 @@
 from Models.Employee import Employee
+import ast
 
 class VoyageLL:
     def __init__(self, data_connection):
@@ -10,12 +11,17 @@ class VoyageLL:
 
     def get_voyage(self, id):
         """Return a specific voyage"""
-        self.data_wrapper.get_voyage(id)
+        return self.data_wrapper.get_voyage(id)
 
     def get_all_voyages(self):
         """Return all voyages"""
-        self.data_wrapper.get_all_voyages()
+        return self.data_wrapper.get_all_voyages()
 
     def voyage_add_employee(self, employeeList, id):
-        """Add a pilot to a voyage"""
+        """Add an employee to a voyage"""
         self.data_wrapper.voyage_add_employee(employeeList, id)
+    
+    def get_crew_of_voyage(self, voyage):
+        """Get the crew of a specific voyage"""
+        crew_list = ast.literal_eval(voyage.crew)
+        return crew_list

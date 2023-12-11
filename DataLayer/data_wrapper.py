@@ -41,7 +41,7 @@ class Data_Wrapper:
     # ------ Destination ---------
 
     def add_destination(self, destination):
-        return self.DestinationIO.add_destination()
+        return self.DestinationIO.add_destination(destination)
     
     def get_destination(self, country):
         return self.DestinationIO.get_destination(country)

@@ -19,9 +19,11 @@ class FlightLL:
         return self.data_wrapper.get_all_flights()
     
     def calculate_arrival_time(self, date, time):
+        """Add together the departing time and the flytime to get arrival time"""
 
         calculate_arrival = date + timedelta(hours=time.hour, minutes=time.minute)
         return calculate_arrival
 
     def create_unique_id(self):
+        """Use a random number as a unique id"""
         return random.randint(0, 5000)
