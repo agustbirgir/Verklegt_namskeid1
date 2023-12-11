@@ -20,7 +20,67 @@ class Crew_UI:
         for elem in result:
             print(f"name: {elem.name}, profession: {elem.profession}")
 
+    def display_employees_not_working(self):
+        return 0
+
+    def display_employee(self):
+        while True:
+
+            command = input("Search by [name] or [ssn] (b to go back): ")
+            command = command.lower()
+
+            if command =="name" or command =="n":
+
+                name = input("Input the name of the employee: ")
+                if name == "back" or name == "b":
+                    break
+                employee = self.logic_wrapper.get_employee_by_name(name)
+                if employee:
+                    print(f"\n Name: {employee.name}\n Profession: {employee.profession}\n SSN: {employee.homeAddress}\n Gsm number: {employee.gsmNumber}\n Email: {employee.email}\n HomePhone: {employee.homePhone}\n Status: {employee.status}\n Scheduled: {employee.scheduled}\n")
+                else:
+                    print("name invalid")
+
+            elif command =="ssn" or command =="s":
+
+                ssn = input("Input the ssn of the employee: ")
+                if ssn == "back" or ssn == "b":
+                    break
+                employee = self.logic_wrapper.find_employee_by_ssn(ssn)
+                if employee:
+                    print(f"name: {employee.name}, profession: {employee.profession}")
+                else:
+                    print("name invalid")
+
+            elif command == "back" or command == "b":
+                break
+
+            else:
+                print("invalid command")
+
+    def display_employee_database_UI(self):
+        while True:
+            print("Employee Database")
+            print("1. List all employees")
+            print("2. List all pilots")
+            print("3. List all attendants")
+            print("4. List specific employee")
+            print("b to go back")
+            command = input("Please pick an option: ")
+            if command == "1":
+                self.display_employee_list()
+            elif command == "2":
+                self.display_pilot_list()
+            elif command == "3":
+                self.display_attendant_list()
+            elif command == "4":
+                self.display_employee()
+            elif command == "b":
+                break
+            else:
+                print("Invalid input")
+
     def display_add_crew_to_voyage_UI(self): 
+        """Display the menu to add crew to voyage"""
         while True:
             id = input("please enter voyage ID: ")
             try:
@@ -34,26 +94,50 @@ class Crew_UI:
             print("Invalid input")
         else:
             # Voyage Found
-            print("All employees:")
-            result = self.logic_wrapper.get_all_employees()
-            employee_list = []
-            for elem in result:
-                print(f"name: {elem.name}, profession: {elem.profession}")
+            print("All NaN Air employees:")
+            self.display_employee_list()
+            all_employees = self.logic_wrapper.get_all_employees()
+            voyages = self.logic_wrapper.get_all_voyages()
+            crew_list = self.logic_wrapper.get_crew_of_voyage(voyage)
+            selected_voyage_departure = self.logic_wrapper.get_flight(voyage.id).departureTime
+            print("You picked voyage", voyage.id,"which departs at", selected_voyage_departure)
+            print("Voyage", id,"crew:", crew_list)
+            
             while True:
                 name = input("Enter the name of an employee to add (q to finish adding to voyage): ")
+                employee = self.logic_wrapper.get_employee_by_name(name)
+
                 if name == "q":
-                    break
-                else:
-                    employee = self.logic_wrapper.get_employee_by_name(name)
-                    if employee != None:
-                        employee_list.append([employee.name, employee.profession])
+                    if validate_voyage_crew(crew_list, all_employees):
+                        self.logic_wrapper.voyage_add_employee(crew_list, id)
+                        print(f"Successfully registered crew to voyage {id}")
+                        break
                     else:
-                        print("Employee does not exist, try again")
-            self.logic_wrapper.voyage_add_employee(employee_list, id)
+                        print("Invalid crew assigned, try again")
+                else:
+                    if employee != None:
+                        # Check if employee is already assigned to the selected voyage
+                        if employee.name in crew_list:
+                            print(name,"is already in currently selected voyage,",id,", try again")
+                        else:
+                            # Check if employee is already registered on a voyage on same date as selected voyage
+                            in_voyage = False
+                            for v in voyages:
+                                v_departure = self.logic_wrapper.get_flight(v.id).departureTime
+                                v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+                                if name in v_crew:
+                                    if validate_if_registered_at_date(selected_voyage_departure, v_departure):
+                                        print(f"{name}, is already in voyage {v.id}, at the same date {v_departure}, try again")
+                                        in_voyage = True
+                            if not in_voyage:
+                                crew_list.append(employee.name)
+                    else:
+                        print(f"Employee {name} does not exist, try again")
+            self.logic_wrapper.voyage_add_employee(crew_list, id)
                 
 
     def crew_manager_output(self):
-        print("Crew Manager Menu")
+        print("\nCrew Manager Menu")
         print("1. Assign crew to voyage")
         print("2. Employee database")
         print("3. Update employee")
@@ -71,7 +155,7 @@ class Crew_UI:
             elif command == "1":
                 self.display_add_crew_to_voyage_UI()
             elif command == "2":
-                self.display_employee_list()
+                self.display_employee_database_UI()
             elif command == "3":
                 ssn = input("Enter the ssn of the employee to update: ")
                 employee = self.logic_wrapper.find_employee_by_ssn(ssn)

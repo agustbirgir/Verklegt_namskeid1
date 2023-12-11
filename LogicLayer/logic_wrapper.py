@@ -49,6 +49,9 @@ class Logic_Wrapper:
     def voyage_add_employee(self, employeeList, id):
         return self.VoyageLL.voyage_add_employee(employeeList, id)
     
+    def get_crew_of_voyage(self, voyage):
+        return self.VoyageLL.get_crew_of_voyage(voyage)
+    
 
     # ----- DESTINATION -----------
 

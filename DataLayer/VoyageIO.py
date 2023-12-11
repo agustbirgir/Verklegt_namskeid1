@@ -8,6 +8,7 @@ class VoyageIO:
 
     def add_voyage(self, voyage):
         """Create new voyage"""
+        print(voyage)
         with open(self.file_name, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["departureFlight", "arrivalFlight", "crew", "id"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames,delimiter=";")
@@ -23,7 +24,6 @@ class VoyageIO:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
                 if int(row["id"]) == int(id):
-                    print("ye")
                     return Voyage(row["departureFlight"], row["arrivalFlight"], row["crew"], row["id"])
         return None
 
@@ -32,7 +32,7 @@ class VoyageIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                ret_list.append(Voyage(row["departureFlight"], row["arrivalFlight"]), row["crew"], row["id"])
+                ret_list.append(Voyage(row["departureFlight"], row["arrivalFlight"], row["crew"], row["id"]))
         return ret_list
     
     def voyage_add_employee(self, employeeList, id):
