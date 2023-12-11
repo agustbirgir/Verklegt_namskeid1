@@ -20,8 +20,41 @@ class Crew_UI:
         for elem in result:
             print(f"name: {elem.name}, profession: {elem.profession}")
 
-    def display_employees_not_working(self):
-        return 0
+    def display_employees_working_status(self):
+        while True:
+            working = input("do you want to see [working] or [free] employees?")
+            working = working.lower()
+            if working == "free" or working == "f":
+                work = False
+                date = input("what date would you like to check?")
+
+                while not validate_date(date) and (date.lower() != "back" and date.lower() != "b"):
+                    print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
+                    date = input("Enter new scheduled date (YYYY-MM-DD): ")
+
+                if date.lower() != "back" and date.lower() != "b":
+                    employees = self.logic_wrapper.employee_schedule_checker(date, work)
+                    print(f"name: {employees.name}, profession: {employees.profession}")
+
+            elif working == "working" or working == "w":
+                work = True
+                date = input("what date would you like to check?(YYYY-MM-DD)")
+                
+                while not validate_date(date) and (date.lower() != "back" and date.lower() != "b"):
+                    print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
+                    date = input("Enter new scheduled date (YYYY-MM-DD): ")
+
+                if date.lower() != "back" and date.lower() != "b":
+                    employees = self.logic_wrapper.employee_schedule_checker(date, work)
+                    print(f"name: {employees.name}, profession: {employees.profession}")
+
+            elif working == "back" or working == "b":
+                break
+
+            else:
+                print("invalid command")
+
+            
 
     def display_employee(self):
         while True:
@@ -152,11 +185,11 @@ class Crew_UI:
             command = command.lower()
             if command == "b":
                 break
-            elif command == "1":
-                self.display_add_crew_to_voyage_UI()
-            elif command == "2":
-                self.display_employee_database_UI()
-            elif command == "3":
+            elif command == "1":                        #adding crew to a voyage
+                self.display_add_crew_to_voyage_UI()    
+            elif command == "2":                        #showing the database to list peeps
+                self.display_employee_database_UI() 
+            elif command == "3":                        #updating employee (im doing this so i can understand this better)
                 ssn = input("Enter the ssn of the employee to update: ")
                 employee = self.logic_wrapper.find_employee_by_ssn(ssn)
                 if employee:
@@ -167,7 +200,7 @@ class Crew_UI:
                     print(f"4. Email: {employee.email}")
                     print(f"5. Home Phone: {employee.homePhone}")
                     print(f"6. Status: {employee.status}")
-                    print(f"7. Scheduled: {employee.scheduled}")
+                    
 
                     choice = input("Select the field to update (1-7): ")
                     if choice == "1":
@@ -191,18 +224,16 @@ class Crew_UI:
                             employee.homePhone = ''
                     elif choice == "6":
                         employee.status = input("Enter new status: ")
-                    elif choice == "7":
-                        employee.scheduled = input("Enter new scheduled date (YYYY-MM-DD): ")
-                        while not validate_date(employee.scheduled):
-                            print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
-                            employee.scheduled = input("Enter new scheduled date (YYYY-MM-DD): ")
+                    
+                    employee.scheduled = []
+                        
 
                     self.logic_wrapper.update_employee(employee)
                     print("Employee information updated successfully.")
                 else:
                     print("Employee not found with the provided SSN.")
 
-            elif command == "4":
+            elif command == "4":                                            #making a new employee
                 e = Employee()
                 while True:
                     e.name = input("Enter the name of the employee: ")
@@ -268,10 +299,7 @@ class Crew_UI:
                 #End
 
                 #Schedule 
-                e.scheduled = input("Enter the scheduled date of the employee (YYYY-MM-DD): ")
-                while not validate_date(e.scheduled):
-                    print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
-                    e.scheduled = input("Enter the scheduled date of the employee (YYYY-MM-DD): ")
+                e.scheduled = []
                 #End
                 self.logic_wrapper.add_employee(e)
             elif command == "5":
@@ -310,13 +338,12 @@ class Crew_UI:
                 employee.homePhone = new_home_phone
 
             if choice == "6":
-                new_Status = input("Enter new Status: ")
+                new_Status = input("Enter new Status: ")  #thinking about this again... we dont use this do we?...
                 employee.status = new_Status
             
-            if choice == "7":
-                new_schedule = input("Enter the new schedule: ")
-                employee.scheduled = new_schedule
-
-            self.logic_wrapper.update_employee(employee)
+            
+            self.logic_wrapper.update_employee(employee) #schedule should remain unchanged
         else:
             print("Employee not found.")
+
+

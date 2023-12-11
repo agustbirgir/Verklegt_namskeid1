@@ -36,6 +36,9 @@ class Data_Wrapper:
     def update_employee(self, employee):
         self.EmployeeIO.update_employee(employee)
 
+    def get_all_employees_schedule(self):
+        return self.EmployeeIO.get_all_employees_schedule()
+
 
     
     # ------ Destination ---------

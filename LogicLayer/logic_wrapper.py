@@ -35,6 +35,9 @@ class Logic_Wrapper:
     def update_employee(self, employee):
         return self.EmployeeLL.update_employee(employee)
     
+    def employee_schedule_checker(self, date, working):
+        return self.EmployeeLL.employee_schedule_checker(date, working)
+    
     # ------- VOYAGE ------------
 
     def add_voyage(self, voyage):
