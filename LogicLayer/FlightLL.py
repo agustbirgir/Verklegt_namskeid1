@@ -1,6 +1,5 @@
-from Models.Flight import Flight
 import random
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 class FlightLL:
     def __init__(self, data_connection):

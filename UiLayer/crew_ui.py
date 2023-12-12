@@ -141,28 +141,27 @@ class Crew_UI:
             selected_voyage_departure = self.logic_wrapper.get_flight(voyage.id).departureTime
             print("You picked voyage", voyage.id,"which departs at", selected_voyage_departure)
             print("Voyage", id,"crew:", crew_list)
+            new_crew_list = []
             
             while True:
                 name = input("Enter the name of an employee to add (q to finish adding to voyage): ")
                 employee = self.logic_wrapper.get_employee_by_name(name) # Get selected employee
-                new_crew = []
 
                 if name == "q":
-                    if validate_voyage_crew(crew_list, all_employees): # Crew has to be valid for user to be able to quit
+                    #if validate_voyage_crew(crew_list, all_employees): # Crew has to be valid for user to be able to quit
                         # Update the schedule of all assigned employees
-                        for name in crew_list:
-                            employee = self.logic_wrapper.get_employee_by_name(name)
-                            schedule = self.logic_wrapper.get_schedule_of_employee(employee)
-                            voyage_date = selected_voyage_departure.split(" ")[0]
-                            schedule.append(voyage_date)
-                            employee.scheduled = schedule
-                            self.logic_wrapper.update_employee(employee)
-                        # Add the list of employees to the voyage
-                        self.logic_wrapper.voyage_add_employee(crew_list, id)
-                        print(f"Successfully registered crew to voyage {id}")
-                        break
-                    else:
-                        print("Invalid crew assigned, try again")
+                    for name in crew_list:
+                        employee = self.logic_wrapper.get_employee_by_name(name)
+                        schedule = self.logic_wrapper.get_schedule_of_employee(employee)
+                        voyage_date = selected_voyage_departure.split(" ")[0]
+                        schedule.append(voyage_date)
+                        employee.scheduled = schedule
+                        self.logic_wrapper.update_employee(employee)
+                    # Add the list of employees to the voyage
+                    crew_list += new_crew_list
+                    self.logic_wrapper.voyage_add_employee(crew_list, id)
+                    print(f"Successfully registered crew to voyage {id}")
+                    break
                 else:
                     if employee != None:
                         # Check if employee is already assigned to the selected voyage
@@ -180,7 +179,7 @@ class Crew_UI:
                                         in_voyage = True
                             # Otherwise we add the employee to the voyage
                             if not in_voyage:
-                                crew_list.append(employee.name)
+                                new_crew_list.append(employee.name)
                     else:
                         print(f"Employee {name} does not exist, try again")
                 
