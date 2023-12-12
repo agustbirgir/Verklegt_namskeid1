@@ -38,16 +38,11 @@ class VoyageIO:
     def voyage_add_employee(self, employeeList, id):
         """Add an employee to a voyage"""
         rows = []
-        for x in employeeList:
-            print(x)
-
-        rows = []
         with open(self.file_name, mode='r') as file:
             reader = csv.DictReader(file, delimiter=";")
             for row in reader:
                 rows.append(row)
 
-            
         for row in rows:
             if int(row['id']) == id:
                 row['crew'] = str(employeeList)

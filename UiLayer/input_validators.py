@@ -24,6 +24,13 @@ def validate_email(email):
 
 def validate_date(date):
     try:
+        datetime.strptime(date, '%d-%m-%Y')
+        return True
+    except ValueError:
+        return False
+    
+def validate_date_2(date):
+    try:
         datetime.strptime(date, '%Y-%m-%d')
         return True
     except ValueError:
