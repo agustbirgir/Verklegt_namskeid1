@@ -1,9 +1,11 @@
 name,profession,ssn,homeAddress,gsmNumber,email,homePhone,status,scheduled
 Siggi,Pilot,1,2,3,a@g.is,4,1,2003-12-10
 Tommy Lee,Head Pilot,12345678,noatun 8,5812345,tommy@lee.com,,2,1998-09-21
-Agust,Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,2003-10-21
-Joi,Head Flight Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,2003-10-21
+Agust,Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,[]
+Agust,Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,[]
 Jonas,Pilot,1,2,3,a@g.is,4,1,2003-12-10
 Helgi,Head Pilot,12345678,noatun 8,5812345,tommy@lee.com,,2,1998-09-21
-Halli,Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,2003-10-21
-Sigurjon,Head Flight Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,2003-10-21
+Agust,Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,[]
+Agust,Attendant,2110032350,Sævangur 8,5812345,agust@gmail.com,1234567,4,[]
+Lalli,Pilot,7593501830,Flatarhraun 15,5812345,Lalli@Gmail.com,,0,[]
+Larus,Pilot,1237846089,Flatarhari 18,5812345,larus@gmail.com,12345324,0,[]
