@@ -85,10 +85,10 @@ class Crew_UI:
                         print("Name was too long")
                 
                 profession_menu = {#Profession
-                    "1": "Flugmaður",
-                    "2": "Flugþjónn",
-                    "3": "Flugstjóri",
-                    "4": "Yfirflugstjóri"
+                    "1": "Pilot",
+                    "2": "Flightattendent",
+                    "3": "Pilot captain",
+                    "4": "Chief pilot officer"
                 }
                 print("Select the Profession of the employee")
                 for key, value in profession_menu.items():
