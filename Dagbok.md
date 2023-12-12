@@ -201,3 +201,22 @@ Unnum bara meira í að klára föll og náðum alveg að klára nokkur
 
 ### Lok dags
 Flight manager kominn langa leið, crew manager líka docs skjal klárað, erum á góðri leið.
+
+## 12. Desember
+
+### Morgunfundur
+Vorum allir að tala saman um hverju næstu skref eru fyrir þessa viku og erum allir komnir saman með hvað á að gera og hvernig 
+
+- Ágúst
+
+- Ragnar
+
+- Sigurður
+
+- Theodór
+
+- Stefán
+  Mætti ekki :(
+
+
+### Lok Dags
