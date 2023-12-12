@@ -6,18 +6,45 @@ from UiLayer.input_validators import *
 class Flight_UI:
     def __init__(self, logic_connection):
         self.logic_wrapper = logic_connection
+        self.asciiart = r"""
+
+__|__
+\___/                       
+ | |
+ | |
+_|_|______________
+        /|\           _   _                 _   _                _____    _____
+      */ | \*        | \ | |      /\       | \ | |      /\      |_   _|  |  __ \              
+      / -+- \        |  \| |     /  \      |  \| |     /  \       | |    | |__) |
+  ---o--(_)--o---    | . ` |    / /\ \     | . ` |    / /\ \      | |    |  _  /
+    /  0 " 0  \      | |\  |   / ____ \    | |\  |   / ____ \    _| |_   | | \ \
+  */     |     \*    \_| \_|  /_/    \_\   \_| \_|  /_/    \_\  |_____|  |_|  \_\
+  /      |      \         
+*/       |       \*
+===================================================================================
+                        CHOOSE YOUR OPTIONS
+===================================================================================
+
+                1. Create voyage
+                2. Destination database
+                3. Show flight info per week
+
+===================================================================================
+                    [B]ack                [Q]uit
+===================================================================================
+        """
+
 
     def display_flight_manager_UI(self):
-        print("1. Create voyage")
-        print("2. Destination database")
-        print("3. Show flight info per week")
-        print("b to go back")
+        print(self.asciiart)
 
     def display_destination_database_UI(self):
         while True:
-            print("1. List all destinations")
-            print("2. Add new destination")
-            print("b to go back")
+            print("===================================================================================")
+            print("                 1. List all destinations")
+            print("                 2. Add new destination")
+            print("                     [B]ack")
+            print("===================================================================================")
             command = input("Please input an option: ")
             if command == "1":
                 self.display_destination_list()
@@ -30,11 +57,25 @@ class Flight_UI:
 
     def display_destination_list(self):
         destinations = self.logic_wrapper.get_all_destinations()
+
+        seperator_line = '-' * 100
+
+        print("{:<12} {:<13} {:<20} {:<10} {:<10} {:<15} {:<15}".format(
+            'Country', 'City', 'Airport', 'Flytime', 'Distance', 'Contact', 'Contact Number'
+        ))
+        print(seperator_line)
+
         for dest in destinations:
-            print(f"country: {dest.country}, city: {dest.city}, airport: {dest.airport}, flytime: {dest.flytime}, distance: {dest.distance}, contact: {dest.contact}, contact number: {dest.contactNumber}")
+            print("{:<15} {:<15} {:<20} {:<10} {:<10} {:<15} {:<15}".format(
+                dest.country, dest.city, dest.airport, dest.flytime, dest.distance, dest.contact, dest.contactNumber
+            ))
+            print(seperator_line)
 
     def display_add_destination_UI(self):
-        print("Fill out the destination details:")
+
+
+
+        print("Fill out the destination details")
         d = Destination()
         while True:
             d.country = input("Enter the country: ")
@@ -220,14 +261,17 @@ class Flight_UI:
     def input_prompt(self):
         while True:
             self.display_flight_manager_UI()
+            seperator_line = '=' * 83
             command = input("Enter your command: ")
             command = command.lower()
             if command == "b":
                 break
             elif command == "1":
                 while True:
-                    print("1. Create new voyage")
-                    print("2. Repeat an existing voyage")
+                    print(seperator_line)
+                    print("                 1. Create new voyage")
+                    print("                 2. Repeat an existing voyage")
+                    print(seperator_line)
                     command = input("Please enter an option (b to go back): ")
                     if command == "b":
                         break
