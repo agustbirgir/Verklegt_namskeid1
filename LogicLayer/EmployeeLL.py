@@ -1,4 +1,4 @@
-from Models.Employee import Employee
+import ast
 
 class EmployeeLL:
     def __init__(self, data_connection):
@@ -33,30 +33,10 @@ class EmployeeLL:
     def update_employee(self, employee):
         self.data_wrapper.update_employee(employee)
 
-
-
     def employee_schedule_checker(self, date, working): #working is meant to say if we are checking for non working and working employees
-        employee = self.data_wrapper.get_all_employees_schedule() #this should help tell the differance
-        ret_list = []
-        if working == True:                                 #if you are searching for those who are working on a specific date
-            for row in employee:
-                schedule = Employee(row["sceduled"])
+        return self.data_wrapper.employee_schedule_checker(date, working)
 
-                for booking in employee.scheduled:          #takes in schedule list size to run through
-                    if date == schedule[booking][1]:        #assuming scheduled is a touple (destination, date)
-                        ret_list.append(Employee(row["name"], row["profession"]))   #we already have date in ui layer, no need to return it
-
-        elif working == False:                              #if you are searching for those who are not working
-            for row in employee:
-
-                schedule = Employee(row["sceduled"])
-                found_date = False
-
-                for booking in employee.scheduled:          #goes through entire list for a match
-                    if date == schedule[booking][1]:
-                        found_date = True                   #this means the date exists in it
-
-                if found_date == True:
-                    ret_list.append(Employee(row["name"], row["profession"]))       #we already have date in ui layer, no need to return it
-                    
-        return ret_list
+    def get_schedule_of_employee(self, employee):
+        """Get the schedule of a given employee"""
+        schedule_list = [item.strip("'") for item in employee.scheduled[1:-1].split(", ")]
+        return schedule_list

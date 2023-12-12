@@ -38,6 +38,9 @@ class Data_Wrapper:
 
     def get_all_employees_schedule(self):
         return self.EmployeeIO.get_all_employees_schedule()
+    
+    def employee_schedule_checker(self, date, working):
+        return self.EmployeeIO.employee_schedule_checker(date, working)
 
 
     

@@ -38,6 +38,9 @@ class Logic_Wrapper:
     def employee_schedule_checker(self, date, working):
         return self.EmployeeLL.employee_schedule_checker(date, working)
     
+    def get_schedule_of_employee(self, employee):
+        return self.EmployeeLL.get_schedule_of_employee(employee)
+    
     # ------- VOYAGE ------------
 
     def add_voyage(self, voyage):

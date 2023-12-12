@@ -20,37 +20,43 @@ class Crew_UI:
         for elem in result:
             print(f"name: {elem.name}, profession: {elem.profession}")
 
-    def display_employees_working_status(self):
+    def display_employee_schedule_list(self, date, working):
+        result = self.logic_wrapper.employee_schedule_checker(date, working)
+        if result == None:
+            print("No employees found")
+        else:
+            for elem in result:
+                print(f"name: {elem.name}, profession: {elem.profession}")
+
+    def display_employees_working_status_UI(self):
         while True:
-            working = input("do you want to see [working] or [free] employees?")
-            working = working.lower()
-            if working == "free" or working == "f":
-                work = False
-                date = input("what date would you like to check?")
-
-                while not validate_date(date) and (date.lower() != "back" and date.lower() != "b"):
-                    print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
-                    date = input("Enter new scheduled date (YYYY-MM-DD): ")
-
-                if date.lower() != "back" and date.lower() != "b":
-                    employees = self.logic_wrapper.employee_schedule_checker(date, work)
-                    print(f"name: {employees.name}, profession: {employees.profession}")
-
-            elif working == "working" or working == "w":
-                work = True
-                date = input("what date would you like to check?(YYYY-MM-DD)")
-                
-                while not validate_date(date) and (date.lower() != "back" and date.lower() != "b"):
-                    print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
-                    date = input("Enter new scheduled date (YYYY-MM-DD): ")
-
-                if date.lower() != "back" and date.lower() != "b":
-                    employees = self.logic_wrapper.employee_schedule_checker(date, work)
-                    print(f"name: {employees.name}, profession: {employees.profession}")
-
-            elif working == "back" or working == "b":
+            print("1. List working employees at date")
+            print("2. List non working employees at date")
+            print("b to go back")
+            working = input("Please enter an option: ")
+            if working == "b":
                 break
-
+            elif working == "1":
+                while True:
+                    date = input("Please enter date (YYY-MM-DD) (b to go back): ")
+                    print(date, validate_date_2(date))
+                    if date == "b":
+                        break
+                    elif not validate_date_2(date):
+                        print("Invalid date format. Please enter a date in YYYY-MM-DD format, try again")
+                    else:
+                        working = True
+                        self.display_employee_schedule_list(date, working)
+            elif working == "2":
+                while True:
+                    date = input("Please enter date (DD-MM-YYYY) (b to go back): ")
+                    if date == "b":
+                        break
+                    elif not validate_date_2(date):
+                        print("Invalid date format. Please enter a date in YYYY-MM-DD format, try again")
+                    else:
+                        working = False
+                        self.display_employee_schedule_list(date, working)
             else:
                 print("invalid command")
 
@@ -138,10 +144,20 @@ class Crew_UI:
             
             while True:
                 name = input("Enter the name of an employee to add (q to finish adding to voyage): ")
-                employee = self.logic_wrapper.get_employee_by_name(name)
+                employee = self.logic_wrapper.get_employee_by_name(name) # Get selected employee
+                new_crew = []
 
                 if name == "q":
-                    if validate_voyage_crew(crew_list, all_employees):
+                    if validate_voyage_crew(crew_list, all_employees): # Crew has to be valid for user to be able to quit
+                        # Update the schedule of all assigned employees
+                        for name in crew_list:
+                            employee = self.logic_wrapper.get_employee_by_name(name)
+                            schedule = self.logic_wrapper.get_schedule_of_employee(employee)
+                            voyage_date = selected_voyage_departure.split(" ")[0]
+                            schedule.append(voyage_date)
+                            employee.scheduled = schedule
+                            self.logic_wrapper.update_employee(employee)
+                        # Add the list of employees to the voyage
                         self.logic_wrapper.voyage_add_employee(crew_list, id)
                         print(f"Successfully registered crew to voyage {id}")
                         break
@@ -162,11 +178,11 @@ class Crew_UI:
                                     if validate_if_registered_at_date(selected_voyage_departure, v_departure):
                                         print(f"{name}, is already in voyage {v.id}, at the same date {v_departure}, try again")
                                         in_voyage = True
+                            # Otherwise we add the employee to the voyage
                             if not in_voyage:
                                 crew_list.append(employee.name)
                     else:
                         print(f"Employee {name} does not exist, try again")
-            self.logic_wrapper.voyage_add_employee(crew_list, id)
                 
 
     def crew_manager_output(self):
@@ -303,7 +319,7 @@ class Crew_UI:
                 #End
                 self.logic_wrapper.add_employee(e)
             elif command == "5":
-                pass
+                self.display_employees_working_status_UI()
             else:
                 print("Invalid input try again")
 
@@ -336,11 +352,6 @@ class Crew_UI:
             if choice == "5":
                 new_home_phone = input("Enter the new Home phone: ")
                 employee.homePhone = new_home_phone
-
-            if choice == "6":
-                new_Status = input("Enter new Status: ")  #thinking about this again... we dont use this do we?...
-                employee.status = new_Status
-            
             
             self.logic_wrapper.update_employee(employee) #schedule should remain unchanged
         else:

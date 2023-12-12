@@ -1,5 +1,4 @@
 from Models.Employee import Employee
-import ast
 
 class VoyageLL:
     def __init__(self, data_connection):
@@ -23,5 +22,5 @@ class VoyageLL:
     
     def get_crew_of_voyage(self, voyage):
         """Get the crew of a specific voyage"""
-        crew_list = ast.literal_eval(voyage.crew)
+        crew_list = [item.strip("'") for item in voyage.crew[1:-1].split(", ")]
         return crew_list
