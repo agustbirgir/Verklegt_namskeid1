@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class VoyageLL:
     def __init__(self, data_connection):
         self.data_wrapper = data_connection
@@ -22,3 +24,72 @@ class VoyageLL:
         """Get the crew of a specific voyage"""
         crew_list = [item.strip("'") for item in voyage.crew[1:-1].split(", ")]
         return crew_list
+    
+    def get_voyages_of_day(self, date_looking):
+        voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
+        ret_list =[]
+        for Voyage in voyages:
+
+            voyage_departure = Voyage["departureFlight"]
+            date_of_voyage = voyage_departure.departureTime 
+            date_of_voyage = datetime.strptime(date_of_voyage, '%Y-%m-%d %H:%M:%S').date()
+
+            if str(date_of_voyage) == date_looking:
+                ret_list.append(Voyage)
+
+        return ret_list
+
+    def unmanned_voyage_fetcher(self, command, input): #command is subroutine (list, search, next), input is for search only
+        
+        if command == "list":
+            
+            voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
+            ret_list =[]
+            for Voyage in voyages:
+                if Voyage["crew"] == [] or len(Voyage["crew"]) == 0: #failsafe if i messed something up
+                    ret_list.append(Voyage)
+            return ret_list
+        
+
+        elif command == "search": #this one feels redundant...
+
+            voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
+            for Voyage in voyages:
+                if Voyage["id"] == input: #this should work in theory, but im judging why im searching for a empty one in the first place...
+
+                    if Voyage["crew"] == [] or len(Voyage["crew"]) == 0: #failsafe if i messed something up
+                        print("Voyage found and unmanned")
+                        return(Voyage)
+
+                    else:
+                        print("Voyage found and manned")
+                        return(Voyage)
+            
+                else:
+                    return("Voyage not found")
+
+
+        elif command == "next":
+            latest_unmanned_voyage = "There is no unmanned voyage left" #this is to make sure that if i never get into the dates of any
+            first_run = True                                            #i dont give the date of a manned voyage
+            for Voyage in voyages:
+
+                voyage_departure = Voyage["departureFlight"]
+                date_of_voyage = voyage_departure.departureTime 
+                date_of_voyage = datetime.strptime(date_of_voyage, '%Y-%m-%d %H:%M:%S')
+
+                if Voyage["crew"] == [] or len(Voyage["crew"]) == 0:
+
+                    if first_run == True:
+                        latest_date_of_voyage = date_of_voyage
+                        latest_unmanned_voyage = Voyage
+                        first_run = False
+
+                    elif date_of_voyage > latest_date_of_voyage: #takes the shortest/nearest date available (does not account for the past)
+                        latest_date_of_voyage = date_of_voyage
+                        latest_unmanned_voyage = Voyage
+
+            return latest_unmanned_voyage
+
+        else:
+            print("error in command prompt")
