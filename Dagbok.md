@@ -222,7 +222,7 @@ tilbúið svo við vitum allavega.
 Vorum allir að tala saman um hverju næstu skref eru fyrir þessa viku og erum allir komnir saman með hvað á að gera og hvernig 
 
 - Ágúst
-  Vinna í að bæta UI-ið
+  Vinna í að bæta UI-ið, láta lista koma fram í töflum o.s.frv
 - Ragnar
   Vinna í að lista alla voyages á ákveðnum degi
 - Sigurður
