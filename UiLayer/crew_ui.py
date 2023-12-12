@@ -183,21 +183,7 @@ class Crew_UI:
                     else:
                         print(f"Employee {name} does not exist, try again")
                 
-    def display_voyage_search(self):
-        while True:
-            command = input("Search by date (DD-MM-YYYY) (b to go back): ")
-            command = command.lower()
-
-            if command == "back" or command == "b":
-                break
-
-            else:
-
-                if validate_date(date):
-                    print(self.logic_wrapper.get_voyages_of_day(date_looking))
-
-                else:
-                    print("invalid date")
+    
 
     def display_unmanned_voyages(self): # i dont know where to place the search and next operations of the unmanned puller
         subroutine = "list"
