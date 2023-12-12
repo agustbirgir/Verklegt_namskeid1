@@ -6,7 +6,12 @@ from UiLayer.flight_ui import Flight_UI
 class MainMenuUI:
     def __init__(self):
         self.logic_wrapper = Logic_Wrapper()
-        self.ascii_art = r"""
+        self.ascii_artBot = r"""
+==================================================================================
+                                [Q]UIT
+==================================================================================
+"""
+        self.ascii_artTop = r"""
 __|__
 \___/                       
  | |
@@ -26,17 +31,15 @@ _|_|______________
 
                 1. Flight manager
                 2. Crew manager
- 
         """
-    
-    def manager_output(self):
-        print(self.ascii_art)
 
     def input_prompt(self):
         while True:
-            self.manager_output()
-            command = input("Pick an option: ")
-            command = command.lower()
+            print(self.ascii_artTop)
+
+            command = input("Pick an option: ").lower()
+
+            print(self.ascii_artBot)
             if command == "q":
                 break
             elif command == "1":
@@ -47,3 +50,5 @@ _|_|______________
                 crew.input_prompt()
             else:
                 print("Invalid input, try again")
+
+            

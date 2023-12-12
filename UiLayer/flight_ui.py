@@ -30,8 +30,21 @@ class Flight_UI:
 
     def display_destination_list(self):
         destinations = self.logic_wrapper.get_all_destinations()
+
+        seperator_line = '-' * 100
+
+        print("{:<12} {:<13} {:<20} {:<10} {:<10} {:<15} {:<15}".format(
+            'Country', 'City', 'Airport', 'Flytime', 'Distance', 'Contact', 'Contact Number'
+        ))
+        print(seperator_line)
+
         for dest in destinations:
-            print(f"country: {dest.country}, city: {dest.city}, airport: {dest.airport}, flytime: {dest.flytime}, distance: {dest.distance}, contact: {dest.contact}, contact number: {dest.contactNumber}")
+            print("{:<15} {:<15} {:<20} {:<10} {:<10} {:<15} {:<15}".format(
+                dest.country, dest.city, dest.airport, dest.flytime, dest.distance, dest.contact, dest.contactNumber
+            ))
+            print(seperator_line)
+        #for dest in destinations:
+            #print(f"country: {dest.country}, city: {dest.city}, airport: {dest.airport}, flytime: {dest.flytime}, distance: {dest.distance}, contact: {dest.contact}, contact number: {dest.contactNumber}")
 
     def display_add_destination_UI(self):
         print("Fill out the destination details:")
