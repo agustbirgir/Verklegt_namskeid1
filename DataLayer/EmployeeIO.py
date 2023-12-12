@@ -97,3 +97,11 @@ class EmployeeIO:
                 if row["profession"] == "Attendant" or row["profession"] == "Head attendant":
                     ret_list.append(Employee(row["name"], row["profession"]))
         return ret_list
+    
+    def get_all_employees_schedule(self):
+        ret_list = []
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                ret_list.append(Employee(row["name"], row["profession"], row["scheduled"]))
+        return ret_list
