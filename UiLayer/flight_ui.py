@@ -171,7 +171,7 @@ class Flight_UI:
                     voyage = Voyage()
                     voyage.departureFlight = arrivalFlight.id
                     voyage.arrivalFlight = arrivalFlight.id
-                    voyage.crew = ""
+                    voyage.crew = []
                     voyage.id = id
 
                     self.logic_wrapper.add_flight(arrivalFlight)
