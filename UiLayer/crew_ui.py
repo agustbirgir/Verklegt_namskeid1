@@ -172,7 +172,7 @@ class Crew_UI:
         """Display the menu to add crew to voyage"""
         while True:
             mode = input("do you wish to search for a voyage [1] or do you wish to get the nearest voyage [2]")
-            if mode == 1:
+            if mode == "1":
                 while True:
                     id = input("please enter voyage ID: ")
                     try:
@@ -182,7 +182,7 @@ class Crew_UI:
                         print("Invalid ID, please enter a number.")
                 voyage = self.logic_wrapper.get_voyage(id)
                 break
-            elif mode == 2:
+            elif mode == "2":
                 voyage = pull_next_unmanned_voyage()
                 break
             else:
