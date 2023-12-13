@@ -1,4 +1,5 @@
 from datetime import datetime
+from UiLayer.input_validators import *
 
 class VoyageLL:
     def __init__(self, data_connection):
@@ -41,12 +42,15 @@ class VoyageLL:
 
     def unmanned_voyage_fetcher(self, command, input): #command is subroutine (list, search, next), input is for search only
         
+        all_employees = self.logic_wrapper.get_all_employees()
+
         if command == "list":
             
             voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
             ret_list =[]
             for Voyage in voyages:
-                if Voyage["crew"] == [] or len(Voyage["crew"]) == 0: #failsafe if i messed something up
+                crew_list = self.data_wrapper.get_crew_of_voyage(Voyage)
+                if validate_voyage_crew(crew_list, all_employees) == False: 
                     ret_list.append(Voyage)
             return ret_list
         
@@ -56,8 +60,9 @@ class VoyageLL:
             voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
             for Voyage in voyages:
                 if Voyage["id"] == input: #this should work in theory, but im judging why im searching for a empty one in the first place...
-
-                    if Voyage["crew"] == [] or len(Voyage["crew"]) == 0: #failsafe if i messed something up
+                    crew_list = self.data_wrapper.get_crew_of_voyage(Voyage)
+        
+                    if validate_voyage_crew(crew_list, all_employees) == False: 
                         print("Voyage found and unmanned")
                         return(Voyage)
 
@@ -73,12 +78,13 @@ class VoyageLL:
             latest_unmanned_voyage = "There is no unmanned voyage left" #this is to make sure that if i never get into the dates of any
             first_run = True                                            #i dont give the date of a manned voyage
             for Voyage in voyages:
-
+                
+                crew_list = self.data_wrapper.get_crew_of_voyage(Voyage)
                 voyage_departure = Voyage["departureFlight"]
                 date_of_voyage = voyage_departure.departureTime 
                 date_of_voyage = datetime.strptime(date_of_voyage, '%Y-%m-%d %H:%M:%S')
 
-                if Voyage["crew"] == [] or len(Voyage["crew"]) == 0:
+                if validate_voyage_crew(crew_list, all_employees) == False:
 
                     if first_run == True:
                         latest_date_of_voyage = date_of_voyage
