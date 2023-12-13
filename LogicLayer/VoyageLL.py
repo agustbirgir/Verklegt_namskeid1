@@ -41,13 +41,10 @@ class VoyageLL:
         return ret_list
 
     def unmanned_voyage_fetcher(self, command, input): #command is subroutine (list, search, next), input is for search only
-        
         all_employees = self.data_wrapper.get_all_employees()
         voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
 
         if command == "list":
-            
-            
             ret_list =[]
             for Voyage in voyages:
                 crew_list = [item.strip("'") for item in Voyage.crew[1:-1].split(", ")]
@@ -55,10 +52,7 @@ class VoyageLL:
                     ret_list.append(Voyage)
             return ret_list
         
-
         elif command == "search": #this one feels redundant...
-
-            
             for Voyage in voyages:
                 if Voyage["id"] == input: #this should work in theory, but im judging why im searching for a empty one in the first place...
                     crew_list = [item.strip("'") for item in Voyage.crew[1:-1].split(", ")]
@@ -66,24 +60,30 @@ class VoyageLL:
                     if validate_voyage_crew(crew_list, all_employees) == False: 
                         print("Voyage found and unmanned")
                         return(Voyage)
-
                     else:
                         print("Voyage found and manned")
                         return(Voyage)
-            
                 else:
                     return("Voyage not found")
-
 
         elif command == "next":
             latest_unmanned_voyage = "There is no unmanned voyage left" #this is to make sure that if i never get into the dates of any
             first_run = True                                            #i dont give the date of a manned voyage
             for Voyage in voyages:
-                
                 crew_list = [item.strip("'") for item in Voyage.crew[1:-1].split(", ")]
-                voyage_departure = Voyage["departureFlight"]
-                date_of_voyage = voyage_departure.departureTime 
-                date_of_voyage = datetime.strptime(date_of_voyage, '%Y-%m-%d %H:%M:%S')
+
+                flight_id = Voyage.departureFlight
+                flight = self.get_flight_by_id(flight_id)
+
+                if flight:
+                    try:
+                        date_of_voyage = datetime.strptime(flight.departureTime, '%Y-%m-%d %H:%M:%S')
+                    except ValueError as e:
+                        print(f"Error parsing departure time for flight {flight_id}: {e}")
+                        continue
+                #voyage_departure_str = Voyage.departureFlight  # Corrected this line
+                #date_of_voyage = datetime.strptime(voyage_departure_str, '%Y-%m-%d %H:%M:%S') 
+                #date_of_voyage = datetime.strptime(date_of_voyage, '%Y-%m-%d %H:%M:%S')
 
                 if validate_voyage_crew(crew_list, all_employees) == False:
 

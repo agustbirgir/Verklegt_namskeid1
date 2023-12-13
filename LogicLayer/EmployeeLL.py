@@ -38,5 +38,7 @@ class EmployeeLL:
 
     def get_schedule_of_employee(self, employee):
         """Get the schedule of a given employee"""
+        if employee is None:
+            return []
         schedule_list = [item.strip("'") for item in employee.scheduled[1:-1].split(", ")]
         return schedule_list

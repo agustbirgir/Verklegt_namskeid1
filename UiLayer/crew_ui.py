@@ -7,15 +7,29 @@ class Crew_UI:
 
     def display_pilot_list(self):
         result = self.logic_wrapper.get_all_pilots()
-        for elem in result:
-            print(f"name: {elem.name}, profession: {elem.profession}")
+        sorted_result = sorted(result, key=lambda employee: employee.profession)
+
+        print("===================================================================================")
+        for elem in sorted_result:
+            print(f""" name: {elem.name} | profession: {elem.profession}  """)
+        print("""
+===================================================================================
+                    [B]ack          [Q]uit   
+===================================================================================
+            """)
 
     def display_attendant_list(self):
         result = self.logic_wrapper.get_all_attendants()
-        
-        for elem in result:
-            print(f"name: {elem.name}, profession: {elem.profession}")
-    
+        sorted_result = sorted(result, key=lambda employee: employee.profession)
+
+        print("===================================================================================")
+        for elem in sorted_result:
+            print(f""" name: {elem.name} | profession: {elem.profession}  """)
+            print("""
+===================================================================================
+                    [B]ack          [Q]uit   
+===================================================================================
+            """)
     def display_employee_list(self):
         result = self.logic_wrapper.get_all_employees()
         sorted_result = sorted(result, key=lambda employee: employee.profession)
@@ -163,8 +177,10 @@ class Crew_UI:
                 self.display_attendant_list()
             elif command == "4":
                 self.display_employee()
-            elif command == "b":
+            elif command.lower() == "b":
                 break
+            elif command.lower() == "q":
+                exit(0)
             else:
                 print("Invalid input")
 
@@ -181,9 +197,15 @@ class Crew_UI:
                     except ValueError:
                         print("Invalid ID, please enter a number.")
                 voyage = self.logic_wrapper.get_voyage(id)
+                if isinstance(voyage, str):
+                    print(voyage)
+                    continue
                 break
             elif mode == "2":
                 voyage = pull_next_unmanned_voyage(self)
+                if isinstance(voyage, str):
+                    print(voyage)
+                    continue
                 break
             else:
                 print("invalid mode")
@@ -212,11 +234,15 @@ class Crew_UI:
                         # Update the schedule of all assigned employees
                     for name in crew_list:
                         employee = self.logic_wrapper.get_employee_by_name(name)
-                        schedule = self.logic_wrapper.get_schedule_of_employee(employee)
-                        voyage_date = selected_voyage_departure.split(" ")[0]
-                        schedule.append(voyage_date)
-                        employee.scheduled = schedule
-                        self.logic_wrapper.update_employee(employee)
+                        if employee is not None:
+                            employee = self.logic_wrapper.get_employee_by_name(name)
+                            schedule = self.logic_wrapper.get_schedule_of_employee(employee)
+                            voyage_date = selected_voyage_departure.split(" ")[0]
+                            schedule.append(voyage_date)
+                            employee.scheduled = schedule
+                            self.logic_wrapper.update_employee(employee)
+                        else:
+                            print("Employeee {name} not found")
                     # Add the list of employees to the voyage
                     crew_list += new_crew_list
                     self.logic_wrapper.voyage_add_employee(crew_list, id)

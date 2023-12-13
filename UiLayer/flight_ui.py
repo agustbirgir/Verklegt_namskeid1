@@ -139,10 +139,20 @@ _|_|______________
         while True:
             print()
             print("Destinations:")
+            print("===================================================================================")
+            print("                Destinations ")
+            print("===================================================================================")
             for key, value in destination_menu.items():
-                print(f"{key}. {value}")
-            command = input("Please pick the arrival destination (q to quit): ")
-            if command == "q":
+                print(f"""{key}. {value}""")
+            print(f"""
+===================================================================================
+                  [B]ack            [Q]uit
+===================================================================================
+            """)    
+            command = input("Option: ")
+            if command.lower() == "q":
+                exit(0)
+            if command.lower() == "b":
                 break
             elif int(command) < 0 or int(command) > 5:
                 print("Invalid input, try again")
@@ -154,14 +164,16 @@ _|_|______________
                     break
                 else:
                     print("Destination does not exist, try again")
-        if command != "q":
+        if command != "b":
             id = self.logic_wrapper.create_unique_id()
             while True:
                 print()
-                departure = input(f"Please pick the departure time from Keflavik to {destination.city} (YYYY-MM-DD HH:MM) (q to quit): ")
+                departure = input(f"Please pick the departure time from Keflavik to {destination.city} (YYYY-MM-DD HH:MM) (q to quit, b to break): ")
                 validate, departureDate = validate_voyage_date(departure)
-                if departure == "q":
+                if departure.lower() == "b":
                     break
+                if departure.lower() == "q":
+                    exit(0)
                 elif validate == False:
                     print("Wrong format for input, try again")
                 elif validate == True:
@@ -208,12 +220,20 @@ _|_|______________
                 self.logic_wrapper.add_flight(arrivalFlight)
                 self.logic_wrapper.add_voyage(voyage)
                 
-                print(f"\nSuccessfully registered voyage, ID: {id}")
-                print(f"\nDeparture from Keflavik to {destination.city}:", departureDate)
-                print(f"Arrival date from Keflavik to {destination.city}:", arrivalDate)
-                print(f"\nDeparture from {destination.city} to Keflavik:", departureDate2)
-                print(f"Arrival date from {destination.city} to Keflavik:", arrivalDate2)
-                print()
+                print(f"""
+===================================================================================
+                      Successfully registered voyage, ID: {id}
+===================================================================================
+
+            Departure from Keflavik to {destination.city}: {departureDate}
+            Arrival date from Keflavik to {destination.city}: {arrivalDate}
+            Departure from {destination.city} to Keflavik: {departureDate2}
+            Arrival date from {destination.city} to Keflavik: {arrivalDate2}
+
+===================================================================================
+
+===================================================================================
+                """)
 
     def display_repeat_voyage_UI(self):
         while True:
@@ -301,12 +321,14 @@ _|_|______________
                     2. Repeat an existing voyage
 
 ===================================================================================
-                        [B]ack
+                        [B]ack          [Q]uit
 ===================================================================================
                     """)
-                    command = input("Please enter an option (b to go back): ")
-                    if command == "b":
+                    command = input("Option: ")
+                    if command.lower() == "b":
                         break
+                    if command.lower() == "q":
+                        exit(0)
                     elif command == "1":
                         self.display_add_voyage_UI()
                     elif command == "2":
