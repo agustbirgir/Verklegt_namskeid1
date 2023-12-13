@@ -92,6 +92,10 @@ _|_|______________
             while True:
                 self.print_destination_details(d)
                 value = input(prompt)
+                
+                if value.lower() in ['b' or 'q']:
+                    return
+
                 try:
                     validation(value)
                     setattr(d, attribute, value)
@@ -120,59 +124,9 @@ _|_|______________
                             [B]ack      [Q]uit
 ===================================================================================
         """)
-        """
-        while True:
-            d.country = input("Enter the country: ")
-            try:
-                validate_name(d.country)
-                break
-            except NameLengthException:
-                print("Name is too long")
 
-        while True:
-            d.city = input("Enter the city: ")
-            if validate_if_not_number(d.city):
-                break
-            else:
-                print("Input has to be a string, try again")
 
-        while True:
-            d.airport = input("Enter the airport: ")
-            if validate_if_not_number(d.city):
-                break
-            else:
-                print("Input has to be a string, try again")
-        
-        while True:
-            d.flytime = input("Enter the flytime (HH:MM): ")
-            if validate_time(d.flytime):
-                break
-            else:
-                print("Input is in wrong format, try again")
 
-        while True:
-            d.distance = input("Enter the distance from Iceland (in km): ")
-            if not validate_if_not_number(d.distance):
-                break
-            else:
-                print("Input has to be a number, try again")
-        
-        while True:
-            d.contact = input("Enter name of contact: ")
-            if validate_if_not_number(d.contact):
-                break
-            else:
-                print("Input has to be a string, try again")
-        
-        while True:
-            d.contactNumber = input("Enter the contact number: ")
-            if validate_phone (d.contactNumber):
-                break
-            else:
-                print("Input is not a valid number, try again")
-
-        self.logic_wrapper.add_destination(d)
-        """
     def display_add_voyage_UI(self):
         destination_menu = {
                     "1": "Nuuk",
@@ -309,10 +263,16 @@ _|_|______________
                 break
             elif command == "1":
                 while True:
-                    print(seperator_line)
-                    print("                 1. Create new voyage")
-                    print("                 2. Repeat an existing voyage")
-                    print(seperator_line)
+                    print("""
+===================================================================================
+                          
+                    1. Create new voyage
+                    2. Repeat an existing voyage
+
+===================================================================================
+                        [B]ack
+===================================================================================
+                    """)
                     command = input("Please enter an option (b to go back): ")
                     if command == "b":
                         break
@@ -328,7 +288,4 @@ _|_|______________
                 pass
             else:
                 print("Invalid input, try again")
-        
-        
-
 
