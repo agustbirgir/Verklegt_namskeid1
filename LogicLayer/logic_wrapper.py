@@ -58,6 +58,12 @@ class Logic_Wrapper:
     def get_crew_of_voyage(self, voyage):
         return self.VoyageLL.get_crew_of_voyage(voyage)
     
+    def get_voyages_of_day(self, date_looking):                         #this for flight or crew?
+        return self.VoyageLL.get_voyages_of_day(date_looking)
+    
+    def unmanned_voyage_fetcher(self, command, input):                  #this is like, 90% for crew manager, right?
+        return self.VoyageLL.unmanned_voyage_fetcher(command, input)
+    
 
     # ----- DESTINATION -----------
 

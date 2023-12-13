@@ -289,3 +289,24 @@ _|_|______________
             else:
                 print("Invalid input, try again")
 
+        
+
+    def display_voyage_search(self):
+        while True:
+            date = input("Search by date (DD-MM-YYYY) (b to go back): ")
+            date = date.lower()
+
+            if date == "back" or date == "b":
+                break
+
+            else:
+
+                if validate_date(date):
+                    print(self.logic_wrapper.get_voyages_of_day(date))
+
+                else:
+                    print("invalid date")
+        
+
+
+
