@@ -69,6 +69,7 @@ class Data_Wrapper:
     
     def voyage_add_employee(self, employeeList, id):
         return self.VoyageIO.voyage_add_employee(employeeList, id)
+        
 
     # ------- Flight ----------
 
@@ -80,6 +81,9 @@ class Data_Wrapper:
     
     def get_all_flights(self):
         return self.FlightIO.get_all_flights()
+    
+    def get_voyage_flights(self, id):
+        return self.FlightIO.get_voyage_flights(id)
     
     # ------ Aircraft ---------
 

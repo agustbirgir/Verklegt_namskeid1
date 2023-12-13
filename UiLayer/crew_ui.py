@@ -26,7 +26,22 @@ class Crew_UI:
             print("No employees found")
         else:
             for elem in result:
-                print(f"name: {elem.name}, profession: {elem.profession}")
+                print(f"name: {elem.name}")
+    
+    def display_employees_working_list(self, date, working):
+        result = self.logic_wrapper.employee_schedule_checker(date, working)
+        voyages = self.logic_wrapper.get_all_voyages()
+        if result == None:
+            print("No employees found")
+        ret_list = []
+        for elem in result: # Find the voyages of all the working employees
+            for v in voyages:
+                v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+                if elem.name in v_crew:
+                    ret_list.append([elem.name, v.id])
+                    break
+        for employee in ret_list:
+            print(f"name: {employee[0]}, voyage ID: {employee[1]}")
 
     def display_employees_working_status_UI(self):
         while True:
@@ -39,14 +54,13 @@ class Crew_UI:
             elif working == "1":
                 while True:
                     date = input("Please enter date (YYY-MM-DD) (b to go back): ")
-                    print(date, validate_date_2(date))
                     if date == "b":
                         break
                     elif not validate_date_2(date):
                         print("Invalid date format. Please enter a date in YYYY-MM-DD format, try again")
                     else:
                         working = True
-                        self.display_employee_schedule_list(date, working)
+                        self.display_employees_working_list(date, working)
             elif working == "2":
                 while True:
                     date = input("Please enter date (DD-MM-YYYY) (b to go back): ")

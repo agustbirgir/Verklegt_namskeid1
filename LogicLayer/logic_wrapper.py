@@ -87,6 +87,9 @@ class Logic_Wrapper:
     def get_all_flights(self):
         return self.FlightLL.get_all_flights()
     
+    def get_voyage_flights(self, id):
+        return self.FlightLL.get_voyage_flights(id)
+
     def calculate_arrival_time(self, date, time):
         return self.FlightLL.calculate_arrival_time(date, time)
     

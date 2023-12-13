@@ -17,6 +17,9 @@ class FlightLL:
         """Return all of the flights"""
         return self.data_wrapper.get_all_flights()
     
+    def get_voyage_flights(self, id):
+        return self.data_wrapper.get_voyage_flights(id)
+    
     def calculate_arrival_time(self, date, time):
         """Add together the departing time and the flytime to get arrival time"""
 
