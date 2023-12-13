@@ -1,7 +1,7 @@
 name;profession;ssn;homeAddress;gsmNumber;email;homePhone;status;scheduled
 Siggi;Pilot;1214742314;2;3;a@g.is;4;1;['1010-11-10', '10', '1010-11-10', '1010-11-10']
 Tommy Lee;Head Pilot;12345678;noatun 8;5812345;tommy@lee.com;;2;[]
-Agust;Attendant;2110032350;Sævangur 8;5812345;agust@gmail.com;1234567;4;[]
+Agust;Pilot;2110032350;Sævangur 8;8522607;agustbirgirkarlsson@gmail.com;1234567;4;[]
 Joi;Head Flight Attendant;1090452944;Sævangur 8;5812345;agust@gmail.com;1234567;4;[]
 Jonas;Pilot;1908912675;2;3;a@g.is;4;1;[]
 Helgi;Head Pilot;1881425342;noatun 8;5812345;tommy@lee.com;;2;['1010-11-10', '1010-11-10']

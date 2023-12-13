@@ -197,18 +197,26 @@ class Crew_UI:
         return self.logic_wrapper.unmanned_voyage_fetcher(subroutine, input) 
 
     def crew_manager_output(self):
-        print("\nCrew Manager Menu")
-        print("1. Assign crew to voyage")
-        print("2. Employee database")
-        print("3. Update employee")
-        print("4. Register employee")
-        print("5. Crew schedules")
-        print("b to go back")
+        print("""\n
+===================================================================================
+                        Crew Manager Menu
+===================================================================================
+            
+                    1. Assign crew to voyage
+                    2. Employee database
+                    3. Update employee
+                    4. Register employee
+                    5. Crew schedules
+
+===================================================================================
+                                [B]ack      
+===================================================================================
+        """)
 
     def input_prompt(self):
         while True:
             self.crew_manager_output()
-            command = input("Enter your command: ")
+            command = input("Option: ")
             command = command.lower()
             if command == "b":
                 break
@@ -217,48 +225,63 @@ class Crew_UI:
             elif command == "2":                        #showing the database to list peeps
                 self.display_employee_database_UI() 
             elif command == "3":                        #updating employee (im doing this so i can understand this better)
-                ssn = input("Enter the ssn of the employee to update: ")
-                employee = self.logic_wrapper.find_employee_by_ssn(ssn)
-                if employee:
-                    print("Current Employee Details:")
-                    print(f"1. Profession: {employee.profession}")
-                    print(f"2. Home Address: {employee.homeAddress}")
-                    print(f"3. GSM Number: {employee.gsmNumber}")
-                    print(f"4. Email: {employee.email}")
-                    print(f"5. Home Phone: {employee.homePhone}")
-                    print(f"6. Status: {employee.status}")
-                    
+                    while True:
+                        ssn = input("Enter the ssn of the employee to update or 'Q' to quit: ")
+                        if ssn.lower() == 'q':
+                            break
 
-                    choice = input("Select the field to update (1-7): ")
-                    if choice == "1":
-                        employee.profession = input("Enter new profession: ")
-                    elif choice == "2":
-                        employee.homeAddress = input("Enter new home address: ")
-                    elif choice == "3":
-                        employee.gsmNumber = input("Enter new GSM number: ")
-                        while not validate_phone(employee.gsmNumber):
-                            print("Invalid GSM number. Please try again.")
-                            employee.gsmNumber = input("Enter new GSM number: ")
-                    elif choice == "4":
-                        employee.email = input("Enter new email address: ")
-                        while not validate_email(employee.email):
-                            print("Invalid email. Please try again.")
-                            employee.email = input("Enter new email address: ")
-                    elif choice == "5":
-                        employee.homePhone = input("Enter new home phone (optional): ")
-                        if employee.homePhone and not validate_phone(employee.homePhone):
-                            print("Invalid home phone number. Leaving it empty.")
-                            employee.homePhone = ''
-                    elif choice == "6":
-                        employee.status = input("Enter new status: ")
+                        employee = self.logic_wrapper.find_employee_by_ssn(ssn)
+                        if employee:
+                            while True:
+                                print(f"""
+===================================================================================
+                    Current Employee Details of {employee.name} 
+===================================================================================
+
+                        1. Profession: {employee.profession}
+                        2. Home Address: {employee.homeAddress}
+                        3. GSM Number: {employee.gsmNumber}
+                        4. Email: {employee.email}
+                        5. Home Phone: {employee.homePhone}
+                          
+===================================================================================
+                        [B]ack          [Q]uit    
+===================================================================================
+
+                    """)
+
+                                choice = input("Select the field to update (1-5): ")
+                                if choice.lower() == 'q':
+                                    exit(0)
+                                elif choice.lower() == 'b':
+                                    break
+                                if choice == "1":
+                                    employee.profession = input("Enter new profession: ")
+                                elif choice == "2":
+                                    employee.homeAddress = input("Enter new home address: ")
+                                elif choice == "3":
+                                    employee.gsmNumber = input("Enter new GSM number: ")
+                                    while not validate_phone(employee.gsmNumber):
+                                        print("Invalid GSM number. Please try again.")
+                                        employee.gsmNumber = input("Enter new GSM number: ")
+                                elif choice == "4":
+                                    employee.email = input("Enter new email address: ")
+                                    while not validate_email(employee.email):
+                                        print("Invalid email. Please try again.")
+                                        employee.email = input("Enter new email address: ")
+                                elif choice == "5":
+                                    employee.homePhone = input("Enter new home phone (optional): ")
+                                    if employee.homePhone and not validate_phone(employee.homePhone):
+                                        print("Invalid home phone number. Leaving it empty.")
+                                        employee.homePhone = ''
                     
-                    employee.scheduled = []
+                                employee.scheduled = []
                         
 
-                    self.logic_wrapper.update_employee(employee)
-                    print("Employee information updated successfully.")
-                else:
-                    print("Employee not found with the provided SSN.")
+                                self.logic_wrapper.update_employee(employee)
+                                print("Employee information updated successfully.")
+                        else:
+                            print("Employee not found with the provided SSN.")
 
             elif command == "4":                                            #making a new employee
                 e = Employee()
@@ -320,11 +343,6 @@ class Crew_UI:
                     e.homePhone = ''
                 #End
 
-                #Status
-                e.status = 0
-                
-                #End
-
                 #Schedule 
                 e.scheduled = []
                 #End
@@ -334,15 +352,14 @@ class Crew_UI:
             else:
                 print("Invalid input try again")
 
-    # Inside Crew_UI class
 
     def display_update_employee_UI(self):
         ssn = input("Enter the SSN of the employee to update: ")
         employee = self.logic_wrapper.find_employee_by_ssn(ssn)
         if employee:
             print("Select the field to update:")
-            print("1. Profession\n2. Home Address\n3. GSM Number\n4. Email\n5. Home Phone\n6. Status\n7.    Scheduled")
-            choice = input("Enter your choice [1-7]: ")
+            print("1. Profession\n2. Home Address\n3. GSM Number\n4. Email\n5. Home Phone \n6.    Scheduled")
+            choice = input("Enter your choice [1-6]: ")
 
             if choice == "1":
                 new_profession = input("Enter new profession: ")
