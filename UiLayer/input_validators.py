@@ -102,7 +102,7 @@ def validate_if_registered_at_date(date1, date2):
 #------not validators, but it wont work in the ui layer
 
 
-def pull_next_unmanned_voyage(self):  #i will make a temp function for the pull, im not sure how to integrate it as of now, just bear with this abomination for now
+def pull_next_unmanned_voyage():  #i will make a temp function for the pull, im not sure how to integrate it as of now, just bear with this abomination for now
     subroutine = "next"                                 #this should be able to pull in the next empty voyage
     input = 0                                           #so this should be used in the main function for crew assignment on while loops
     return self.logic_wrapper.unmanned_voyage_fetcher(subroutine, input) 
