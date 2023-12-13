@@ -12,13 +12,23 @@ class Crew_UI:
 
     def display_attendant_list(self):
         result = self.logic_wrapper.get_all_attendants()
+        
         for elem in result:
             print(f"name: {elem.name}, profession: {elem.profession}")
     
     def display_employee_list(self):
         result = self.logic_wrapper.get_all_employees()
-        for elem in result:
-            print(f"name: {elem.name}, profession: {elem.profession}")
+        sorted_result = sorted(result, key=lambda employee: employee.profession)
+
+        print("===================================================================================")
+        for elem in sorted_result:
+            print(f""" name: {elem.name} | profession: {elem.profession}  """)
+        print("""
+===================================================================================
+                    [B]ack          [Q]uit   
+===================================================================================
+            """)
+
 
     def display_employee_schedule_list(self, date, working):
         result = self.logic_wrapper.employee_schedule_checker(date, working)
@@ -60,50 +70,76 @@ class Crew_UI:
             else:
                 print("invalid command")
 
-            
-
     def display_employee(self):
         while True:
+            command = input("Search by [name] or [ssn] (b to go back): ").lower()
 
-            command = input("Search by [name] or [ssn] (b to go back): ")
-            command = command.lower()
-
-            if command =="name" or command =="n":
-
+            if command in ["name", "n"]:
                 name = input("Input the name of the employee: ")
-                if name == "back" or name == "b":
+                if name.lower() in ['q', 'b']:
+                    if name.lower() == 'q':
+                        exit(0)
                     break
                 employee = self.logic_wrapper.get_employee_by_name(name)
                 if employee:
-                    print(f"\n Name: {employee.name}\n Profession: {employee.profession}\n SSN: {employee.homeAddress}\n Gsm number: {employee.gsmNumber}\n Email: {employee.email}\n HomePhone: {employee.homePhone}\n Status: {employee.status}\n Scheduled: {employee.scheduled}\n")
+                    print(f"""
+===================================================================================
+                            Database of employee
+===================================================================================
+
+                          Name: {employee.name}
+                          Profession: {employee.profession}
+                          SSN: {employee.ssn}
+                          Home address: {employee.homeAddress}
+                          Gsm number: {employee.gsmNumber}
+                          Email: {employee.email}
+                          HomePhone: {employee.homePhone}
+
+===================================================================================
+                            [B]ack          [Q]uit
+===================================================================================
+                    """)
                 else:
-                    print("name invalid")
+                    print("Name invalid")
 
-            elif command =="ssn" or command =="s":
-
+            elif command in ["ssn", "s"]:
                 ssn = input("Input the ssn of the employee: ")
-                if ssn == "back" or ssn == "b":
+                if ssn.lower() in ['q', 'b']:
+                    if ssn.lower() == 'q':
+                        exit(0)
                     break
                 employee = self.logic_wrapper.find_employee_by_ssn(ssn)
                 if employee:
                     print(f"name: {employee.name}, profession: {employee.profession}")
                 else:
-                    print("name invalid")
+                    print("SSN invalid")
 
-            elif command == "back" or command == "b":
+            elif command in ["back", "b"]:
                 break
 
             else:
-                print("invalid command")
+                print("Invalid command")
+
+
 
     def display_employee_database_UI(self):
         while True:
-            print("Employee Database")
-            print("1. List all employees")
-            print("2. List all pilots")
-            print("3. List all attendants")
-            print("4. List specific employee")
-            print("b to go back")
+            print(f"""
+===================================================================================
+                        Employee Database
+===================================================================================
+
+                  1. List all employees
+                  2. List all pilots
+                  3. List all attendants
+                  4. List specific employee
+
+===================================================================================
+                    [B]ack          [Q]uit
+===================================================================================
+
+            """)
+
             command = input("Please pick an option: ")
             if command == "1":
                 self.display_employee_list()
