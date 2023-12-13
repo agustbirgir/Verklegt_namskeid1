@@ -45,7 +45,7 @@ def validate_time(time):
 
 def validate_voyage_date(date):
     try:
-        datetime_obj = datetime.strptime(date, '%d-%m-%Y,%H:%M')
+        datetime_obj = datetime.strptime(date, '%Y-%m-%d %H:%M')
         return True, datetime_obj
     except ValueError:
         return False, None

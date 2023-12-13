@@ -158,7 +158,7 @@ _|_|______________
             id = self.logic_wrapper.create_unique_id()
             while True:
                 print()
-                departure = input(f"Please pick the departure time from Keflavik to {destination.city} (DD-MM-YYYY,HH:MM) (q to quit): ")
+                departure = input(f"Please pick the departure time from Keflavik to {destination.city} (YYYY-MM-DD HH:MM) (q to quit): ")
                 validate, departureDate = validate_voyage_date(departure)
                 if departure == "q":
                     break
@@ -174,54 +174,46 @@ _|_|______________
                     departureFlight.arrivalTime = arrivalDate
                     departureFlight.destination = destination.city
                     departureFlight.id = id
-                    print("Successfully registered")
                     # User could cancel, so we dont write the flight to the csv file until he has registered the second flight as well.
                     break
         if departure != "q" and command != "q":
-            while True:
+            #while True: B requirements
+            #departure2 = input(f"Please pick the departure time from {destination.city} to Keflavik (DD-MM-YYYY,HH:MM) (q to quit): ")
+            departure2 = arrivalDate.strftime('%Y-%m-%d %H:%M') # the A requirements has it so every voyage returns the same date as it leaves
+            validate, departureDate2 = validate_voyage_date(departure2)
+            #validate_if_after = validate_if_date_after(departure2, departure) # Doesnt quite work
+            if validate == False:
+                print("Wrong format for input, try again")
+            #elif validate_if_after == False:
+                #print("Arrival date must be set after the departure date, try again")
+            elif validate == True:
+
+                flytime2 = datetime.strptime(destination.flytime,'%H:%M')
+                arrivalDate2 = self.logic_wrapper.calculate_arrival_time(departureDate2, flytime2)
+                arrivalFlight = Flight()
+                arrivalFlight.startingPoint = destination.city 
+                arrivalFlight.departureTime = departureDate2
+                arrivalFlight.arrivalTime = arrivalDate2
+                arrivalFlight.destination = self.logic_wrapper.get_destination("Keflavik").city # Keflavik is always the arrival destination in A requirements, change in B requirements
+                arrivalFlight.id = id
+
+                # Add the departure flight and arrival flight to the voyage
+                voyage = Voyage()
+                voyage.departureFlight = departureFlight.id
+                voyage.arrivalFlight = arrivalFlight.id
+                voyage.crew = []
+                voyage.id = id
+
+                self.logic_wrapper.add_flight(departureFlight)
+                self.logic_wrapper.add_flight(arrivalFlight)
+                self.logic_wrapper.add_voyage(voyage)
+                
+                print(f"\nSuccessfully registered voyage, ID: {id}")
+                print(f"\nDeparture from Keflavik to {destination.city}:", departureDate)
+                print(f"Arrival date from Keflavik to {destination.city}:", arrivalDate)
+                print(f"\nDeparture from {destination.city} to Keflavik:", departureDate2)
+                print(f"Arrival date from {destination.city} to Keflavik:", arrivalDate2)
                 print()
-                departure2 = input(f"Please pick the departure time from {destination.city} to Keflavik (DD-MM-YYYY,HH:MM) (q to quit): ")
-                validate, departureDate2 = validate_voyage_date(departure2)
-                validate_if_after = validate_if_date_after(departure2, departure) # Doesnt quite work
-                if command == "q":
-                    break
-                elif validate == False:
-                    print("Wrong format for input, try again")
-                elif validate_if_after == False:
-                    print("Arrival date must be set after the departure date, try again")
-                elif validate == True:
-
-                    flytime2 = datetime.strptime(destination.flytime,'%H:%M')
-                    arrivalDate2 = self.logic_wrapper.calculate_arrival_time(departureDate2, flytime2)
-                    #destinationInfo = [destination.country,destination.city,destination.airport,destination.flytime,
-                                       #destination.distance,destination.contact,destination.contactNumber]
-                    # ef ekki hægt að referenca Destination object úr csv skránni þá nota þennann lista, sjáum til
-                    arrivalFlight = Flight()
-                    arrivalFlight.startingPoint = destination.city 
-                    arrivalFlight.departureTime = departureDate2
-                    arrivalFlight.arrivalTime = arrivalDate2
-                    arrivalFlight.destination = self.logic_wrapper.get_destination("Keflavik").city # Keflavik is always the arrival destination in A requirements, change in B requirements
-                    arrivalFlight.id = id
-
-                    # Add the departure flight and arrival flight to the voyage
-                    voyage = Voyage()
-                    voyage.departureFlight = arrivalFlight.id
-                    voyage.arrivalFlight = arrivalFlight.id
-                    voyage.crew = []
-                    voyage.id = id
-
-                    self.logic_wrapper.add_flight(arrivalFlight)
-                    self.logic_wrapper.add_flight(departureFlight)
-                    self.logic_wrapper.add_voyage(voyage)
-                    
-                    print(f"\nSuccessfully registered voyage, ID: {id}")
-                    print(f"\nDeparture from Keflavik to {destination.city}:", departureDate)
-                    print(f"Arrival date from Keflavik to {destination.city}:", arrivalDate)
-                    print(f"\nDeparture from {destination.city} to Keflavik:", departureDate2)
-                    print(f"Arrival date from {destination.city} to Keflavik:", arrivalDate2)
-                    print()
-
-                    break
 
     def display_repeat_voyage_UI(self):
         while True:
@@ -233,22 +225,61 @@ _|_|______________
                 print("Invalid ID, please enter a number.")
         get_voyage = self.logic_wrapper.get_voyage(id)
         if get_voyage != None:
-            print(f"You picked voyage: {get_voyage}")
+            print(f"You picked voyage: {get_voyage.id}")
             while True:
-                repeat_date = input("Please input the date and time for when you want to repeat this voyage (DD-MM-YYYY,HH:MM) (q to quit): ")
-                validate, date = validate_voyage_date(repeat_date)
+                repeat_date = input("Please input the date and time for when you want to repeat this voyage (YYYY-MM-DD HH:MM) (q to quit): ")
+                validate, departureDate = validate_voyage_date(repeat_date)
                 if repeat_date == "q":
                     break
-                elif validate_voyage_date(validate):
+                elif validate == False:
                     print("Invalid date format, try again")
-                else:
-                    id = self.logic_wrapper.create_unique_id()
+                elif validate == True:
+                    new_id = self.logic_wrapper.create_unique_id() # Create a new id
+                    voyage_flights = self.logic_wrapper.get_voyage_flights(id) # Get the flights of the selected voyage
+
+                    # ----------- Register departure flight ------------
+                    destination = self.logic_wrapper.get_destination(voyage_flights[0].destination)
+                    flytime = datetime.strptime(destination.flytime,'%H:%M')
+                    arrivalDate = self.logic_wrapper.calculate_arrival_time(departureDate, flytime)
+                    print("Arrival date departure:", arrivalDate)
+                    departureFlight = Flight()
+                    departureFlight.startingPoint = "Keflavik" # Starting point is always keflavik for now in A requirements
+                    departureFlight.departureTime = departureDate
+                    departureFlight.arrivalTime = arrivalDate
+                    departureFlight.destination = destination.city
+                    departureFlight.id = new_id
+
+                    # -------- Register arrival flight ------------
+                    destination2 = "Keflavik"           # Destination always Keflavik in A requirements
+                    departureDate2 = arrivalDate
+                    destination2 = self.logic_wrapper.get_destination(voyage_flights[0].destination)
+                    flytime2 = datetime.strptime(destination2.flytime,'%H:%M')
+                    arrivalDate2 = self.logic_wrapper.calculate_arrival_time(departureDate2, flytime2)
+                    arrivalFlight = Flight()
+                    arrivalFlight.startingPoint = destination.city # Get the city of the departure flight
+                    arrivalFlight.departureTime = departureDate2
+                    arrivalFlight.arrivalTime = arrivalDate2
+                    arrivalFlight.destination = "Keflavík" # Keflavik is always the arrival destination in A requirements, change in B requirements
+                    arrivalFlight.id = new_id
+
+                    # ----------- Add the departure flight and arrival flight to the new voyage -----------
                     new_voyage = Voyage()
-                    new_voyage.departureFlight = get_voyage.departureFlight
-                    new_voyage.arrivalFlight = get_voyage.arrivalFlight
+                    new_voyage.departureFlight = departureFlight.id
+                    new_voyage.arrivalFlight = arrivalFlight.id
                     new_voyage.crew = get_voyage.crew
-                    new_voyage.id = id
+                    new_voyage.id = new_id
+
+                    self.logic_wrapper.add_flight(departureFlight)
+                    self.logic_wrapper.add_flight(arrivalFlight)
                     self.logic_wrapper.add_voyage(new_voyage)
+                    
+                    print(f"\nSuccessfully registered voyage, ID: {id}")
+                    print(f"\nDeparture from Keflavik to {destination.city}:", departureDate)
+                    print(f"Arrival date from Keflavik to {destination.city}:", arrivalDate)
+                    print(f"\nDeparture from {destination.city} to Keflavik:", departureDate2)
+                    print(f"Arrival date from {destination.city} to Keflavik:", arrivalDate2)
+                    print()
+                    break
         else:
             print("Voyage not found")
 

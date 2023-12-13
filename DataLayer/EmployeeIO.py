@@ -122,5 +122,5 @@ class EmployeeIO:
                         if emp_sched == date:
                             is_working_at_date = True
                         if not is_working_at_date:
-                            ret_list.append(Employee(row["name"], row["profession"]))
+                            ret_list.append(Employee(row["name"]))
         return ret_list

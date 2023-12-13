@@ -41,6 +41,6 @@ class FlightIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                if (row["id"] == id):
+                if (int(row["id"]) == int(id)):
                     ret_list.append(Flight(row["startingPoint"], row["departureTime"], row["arrivalTime"], row["destination"], row["id"]))
         return ret_list
