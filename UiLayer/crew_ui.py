@@ -1,5 +1,6 @@
 from Models.Employee import Employee
 from UiLayer.input_validators import *
+from LogicLayer.Employee_updater import EmployeeUpdater
 
 class Crew_UI:
     def __init__(self, logic_connection):
@@ -29,7 +30,8 @@ class Crew_UI:
                 for elem in result:
                     print(f"name: {elem.name}, profession: {elem.profession}")
             elif command == "3":
-                pass
+                ssn = input("Enter the SSN of the employee to update: ")
+                self.employee_updater.update_employee_details(ssn)
             elif command == "4":
                 e = Employee()
                 while True:
@@ -109,7 +111,6 @@ class Crew_UI:
                 pass
             else:
                 print("Invalid input try again")
-
 
     def list_pilots(self):
         print(self.logic_wrapper.get_all_pilots())

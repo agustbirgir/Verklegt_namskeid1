@@ -24,6 +24,10 @@ class Logic_Wrapper:
     def get_all_attendants(self):
         return self.EmployeeLL.get_all_attendants()
     
+    def find_employee_by_ssn(self, ssn):
+        return self.EmployeeLL.find_employee_by_ssn(ssn)
+    
+
     # ------- VOYAGE ------------
 
     def add_voyage(self, voyage):

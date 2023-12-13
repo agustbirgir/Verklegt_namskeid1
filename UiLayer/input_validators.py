@@ -10,7 +10,7 @@ def validate_name(name):
         raise NameLengthException
     
 def validate_ssn(ssn):
-    return ssn.isdigit() and len(ssn) == 8
+    return ssn.isdigit() and len(ssn) == 10
 
 def validate_phone(phone_number):
     pattern = re.compile(r"^\d{7,15}$")

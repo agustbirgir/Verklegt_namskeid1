@@ -22,6 +22,10 @@ class Data_Wrapper:
 
     def get_all_attendants(self):
         return self.EmployeeIO.get_all_attendants()
+    
+    def find_employee_by_ssn(self, ssn):
+        """Logic to find and return an employee by SSN"""
+        return self.EmployeeIO.find_employee_by_ssn(ssn)
 
 
     

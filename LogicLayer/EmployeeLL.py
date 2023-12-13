@@ -23,3 +23,8 @@ class EmployeeLL:
         """Returns all attendants"""
 
         return self.data_wrapper.get_all_attendants()
+    
+    def find_employee_by_ssn(self, ssn):
+        """Find and return an employee by SSN"""
+        
+        return self.data_wrapper.find_employee_by_ssn(ssn)
