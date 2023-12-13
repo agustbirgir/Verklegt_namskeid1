@@ -183,7 +183,7 @@ class Crew_UI:
                 voyage = self.logic_wrapper.get_voyage(id)
                 break
             elif mode == "2":
-                voyage = pull_next_unmanned_voyage()
+                voyage = pull_next_unmanned_voyage(self)
                 break
             else:
                 print("invalid mode")
