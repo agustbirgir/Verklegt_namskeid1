@@ -40,11 +40,14 @@ _|_|______________
 
     def display_destination_database_UI(self):
         while True:
-            print("===================================================================================")
-            print("                 1. List all destinations")
-            print("                 2. Add new destination")
-            print("                     [B]ack")
-            print("===================================================================================")
+            print("""===================================================================================
+                  
+                    1. List all destinations
+                    2. Add new destination
+                  
+===================================================================================
+                        [B]ack
+===================================================================================""")
             command = input("Please input an option: ")
             if command == "1":
                 self.display_destination_list()
@@ -72,65 +75,57 @@ _|_|______________
             print(seperator_line)
 
     def display_add_destination_UI(self):
-
-
-
-        print("Fill out the destination details")
+        #print("Fill out the destination details")
         d = Destination()
-        while True:
-            d.country = input("Enter the country: ")
-            try:
-                validate_name(d.country)
-                break
-            except NameLengthException:
-                print("Name is too long")
 
-        while True:
-            d.city = input("Enter the city: ")
-            if validate_if_not_number(d.city):
-                break
-            else:
-                print("Input has to be a string, try again")
+        fields = [
+            ("Enter the country: ", "country", validate_name),
+            ("Enter the city: ", "city", validate_if_not_number),
+            ("Enter the airport: ", "airport", validate_if_not_number),
+            ("Enter the flytime (HH:MM): ", "flytime", validate_time),
+            ("Enter the distance from Iceland (in km): ", "distance", lambda x: not validate_if_not_number(x)),
+            ("Enter name of contact: ", "contact", validate_if_not_number),
+            ("Enter the contact number: ", "contactNumber", validate_phone)
+        ]
 
-        while True:
-            d.airport = input("Enter the airport: ")
-            if validate_if_not_number(d.city):
-                break
-            else:
-                print("Input has to be a string, try again")
-        
-        while True:
-            d.flytime = input("Enter the flytime (HH:MM): ")
-            if validate_time(d.flytime):
-                break
-            else:
-                print("Input is in wrong format, try again")
+        for prompt, attribute, validation in fields:
+            while True:
+                self.print_destination_details(d)
+                value = input(prompt)
+                
+                if value.lower() in ['b' or 'q']:
+                    return
 
-        while True:
-            d.distance = input("Enter the distance from Iceland (in km): ")
-            if not validate_if_not_number(d.distance):
-                break
-            else:
-                print("Input has to be a number, try again")
-        
-        while True:
-            d.contact = input("Enter name of contact: ")
-            if validate_if_not_number(d.contact):
-                break
-            else:
-                print("Input has to be a string, try again")
-        
-        while True:
-            d.contactNumber = input("Enter the contact number: ")
-            if validate_phone (d.contactNumber):
-                break
-            else:
-                print("Input is not a valid number, try again")
+                try:
+                    validation(value)
+                    setattr(d, attribute, value)
+                    break
+                except NameLengthException:
+                    print("Name is too long")
 
         self.logic_wrapper.add_destination(d)
-        
         print(f"Successfully registered new destination at {d.city}")
-            
+
+    def print_destination_details(self, destination):
+        print(f"""
+===================================================================================
+                        Destination Details
+===================================================================================
+                    
+                    Country: {destination.country}
+                    City: {destination.city}
+                    Airport: {destination.airport}
+                    Flytime: {destination.flytime}
+                    Distance: {destination.distance}
+                    Contact: {destination.contact}
+                    Contact Number: {destination.contactNumber}
+              
+===================================================================================
+                            [B]ack      [Q]uit
+===================================================================================
+        """)
+
+
 
     def display_add_voyage_UI(self):
         destination_menu = {
@@ -268,10 +263,16 @@ _|_|______________
                 break
             elif command == "1":
                 while True:
-                    print(seperator_line)
-                    print("                 1. Create new voyage")
-                    print("                 2. Repeat an existing voyage")
-                    print(seperator_line)
+                    print("""
+===================================================================================
+                          
+                    1. Create new voyage
+                    2. Repeat an existing voyage
+
+===================================================================================
+                        [B]ack
+===================================================================================
+                    """)
                     command = input("Please enter an option (b to go back): ")
                     if command == "b":
                         break
@@ -287,6 +288,7 @@ _|_|______________
                 pass
             else:
                 print("Invalid input, try again")
+
         
 
     def display_voyage_search(self):
@@ -305,5 +307,6 @@ _|_|______________
                 else:
                     print("invalid date")
         
+
 
 

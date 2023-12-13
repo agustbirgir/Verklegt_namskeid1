@@ -2,4 +2,5 @@ startingPoint;departureTime;arrivalTime;destination;id
 Nuuk;1010-11-10 10:30:00;Keflavik;1010-11-10 13:10:00;3891
 Keflavik;1010-11-10 10:20:00;Nuuk;1010-11-10 13:10:00;3891
 Nuuk;1010-11-10 14:30:00;Keflavik;1010-11-10 14:10:00;2
-Keflavik;1010-11-10 14:20:00;Nuuk;1010-11-10 14:10:00;2
+Keflavik;1010-11-10 14:20:00;Nuuk;1010-11-10 14:10:00;2Kulusuk;2023-10-22 12:40:00;2023-10-22 15:20:00;Keflavik;2693
+Keflavik;2023-10-21 06:40:00;2023-10-21 09:20:00;Kulusuk;2693
