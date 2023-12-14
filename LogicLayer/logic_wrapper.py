@@ -41,6 +41,9 @@ class Logic_Wrapper:
     def get_schedule_of_employee(self, employee):
         return self.EmployeeLL.get_schedule_of_employee(employee)
     
+    def sort_pilots_by_license(self):
+        return self.EmployeeLL.sort_pilots_by_license()
+    
     # ------- VOYAGE ------------
 
     def add_voyage(self, voyage):

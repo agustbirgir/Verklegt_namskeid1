@@ -177,6 +177,8 @@ class Crew_UI:
                 self.display_attendant_list()
             elif command == "4":
                 self.display_employee()
+            elif command == "5":
+                self.logic_wrapper.sort_pilots_by_license()
             elif command.lower() == "b":
                 break
             elif command.lower() == "q":
