@@ -254,10 +254,12 @@ Við erum komnir með flottan UI hjá okkur allt sýnist vera koma hægt og ról
 
 ## 14. Desember
 
--Ágúst
-
--Ragnar
-
--Sigurður
+- Ágúst
+  Heldur áfram með UI, okkur vantar enn alveg mikið þar.
+- Ragnar
+  Byrja að vinna í að lista hluti í B kröfum
+- Sigurður
+  Klára að lista voyages og starfsmenn í ákveðni viku, byrja að setja upp og gera föll fyrir B kröfur.
 
 ### Lok dags
+Kláruðum A kröfur, byrjaðir á B kröfum og kláruðum fyrstu 6 kröfurnar.
