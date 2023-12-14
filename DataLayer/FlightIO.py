@@ -22,8 +22,8 @@ class FlightIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                if (row["id"] == id):
-                    return Flight(row["startingPoint"], row["departureTime"], row["arrivalTime"], row["destination"], row["id"])
+                if (row["id"].strip() == str(id).strip()):
+                    return Flight(row["startingPoint"].strip(), row["departureTime"].strip(), row["arrivalTime"].strip(), row["destination"].strip(), row["id"].strip())
         return ("Flight not found")
 
     def get_all_flights(self):
