@@ -315,15 +315,35 @@ _|_|______________
 
     def display_get_voyage_on_date_UI(self):
         while True:
-            date = input("Please input the date to get all voyages (YYYY-MM-DD) (q to quit): ")
+            date = input("Please input the date to get all voyages (YYYY-MM-DD): ")
             if date == "q":
                 break
             elif not validate_date_2(date):
                 print("Invalid date format, try again")
             else:
-                result = self.logic_wrapper.get_voyages_of_day(date)
-                for elem in result:
-                    print(f"Voyage ID: {elem.id}")
+                week = self.logic_wrapper.get_week_dates(date)
+                header = "{:<6} {:<20} {:<20}".format('ID', 'Departure Time', 'Destination')
+                separator_line = '-' * 50
+
+                print(separator_line)
+                print(header)
+                print(separator_line)
+
+                for day in week:
+                    result = self.logic_wrapper.get_voyages_of_day(day)
+                
+                    for voyage in result:
+                        flight = self.logic_wrapper.get_flight(voyage.id)
+                        if flight:
+                            print("{:<6} {:<20} {:<20}".format(
+                                flight.id, flight.departureTime, flight.destination
+                            ))
+                            print(separator_line)
+                print("""
+===================================================================================
+                                [Q]uit  
+===================================================================================
+                """)
     
     def display_get_voyages_in_a_week_UI(self):
         while True:
@@ -334,15 +354,38 @@ _|_|______________
                 print("Invalid date format, try again")
             else:
                 week = self.logic_wrapper.get_week_dates(date)
+                header = "{:<6} {:<20} {:<20}".format('ID', 'Departure Time', 'Destination')
+                separator_line = '-' * 50
+
+                print("===================================================================================")
+                print(header)
+                print(separator_line)
+
                 for day in week:
-                    print(day)
                     result = self.logic_wrapper.get_voyages_of_day(day)
-                    for elem in result:
-                        print(f"Voyage ID: {elem.id}")
+
+                    if not result:  # If there are no voyages on this day, print the date and separator
+                        print(f"Date: {day}")
+                        print(separator_line)
+                    else:  # If there are voyages, print the date without the separator
+                        print(f"Date: {day}")
+
+                        for voyage in result:
+                            flight = self.logic_wrapper.get_flight(voyage.id)
+                            if flight:
+                                print("{:<6} {:<20} {:<20}".format(
+                                    flight.id, flight.departureTime, flight.destination
+                                ))
+                        print(separator_line)  # Print the separator after listing all voyages of the day
+
+                print("""===================================================================================
+                        [Q]uit  
+===================================================================================""")
+
 
     def display_employee_voyages_in_a_week_UI(self):
         while True:
-            date = input("Please input a date in the week to be checked (YYYY-MM-DD) (q to quit): ")
+            date = input("Please input a date in the week to be checked (YYYY-MM-DD): ")
             if date == "q":
                 break
             elif not validate_date_2(date):
