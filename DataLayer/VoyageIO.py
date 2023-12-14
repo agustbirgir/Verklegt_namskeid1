@@ -79,3 +79,18 @@ class VoyageIO:
 
             # Write updated data
             writer.writerows(attendantList)
+
+    def get_all_flights(self):
+        flights = []
+        with open(self.file_name, mode='r', encoding='utf-8') as file:
+            csv_reader = csv.DictReader(file, delimiter=';')
+            for row in csv_reader:
+                flights.append(row)
+        return flights
+
+    def get_flight_by_id(self, flight_id):
+        all_flights = self.get_all_flights()
+        for flight in all_flights:
+            if flight['departureFlight'] == str(flight_id):
+                return flight
+        return flight

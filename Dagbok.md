@@ -234,3 +234,30 @@ Vorum allir að tala saman um hverju næstu skref eru fyrir þessa viku og erum 
 
 
 ### Lok Dags
+Kláruðum að gera nokkra UI Breytingar og erum sma fastir með Voyages
+
+## 13. Desember
+Allir héldu áfram með sín verkefni eins og í gær og fórum líka að debugga nokkra hluti sem þurfti það
+
+- Ágúst 
+  Lét UI líta betur út núna í Flight UI og er kominn með 80% af Crew UI 
+
+- Ragnar 
+  Fór að vinna í Voyage partin og er að vinna í Repeat Voyage
+
+- Sigurður
+  Lagaði add voyage sem var A krafa hjá okkur og Repeat Voyage
+
+### Lok dags
+Við erum komnir með flottan UI hjá okkur allt sýnist vera koma hægt og rólega en erum enþá smá fastir með Voyages
+
+
+## 14. Desember
+
+-Ágúst
+
+-Ragnar
+
+-Sigurður
+
+### Lok dags
