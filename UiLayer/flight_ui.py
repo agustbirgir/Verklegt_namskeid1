@@ -34,7 +34,6 @@ _|_|______________
 ===================================================================================
         """
 
-
     def display_flight_manager_UI(self):
         print(self.asciiart)
 
@@ -60,14 +59,11 @@ _|_|______________
 
     def display_destination_list(self):
         destinations = self.logic_wrapper.get_all_destinations()
-
         seperator_line = '-' * 100
-
         print("{:<12} {:<13} {:<20} {:<10} {:<10} {:<15} {:<15}".format(
             'Country', 'City', 'Airport', 'Flytime', 'Distance', 'Contact', 'Contact Number'
         ))
         print(seperator_line)
-
         for dest in destinations:
             print("{:<15} {:<15} {:<20} {:<10} {:<10} {:<15} {:<15}".format(
                 dest.country, dest.city, dest.airport, dest.flytime, dest.distance, dest.contact, dest.contactNumber
@@ -92,10 +88,8 @@ _|_|______________
             while True:
                 self.print_destination_details(d)
                 value = input(prompt)
-                
                 if value.lower() in ['b' or 'q']:
                     return
-
                 try:
                     validation(value)
                     setattr(d, attribute, value)
@@ -160,6 +154,19 @@ _|_|______________
                 print(destination_menu[command])
                 destination = self.logic_wrapper.get_destination(destination_menu[command])
                 if destination != None:
+                    print(f"""
+===================================================================================
+===================================================================================
+                    Selected destination: 
+                        country: {destination.country} 
+                        city: {destination.city}
+                        airport: {destination.airport}
+
+===================================================================================
+                        [B]ack        [Q]uit
+===================================================================================
+
+                    """)
                     print(f"Selected destination: country: {destination.country}, city: {destination.city}, airport: {destination.airport}")
                     break
                 else:
@@ -168,7 +175,7 @@ _|_|______________
             id = self.logic_wrapper.create_unique_id()
             while True:
                 print()
-                departure = input(f"Please pick the departure time from Keflavik to {destination.city} (YYYY-MM-DD HH:MM) (q to quit, b to break): ")
+                departure = input(f"Please pick the departure time from Keflavik to {destination.city} (YYYY-MM-DD HH:MM): ")
                 validate, departureDate = validate_voyage_date(departure)
                 if departure.lower() == "b":
                     break
@@ -235,73 +242,9 @@ _|_|______________
 ===================================================================================
                 """)
 
-    def display_repeat_voyage_UI(self):
-        while True:
-            id = input("please enter voyage ID: ")
-            try:
-                id = int(id)
-                break
-            except ValueError:
-                print("Invalid ID, please enter a number.")
-        get_voyage = self.logic_wrapper.get_voyage(id)
-        if get_voyage != None:
-            print(f"You picked voyage: {get_voyage.id}")
-            while True:
-                repeat_date = input("Please input the date and time for when you want to repeat this voyage (YYYY-MM-DD HH:MM) (q to quit): ")
-                validate, departureDate = validate_voyage_date(repeat_date)
-                if repeat_date == "q":
-                    break
-                elif validate == False:
-                    print("Invalid date format, try again")
-                elif validate == True:
-                    new_id = self.logic_wrapper.create_unique_id() # Create a new id
-                    voyage_flights = self.logic_wrapper.get_voyage_flights(id) # Get the flights of the selected voyage
 
-                    # ----------- Register departure flight ------------
-                    destination = self.logic_wrapper.get_destination(voyage_flights[0].destination)
-                    flytime = datetime.strptime(destination.flytime,'%H:%M')
-                    arrivalDate = self.logic_wrapper.calculate_arrival_time(departureDate, flytime)
-                    print("Arrival date departure:", arrivalDate)
-                    departureFlight = Flight()
-                    departureFlight.startingPoint = "Keflavik" # Starting point is always keflavik for now in A requirements
-                    departureFlight.departureTime = departureDate
-                    departureFlight.arrivalTime = arrivalDate
-                    departureFlight.destination = destination.city
-                    departureFlight.id = new_id
-
-                    # -------- Register arrival flight ------------
-                    destination2 = "Keflavik"           # Destination always Keflavik in A requirements
-                    departureDate2 = arrivalDate
-                    destination2 = self.logic_wrapper.get_destination(voyage_flights[0].destination)
-                    flytime2 = datetime.strptime(destination2.flytime,'%H:%M')
-                    arrivalDate2 = self.logic_wrapper.calculate_arrival_time(departureDate2, flytime2)
-                    arrivalFlight = Flight()
-                    arrivalFlight.startingPoint = destination.city # Get the city of the departure flight
-                    arrivalFlight.departureTime = departureDate2
-                    arrivalFlight.arrivalTime = arrivalDate2
-                    arrivalFlight.destination = "Keflavík" # Keflavik is always the arrival destination in A requirements, change in B requirements
-                    arrivalFlight.id = new_id
-
-                    # ----------- Add the departure flight and arrival flight to the new voyage -----------
-                    new_voyage = Voyage()
-                    new_voyage.departureFlight = departureFlight.id
-                    new_voyage.arrivalFlight = arrivalFlight.id
-                    new_voyage.crew = get_voyage.crew
-                    new_voyage.id = new_id
-
-                    self.logic_wrapper.add_flight(departureFlight)
-                    self.logic_wrapper.add_flight(arrivalFlight)
-                    self.logic_wrapper.add_voyage(new_voyage)
-                    
-                    print(f"\nSuccessfully registered voyage, ID: {id}")
-                    print(f"\nDeparture from Keflavik to {destination.city}:", departureDate)
-                    print(f"Arrival date from Keflavik to {destination.city}:", arrivalDate)
-                    print(f"\nDeparture from {destination.city} to Keflavik:", departureDate2)
-                    print(f"Arrival date from {destination.city} to Keflavik:", arrivalDate2)
-                    print()
-                    break
-        else:
-            print("Voyage not found")
+    def List_voyage_specific_date(self):
+        pass
 
 
     def input_prompt(self):
@@ -318,7 +261,7 @@ _|_|______________
 ===================================================================================
                           
                     1. Create new voyage
-                    2. Repeat an existing voyage
+                    2. List Voyage on a specifc date
 
 ===================================================================================
                         [B]ack          [Q]uit
@@ -332,7 +275,7 @@ _|_|______________
                     elif command == "1":
                         self.display_add_voyage_UI()
                     elif command == "2":
-                        self.display_repeat_voyage_UI()
+                        self.List_voyage_specific_date()
                     else:
                         print("Invalid input, try again")
             elif command == "2":
@@ -342,24 +285,15 @@ _|_|______________
             else:
                 print("Invalid input, try again")
 
-        
 
     def display_voyage_search(self):
         while True:
             date = input("Search by date (DD-MM-YYYY) (b to go back): ")
             date = date.lower()
-
             if date == "back" or date == "b":
                 break
-
             else:
-
                 if validate_date(date):
                     print(self.logic_wrapper.get_voyages_of_day(date))
-
                 else:
                     print("invalid date")
-        
-
-
-
