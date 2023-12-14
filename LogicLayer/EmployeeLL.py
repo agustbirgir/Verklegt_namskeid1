@@ -42,3 +42,8 @@ class EmployeeLL:
             return []
         schedule_list = [item.strip("'") for item in employee.scheduled[1:-1].split(", ")]
         return schedule_list
+    
+    def sort_pilots_by_license(self):
+        retlist = self.data_wrapper.get_all_pilots()
+        retlist = sorted(retlist, key = lambda row: (row["aircraftLicense"]))
+        return retlist
