@@ -1,11 +1,4 @@
 departureFlight;arrivalFlight;crew;id
-3891;3891;['Tommy Lee', 'Agust', 'Joi', 'Jonas'];3891
+3891;3891;[];3891
 2;2;['Siggi', 'Helgi'];2
-2693;2693;[];2693
-1857;1857;[];1857
-1060;1060;['Siggi', 'Helgi'];1060
-879;879;['Siggi', 'Helgi'];879
-3692;3692;[];3692
-4638;4638;[];4638
-3209;3209;['', 'Jonas', 'Agust', 'Tommy Lee', 'Halli'];3209
-3575;3575;['', 'Halli', 'Tommy Lee', 'Jonas', 'Agust'];3575
+4254;4254;['Siggi', 'Helgi'];4254

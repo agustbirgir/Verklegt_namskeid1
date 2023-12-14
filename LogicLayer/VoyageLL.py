@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from UiLayer.input_validators import *
 
 class VoyageLL:
@@ -25,18 +25,29 @@ class VoyageLL:
         """Get the crew of a specific voyage"""
         crew_list = [item.strip("'") for item in voyage.crew[1:-1].split(", ")]
         return crew_list
+
+    def get_week_dates(self, date):
+
+        date = datetime.strptime(date, "%Y-%m-%d")
+
+        start_date = date - timedelta(days=date.weekday())
+        
+        week_dates = [(start_date+timedelta(days=d)).date() for d in range(7)]
+
+        return week_dates
+
     
     def get_voyages_of_day(self, date_looking):
-        voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
-        ret_list =[]
-        for Voyage in voyages:
+        voyages = self.data_wrapper.get_all_voyages()
+        ret_list = []
+        for v in voyages:
 
-            voyage_departure = Voyage["departureFlight"]
-            date_of_voyage = voyage_departure.departureTime 
+            voyage_flight = self.data_wrapper.get_flight(v.id)
+            date_of_voyage = voyage_flight.departureTime
             date_of_voyage = datetime.strptime(date_of_voyage, '%Y-%m-%d %H:%M:%S').date()
 
-            if str(date_of_voyage) == date_looking:
-                ret_list.append(Voyage)
+            if str(date_of_voyage) == str(date_looking):
+                ret_list.append(v)
 
         return ret_list
 

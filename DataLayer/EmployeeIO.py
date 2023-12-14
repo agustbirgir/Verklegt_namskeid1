@@ -83,7 +83,7 @@ class EmployeeIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                if row["profession"] == "Pilot" or row["profession"] == "Head pilot":
+                if row["profession"] == "Pilot" or row["profession"] == "Head Pilot":
                     ret_list.append(Employee(row["name"], row["profession"]))
         return ret_list
 
@@ -92,7 +92,7 @@ class EmployeeIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                if row["profession"] == "Attendant" or row["profession"] == "Head attendant":
+                if row["profession"] == "Attendant" or row["profession"] == "Head Flight Attendant":
                     ret_list.append(Employee(row["name"], row["profession"]))
         return ret_list
     
@@ -112,7 +112,7 @@ class EmployeeIO:
                 for row in reader:
                     schedule_list = [item.strip("'") for item in row["scheduled"][1:-1].split(", ")]
                     for emp_sched in schedule_list:
-                        if emp_sched == date:
+                        if str(emp_sched) == str(date):
                             ret_list.append(Employee(row["name"], row["profession"]))
             else:
                 for row in reader:
