@@ -161,7 +161,7 @@ class Crew_UI:
                   2. List all pilots
                   3. List all attendants
                   4. List specific employee
-
+                  5. List Pilot sorted by license (temp-test)
 ===================================================================================
                     [B]ack          [Q]uit
 ===================================================================================
