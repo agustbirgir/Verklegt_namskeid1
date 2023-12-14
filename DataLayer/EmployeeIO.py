@@ -16,7 +16,7 @@ class EmployeeIO:
     
     def add_employee(self, employee):
         with open(self.file_name, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["name", "profession", "ssn","homeAddress", "gsmNumber", "email", "homePhone", "status", "scheduled"]
+            fieldnames = ["name", "profession", "ssn","homeAddress", "gsmNumber", "email", "homePhone", "scheduled", "aircraftLicense"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=";")
             if csvfile.tell() == 0:
                 writer.writeheader()
@@ -24,8 +24,8 @@ class EmployeeIO:
             writer.writerow({'name': employee.name, 'profession': employee.profession, 
                              'ssn': employee.ssn, 'homeAddress': employee.homeAddress, 
                              'gsmNumber': employee.gsmNumber, 'email': employee.email, 
-                             'homePhone': employee.homePhone, 'status':employee.status, 
-                             'scheduled':employee.scheduled})
+                             'homePhone': employee.homePhone, 'scheduled': employee.scheduled,
+                             'aircraftLicense': employee.aircraftLicense})
 
 
     def find_employee_by_ssn(self, ssn):
@@ -33,7 +33,7 @@ class EmployeeIO:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
                 if row["ssn"] == ssn:
-                    return Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["status"], row["scheduled"])
+                    return Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["scheduled"], row["aircraftLicense"])
         return None
     
     def get_employee_by_name(self, name):
@@ -41,7 +41,7 @@ class EmployeeIO:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
                 if row["name"] == name:
-                    return Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["status"], row["scheduled"])
+                    return Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["scheduled"], row["aircraftLicense"])
         return None
 
     def update_employee(self, updated_employee):
@@ -60,14 +60,14 @@ class EmployeeIO:
                     'gsmNumber': updated_employee.gsmNumber, 
                     'email': updated_employee.email, 
                     'homePhone': updated_employee.homePhone, 
-                    'status': updated_employee.status, 
-                    'scheduled': updated_employee.scheduled
+                    'scheduled': updated_employee.scheduled,
+                    'aircraftLicense': updated_employee.aircraftLicense
                     })
                 else:
                     employees.append(row)
 
         with open(self.file_name, 'w', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["name", "profession", "ssn", "homeAddress", "gsmNumber", "email", "homePhone", "status", "scheduled"]
+            fieldnames = ["name", "profession", "ssn", "homeAddress", "gsmNumber", "email", "homePhone", "scheduled", "aircraftLicense"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=";")
             writer.writeheader()
             for emp in employees:
