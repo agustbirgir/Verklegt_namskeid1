@@ -52,8 +52,10 @@ def validate_voyage_date(date):
     except ValueError:
         return False, None
 
-def validate_if_date_after(arrival, departure):
-    return arrival > departure
+def validate_if_date_after(date1, date2):
+    date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M')
+    date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M')
+    return date1 > date2
 
 def validate_if_not_number(str):
     return not str.isdigit()
@@ -98,6 +100,8 @@ def validate_if_registered_at_date(date1, date2):
     date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M:%S').date()
 
     return date1 == date2
+
+
 
 
 

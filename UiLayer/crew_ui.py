@@ -25,7 +25,7 @@ class Crew_UI:
         print("===================================================================================")
         for elem in sorted_result:
             print(f""" name: {elem.name} | profession: {elem.profession}  """)
-            print("""
+        print("""
 ===================================================================================
                     [B]ack          [Q]uit   
 ===================================================================================
@@ -61,11 +61,11 @@ class Crew_UI:
         for elem in result: # Find the voyages of all the working employees
             for v in voyages:
                 v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-                if elem.name in v_crew:
-                    ret_list.append([elem.name, v.id])
-                    break
-        for employee in ret_list:
-            print(f"name: {employee[0]}, voyage ID: {employee[1]}")
+                if elem.name in v_crew and elem.name not in ret_list:
+                    print(f"name: {elem.name}, voyage destination: {self.logic_wrapper.get_flight(v.id).destination}")
+                    #ret_list.append([elem.name, v.id])
+        #for employee in ret_list:
+        #    print(f"name: {employee[0]}, voyage destination: {self.logic_wrapper.get_flight(employee[1]).destination}")
 
     def display_employees_working_status_UI(self):
         while True:
@@ -187,7 +187,8 @@ class Crew_UI:
     def display_add_crew_to_voyage_UI(self): 
         """Display the menu to add crew to voyage"""
         while True:
-            mode = input("do you wish to search for a voyage [1] or do you wish to get the nearest voyage [2]")
+            #mode = input("do you wish to search for a voyage [1] or do you wish to get the nearest voyage [2]")
+            mode = "1"
             if mode == "1":
                 while True:
                     id = input("please enter voyage ID: ")
@@ -201,12 +202,12 @@ class Crew_UI:
                     print(voyage)
                     continue
                 break
-            elif mode == "2":
-                voyage = pull_next_unmanned_voyage(self)
-                if isinstance(voyage, str):
-                    print(voyage)
-                    continue
-                break
+            #elif mode == "2":
+            #    voyage = pull_next_unmanned_voyage(self)
+            #    if isinstance(voyage, str):
+            #        print(voyage)
+            #        continue
+            #    break
             else:
                 print("invalid mode")
 
@@ -223,7 +224,7 @@ class Crew_UI:
             selected_voyage_departure = self.logic_wrapper.get_flight(voyage.id).departureTime
             print("You picked voyage", voyage.id,"which departs at", selected_voyage_departure)
             print("Voyage", id,"crew:", crew_list)
-            new_crew_list = []
+            new_crew_list = [] # Make sure only newly registered crew gets their schedule updated with the voyage departure date
             
             while True:
                 name = input("Enter the name of an employee to add (q to finish adding to voyage): ")
@@ -232,7 +233,7 @@ class Crew_UI:
                 if name == "q":
                     #if validate_voyage_crew(crew_list, all_employees): # Crew has to be valid for user to be able to quit
                         # Update the schedule of all assigned employees
-                    for name in crew_list:
+                    for name in new_crew_list:
                         employee = self.logic_wrapper.get_employee_by_name(name)
                         if employee is not None:
                             employee = self.logic_wrapper.get_employee_by_name(name)

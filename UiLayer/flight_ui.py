@@ -289,6 +289,16 @@ _|_|______________
                     new_voyage.crew = get_voyage.crew
                     new_voyage.id = new_id
 
+                    crew_list = self.logic_wrapper.get_crew_of_voyage(get_voyage)
+                    for name in crew_list:
+                        employee = self.logic_wrapper.get_employee_by_name(name)
+                        schedule = self.logic_wrapper.get_schedule_of_employee(employee)
+                        voyage_date = str(departureDate).split(" ")[0] # Get only the date not the time
+                        schedule.append(voyage_date)
+                        employee.scheduled = schedule
+                        self.logic_wrapper.update_employee(employee)
+
+
                     self.logic_wrapper.add_flight(departureFlight)
                     self.logic_wrapper.add_flight(arrivalFlight)
                     self.logic_wrapper.add_voyage(new_voyage)
@@ -303,6 +313,54 @@ _|_|______________
         else:
             print("Voyage not found")
 
+    def display_get_voyage_on_date_UI(self):
+        while True:
+            date = input("Please input the date to get all voyages (YYYY-MM-DD) (q to quit): ")
+            if date == "q":
+                break
+            elif not validate_date_2(date):
+                print("Invalid date format, try again")
+            else:
+                result = self.logic_wrapper.get_voyages_of_day(date)
+                for elem in result:
+                    print(f"Voyage ID: {elem.id}")
+    
+    def display_get_voyages_in_a_week_UI(self):
+        while True:
+            date = input("Please input a date in the week to be checked (YYYY-MM-DD) (q to quit): ")
+            if date == "q":
+                break
+            elif not validate_date_2(date):
+                print("Invalid date format, try again")
+            else:
+                week = self.logic_wrapper.get_week_dates(date)
+                for day in week:
+                    print(day)
+                    result = self.logic_wrapper.get_voyages_of_day(day)
+                    for elem in result:
+                        print(f"Voyage ID: {elem.id}")
+
+    def display_employee_voyages_in_a_week_UI(self):
+        while True:
+            date = input("Please input a date in the week to be checked (YYYY-MM-DD) (q to quit): ")
+            if date == "q":
+                break
+            elif not validate_date_2(date):
+                print("Invalid date format, try again")
+            else:
+                week = self.logic_wrapper.get_week_dates(date)
+                voyages = self.logic_wrapper.get_all_voyages()
+                for day in week:
+                    print(day)
+                    result = self.logic_wrapper.employee_schedule_checker(day, True)
+                    if result == None:
+                        print("No employees found")
+                    for elem in result: # Find the voyages of all the working employees
+                        for v in voyages:
+                            v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+                            if elem.name in v_crew:
+                                print(f"name: {elem.name}, voyage destination: {self.logic_wrapper.get_flight(v.id).destination}")
+                                break
 
     def input_prompt(self):
         while True:
@@ -319,6 +377,9 @@ _|_|______________
                           
                     1. Create new voyage
                     2. Repeat an existing voyage
+                    3. Get voyage on specific date
+                    4. List voyages in a specific week
+                    5. List an employees voyages in a week
 
 ===================================================================================
                         [B]ack          [Q]uit
@@ -333,6 +394,12 @@ _|_|______________
                         self.display_add_voyage_UI()
                     elif command == "2":
                         self.display_repeat_voyage_UI()
+                    elif command == "3":
+                        self.display_get_voyage_on_date_UI()
+                    elif command == "4":
+                        self.display_get_voyages_in_a_week_UI()
+                    elif command == "5":
+                        self.display_employee_voyages_in_a_week_UI()
                     else:
                         print("Invalid input, try again")
             elif command == "2":

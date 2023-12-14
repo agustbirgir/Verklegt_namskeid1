@@ -58,6 +58,9 @@ class Logic_Wrapper:
     def get_crew_of_voyage(self, voyage):
         return self.VoyageLL.get_crew_of_voyage(voyage)
     
+    def get_week_dates(self, date):
+        return self.VoyageLL.get_week_dates(date)
+    
     def get_voyages_of_day(self, date_looking):                         #this for flight or crew?
         return self.VoyageLL.get_voyages_of_day(date_looking)
     
