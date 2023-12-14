@@ -378,11 +378,12 @@ class Crew_UI:
                 
                 profession_menu = {#Profession
                     "1": "Pilot",
-                    "2": "Flight attendant",
-                    "3": "Head pilot",
-                    "4": "Head flight attendant"
+                    "2": "Head Pilot",
+                    "3": "Flight Attendant",
+                    "4": "Head Flight Attendant"
                 }
-                print("Select the Profession of the employee")
+                print()
+                print("Professions:")
                 for key, value in profession_menu.items():
                     print(f"{key}. {value}")
 
@@ -392,43 +393,57 @@ class Crew_UI:
                         e.profession = profession_menu[profession_choice]
                         break
                     else:
-                        print("Wrong input has been chosen")#End
+                        print("Wrong input, try again")
+                if profession_menu[profession_choice] == "Pilot" or profession_menu[profession_choice] == "Head Pilot":
+                    aircraft_menu = {
+                        "1": "Boeing 737",
+                        "2": "Airbus A330",
+                    }
+                    print()
+                    print("Aircraft types:")
+                    for key, value in aircraft_menu.items():
+                        print(f"{key}. {value}")
+                    while True:
+                        aircraft_choice = input(f"Select the aircraft license of the pilot: ")
+                        if aircraft_choice in aircraft_menu:
+                            e.aircraftLicense = aircraft_menu[aircraft_choice]
+                            break
+                        else:
+                            print("Wrong input, try again")
+                else:
+                    e.aircraftLicense = '' 
 
                 #SSN
                 e.ssn = input("Enter the Social security number: ")
                 while not validate_ssn(e.ssn):
-                    print("Invalid ssn. it must be 8 digit!")
+                    print("Invalid ssn, it must be 10 digits")
                     e.ssn = input("Enter the Social security number: ")
-                #End
 
                 #Homeaddress
                 e.homeAddress = input("Enter the home address of the employee: ")
-                #End
 
                 #GSM 
-                e.gsmNumber = input("Enter the Phone number: ")
+                e.gsmNumber = input("Enter the phone number: ")
                 while not validate_phone(e.gsmNumber):
                     print("Wrong input has been chosen")
                     e.gsmNumber = input("Enter the Phone number: ")
-                #End
 
                 #Email
-                e.email = input("Enter the Email of the employee: ")
+                e.email = input("Enter the email of the employee: ")
                 while not validate_email(e.email):
                     print("wrong input need a @ or wrong input")
                     e.email = input("Enter the Email of the employee: ")
-                #End
 
                 #Homephone
-                e.homePhone = input("input the homephone of the employee(optinal): ")
+                e.homePhone = input("input the homephone of the employee (optional): ")
                 if e.homePhone and not validate_phone(e.homePhone):
-                    print("Input has been left empty")
+                    print("Homephone not registered.")
                     e.homePhone = ''
-                #End
 
                 #Schedule 
                 e.scheduled = []
-                #End
+
+                # Add employee
                 self.logic_wrapper.add_employee(e)
             elif command == "5":
                 self.display_employees_working_status_UI()
