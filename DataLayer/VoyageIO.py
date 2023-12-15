@@ -7,7 +7,16 @@ class VoyageIO:
         self.file_name = "files/voyages.csv"
 
     def add_voyage(self, voyage):
-        """Create new voyage"""
+        """
+        Add new voyage to the voyage.csv file
+
+        Args:
+            voyage (Voyage): Voyage to be written to the file
+
+        Examples:
+            >>> add_flight(Voyage)
+            This call writes all the attributes of the Voyage object to the voyages.csv file
+        """
         print(voyage)
         with open(self.file_name, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["departureFlight", "arrivalFlight", "crew", "id"]
@@ -19,7 +28,21 @@ class VoyageIO:
                              'crew': voyage.crew, 'id': voyage.id})
 
     def get_voyage(self, id):
-        """Return a specific voyage"""
+        """
+        Returns a specific voyage from voyages.csv based on id
+
+        Args:
+            id (string): The id of the voyage
+
+        Returns:
+            Voyage: returns a voyage
+
+        Examples:
+            >>> get_voyage(2)
+            Voyage(2, 2, ['Siggi', 'Helgi', 'Jonas', 'Halli'], 2, Airbus A330)
+            >>> get_flight(3891)
+            Voyage(3891, 3891, [], 3891, Boeing 737)
+        """
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
@@ -28,6 +51,16 @@ class VoyageIO:
         return None
 
     def get_all_voyages(self):
+        """
+        Returns all flights from flights.csv
+
+        Returns:
+            list of Voyage: A list containing all voyages
+
+        Examples:
+            >>> get_all_voyages()
+            [Voyage(2, 2, ['Siggi', 'Helgi', 'Jonas', 'Halli'], 2, Airbus A330), Voyage(3891, 3891, [], 3891, Boeing 737)]
+        """
         ret_list = []
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
@@ -35,8 +68,19 @@ class VoyageIO:
                 ret_list.append(Voyage(row["departureFlight"], row["arrivalFlight"], row["crew"], row["id"]))
         return ret_list
     
-    def voyage_add_flight(self, flight, id):
-        """Add employees to a voyage"""
+    def voyage_add_flight(self, aircraft, id):
+        """
+        Add new aircraft to a voyage
+
+        Args:
+            aircraft (string): Name of the aircraft to be added
+            id (string): Id of the voyage for the aircraft to be added
+
+        Examples:
+            >>> voyage_add_flight("Boeing 737", "2")
+            This call writes the flight "Boeing 737" as the aircraft for the voyage with ID 2 
+            
+        """
         rows = []
         with open(self.file_name, mode='r') as file:
             reader = csv.DictReader(file, delimiter=";")
@@ -45,7 +89,7 @@ class VoyageIO:
 
         for row in rows:
             if int(row['id']) == id:
-                row['aircraft'] = str(flight)
+                row['aircraft'] = str(aircraft)
 
         with open(self.file_name, mode='w', newline='') as file:
             fieldnames = ["departureFlight", "arrivalFlight", "crew", "id", "aircraft"]
@@ -54,7 +98,18 @@ class VoyageIO:
             writer.writerows(rows)
     
     def voyage_add_employee(self, employeeList, id):
-        """Add employees to a voyage"""
+        """
+        Add employees to a voyages crew
+
+        Args:
+            employeeList (list): List of employees to be added
+            id (string): Id of the voyage for the employees to be added
+
+        Examples:
+            >>> voyage_add_employee(['John', 'Chad'], "2")
+            This call adds John and Chad to the crew of the voyage with ID 2 
+            
+        """
         rows = []
         with open(self.file_name, mode='r') as file:
             reader = csv.DictReader(file, delimiter=";")
@@ -70,41 +125,3 @@ class VoyageIO:
             writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=";")
             writer.writeheader()
             writer.writerows(rows)
-    
-    def voyage_add_attendant(self, attendant):
-        """Add attendant to a voyage"""
-        attendantList = []
-
-        with open(self.file_name, mode='r') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                attendantList.append(row)
-
-        for row in attendantList:
-            if row['name'] == attendant.name:
-                row['pilots'].append(attendant.name) 
-
-        with open(self.file_name, mode='w', newline='') as file:
-            fieldnames = ["departureFlight", "arrivalFlight", "pilots", "attendants", "aircraft"]
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-
-            # Write headers
-            writer.writeheader()
-
-            # Write updated data
-            writer.writerows(attendantList)
-
-    def get_all_flights(self):
-        flights = []
-        with open(self.file_name, mode='r', encoding='utf-8') as file:
-            csv_reader = csv.DictReader(file, delimiter=';')
-            for row in csv_reader:
-                flights.append(row)
-        return flights
-
-    def get_flight_by_id(self, flight_id):
-        all_flights = self.get_all_flights()
-        for flight in all_flights:
-            if flight['departureFlight'] == str(flight_id):
-                return flight
-        return flight
