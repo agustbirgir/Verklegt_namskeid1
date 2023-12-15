@@ -195,6 +195,14 @@ class EmployeeIO:
                     ret_list.append(Employee(row["name"], row["profession"]))
         return ret_list
     
+    def get_all_employees_schedule(self):
+        ret_list = []
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=";")
+            for row in reader:
+                ret_list.append(Employee(row["name"], row["profession"], row["scheduled"]))
+        return ret_list
+    
     def employee_schedule_checker(self, date, working):
         """
         Return all employees that are not working or are working on a certain date.
@@ -243,7 +251,9 @@ class EmployeeIO:
                 if working and is_working_at_date and row["name"] not in added_employees:
                     ret_list.append(Employee(row["name"], row["profession"]))
                     added_employees.add(row["name"])
+
                 elif not working and not is_working_at_date and row["name"] not in added_employees:
                     ret_list.append(Employee(row["name"]))
                     added_employees.add(row["name"])
         return ret_list
+            """
