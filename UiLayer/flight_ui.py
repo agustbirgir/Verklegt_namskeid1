@@ -502,7 +502,4 @@ _|_|______________
 
                 else:
                     print("invalid date")
-        
-
-
-
+       
