@@ -97,7 +97,7 @@ def validate_employee_for_voyage(name, selected_voyage_departure, v_crew, v, v_d
             return True
         
 def validate_if_registered_at_date(date1, date2):
-    date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M:%S').date()
+    date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M').date()
     date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M:%S').date()
 
     return date1 == date2
