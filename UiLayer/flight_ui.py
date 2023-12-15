@@ -229,17 +229,15 @@ _|_|______________
                     # User could cancel, so we dont write the flight to the csv file until he has registered the second flight as well.
                     break
         if departure != "q" and command != "q":
-            #while True: B requirements
-            #departure2 = input(f"Please pick the departure time from {destination.city} to Keflavik (DD-MM-YYYY,HH:MM) (q to quit): ")
             departure2 = arrivalDate.strftime('%Y-%m-%d %H:%M') # the A requirements has it so every voyage returns the same date as it leaves
+            #departure2 = self.logic_wrapper.calculate_arrival_time(datetime.strptime(str(arrivalDate), '%Y-%m-%d %H:%M'), datetime.strptime("3:00",'%H:%M')) # Add 3 hours between landing and departure
             validate, departureDate2 = validate_voyage_date(departure2)
-            #validate_if_after = validate_if_date_after(departure2, departure) # Doesnt quite work
+            validate_if_after = validate_if_date_after(departure2, departure)
             if validate == False:
                 print("Wrong format for input, try again")
-            #elif validate_if_after == False:
-                #print("Arrival date must be set after the departure date, try again")
+            elif validate_if_after == False:
+                print("Arrival date must be set after the departure date, try again")
             elif validate == True:
-
                 flytime2 = datetime.strptime(destination.flytime,'%H:%M')
                 arrivalDate2 = self.logic_wrapper.calculate_arrival_time(departureDate2, flytime2)
                 arrivalFlight = Flight()
@@ -382,7 +380,6 @@ _|_|______________
             elif not validate_date_2(date):
                 print("Invalid date format, try again")
             else:
-                week = self.logic_wrapper.get_week_dates(date)
                 header = "{:<6} {:<20} {:<20} {:<20}".format('ID', 'Departure Time', 'Destination', 'Is Manned')
                 separator_line = '-' * 70
 
@@ -392,21 +389,20 @@ _|_|______________
                 
                 employees = self.logic_wrapper.get_all_employees()
 
-                for day in week:
-                    result = self.logic_wrapper.get_voyages_of_day(day)
-                
-                    for voyage in result:
-                        flight = self.logic_wrapper.get_flight(voyage.id)
-                        if flight:
-                            is_manned = "true"
-                            if validate_voyage_crew(self.logic_wrapper.get_crew_of_voyage(voyage), employees) == 1:
-                                is_manned = "True"
-                            else:
-                                is_manned = "False"
-                            print("{:<6} {:<20} {:<20} {:<20}".format(
-                                flight.id, flight.departureTime, flight.destination, is_manned)
-                            )
-                            print(separator_line)
+                result = self.logic_wrapper.get_voyages_of_day(date)
+            
+                for voyage in result:
+                    flight = self.logic_wrapper.get_flight(voyage.id)
+                    if flight:
+                        is_manned = "true"
+                        if validate_voyage_crew(self.logic_wrapper.get_crew_of_voyage(voyage), employees) == 1:
+                            is_manned = "True"
+                        else:
+                            is_manned = "False"
+                        print("{:<6} {:<20} {:<20} {:<20}".format(
+                            flight.id, flight.departureTime, flight.destination, is_manned)
+                        )
+                        print(separator_line)
                 print("""
 ===================================================================================
                                 [Q]uit  

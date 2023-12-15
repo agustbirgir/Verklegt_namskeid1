@@ -13,7 +13,7 @@ class AircraftIO:
             aircraft (Aircraft): Aircraft to be written to the file
 
         Examples:
-            >>> add_destination(Aircraft)
+            >>> add_aircraft(Aircraft)
             This call writes all the attributes of the Aircraft object to the aircrafts.csv file
         """
         with open(self.file_name, 'a', newline='', encoding='utf-8') as csvfile:
