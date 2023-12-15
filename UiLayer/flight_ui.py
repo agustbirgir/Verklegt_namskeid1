@@ -6,9 +6,47 @@ from UiLayer.input_validators import *
 
 class Flight_UI:
     def __init__(self, logic_connection):
+        """
+        Constructor that establishes a connection to the logic wrapper
+        """
         self.logic_wrapper = logic_connection
         self.asciiart = r"""
 
+__|__
+\___/                       
+ | |
+ | |
+_|_|______________
+        /|\           _   _                 _   _                _____    _____
+      */ | \*        | \ | |      /\       | \ | |      /\      |_   _|  |  __ \              
+      / -+- \        |  \| |     /  \      |  \| |     /  \       | |    | |__) |
+  ---o--(_)--o---    | . ` |    / /\ \     | . ` |    / /\ \      | |    |  _  /
+    /  0 " 0  \      | |\  |   / ____ \    | |\  |   / ____ \    _| |_   | | \ \
+  */     |     \*    \_| \_|  /_/    \_\   \_| \_|  /_/    \_\  |_____|  |_|  \_\
+  /      |      \         
+*/       |       \*
+===================================================================================
+                        CHOOSE YOUR OPTIONS
+===================================================================================
+
+                1. Voyages
+                2. Destination database
+                3. Register new aircraft
+                
+
+===================================================================================
+                    [B]ack                [Q]uit
+===================================================================================
+        """
+
+
+    def display_flight_manager_UI(self):
+        """
+        Displays ascii art
+
+        Example:
+            >>> display_fligt_manager_UI()
+            
 __|__
 \___/                       
  | |
@@ -35,12 +73,25 @@ _|_|______________
                     [B]ack                [Q]uit
 ===================================================================================
         """
-
-
-    def display_flight_manager_UI(self):
         print(self.asciiart)
 
     def display_destination_database_UI(self):
+        """
+        Displays the menu for listing all destinations or adding a new destination
+
+        Example:
+            >>> display_destination_database_UI()
+            ===================================================================================
+                  
+                    1. List all destinations
+                    2. Add new destination
+                            
+            ===================================================================================
+                                    [B]ack
+            ===================================================================================
+
+        """
+        
         while True:
             print("""===================================================================================
                   
@@ -61,6 +112,14 @@ _|_|______________
                 print("Invalid input, try again")
 
     def display_add_aircraft_UI(self):
+        """
+        Displays the menu for adding and adds a new aircraft to the database
+
+        Example:
+            >>> display_add_aircraft_UI()
+            Enter the name of the aircraft:
+
+        """
         a = Aircraft()
         while True:
             a.name = input("Enter the name of the aircraft: ")
@@ -86,6 +145,27 @@ _|_|______________
         self.logic_wrapper.add_aircraft(a)
 
     def display_destination_list(self):
+        """
+        Lists all destinations
+
+        Example:
+            >>> display_destination_list()
+            Country      City          Airport              Flytime    Distance   Contact         Contact Number
+            ----------------------------------------------------------------------------------------------------
+            Iceland         Keflavik        Keflavik Airport     6:20       1000       helgi           87654321
+            ----------------------------------------------------------------------------------------------------
+            Greenland       Nuuk            Nuuk Airport         2:40       2000       john            12345678
+            ----------------------------------------------------------------------------------------------------
+            Greenland       Kulusuk         Kulusuk Airport      2:40       2500       uji             1234813
+            ----------------------------------------------------------------------------------------------------
+            Faroe Islands   Thorshavn       Vagar Airport        5:30       4500       joe             13579864
+            ----------------------------------------------------------------------------------------------------
+            Shetland Islands Tingwall        Tingwall Airport     4:55       3400       mark            5432167
+            ----------------------------------------------------------------------------------------------------
+            Svalbard        Longyearbyen    Svalbard Airport     4:20       6000       jarl            9324535
+            ----------------------------------------------------------------------------------------------------
+
+        """
         destinations = self.logic_wrapper.get_all_destinations()
 
         seperator_line = '-' * 100
@@ -102,7 +182,13 @@ _|_|______________
             print(seperator_line)
 
     def display_add_destination_UI(self):
-        #print("Fill out the destination details")
+        """
+        Displays the menu for adding and adds a new destination to the database
+
+        Example:
+            >>> display_add_destination_UI()
+            Enter the country:
+        """
         d = Destination()
 
         fields = [
@@ -134,6 +220,28 @@ _|_|______________
         print(f"Successfully registered new destination at {d.city}")
 
     def print_destination_details(self, destination):
+        """
+        Lists all details of a specific destination
+
+        Example:
+            >>> print_destination_details()
+            ===================================================================================
+                        Destination Details
+            ===================================================================================
+                                
+                                Country: Greenland
+                                City: Kulusuk
+                                Airport: Kulusuk Airport
+                                Flytime: 4:30
+                                Distance: 3000
+                                Contact: Helga
+                                Contact Number: 10563937
+                        
+            ===================================================================================
+                                        [B]ack      [Q]uit
+            ===================================================================================
+
+        """
         print(f"""
 ===================================================================================
                         Destination Details
@@ -155,6 +263,26 @@ _|_|______________
 
 
     def display_add_voyage_UI(self):
+        """
+        Displays the menu for adding a new voyage
+
+        Example:
+            >>> display_add_voyage_UI()
+            ===================================================================================
+                Destinations
+            ===================================================================================
+            1. Nuuk
+            2. Kulusuk
+            3. Thorshavn
+            4. Tingwall
+            5. Longyearbyen
+
+            ===================================================================================
+                            [B]ack            [Q]uit
+            ===================================================================================
+
+            Option:
+        """
         destination_menu = {
                     "1": "Nuuk",
                     "2": "Kulusuk",
@@ -232,11 +360,8 @@ _|_|______________
             departure2 = arrivalDate.strftime('%Y-%m-%d %H:%M') # the A requirements has it so every voyage returns the same date as it leaves
             #departure2 = self.logic_wrapper.calculate_arrival_time(datetime.strptime(str(arrivalDate), '%Y-%m-%d %H:%M'), datetime.strptime("3:00",'%H:%M')) # Add 3 hours between landing and departure
             validate, departureDate2 = validate_voyage_date(departure2)
-            validate_if_after = validate_if_date_after(departure2, departure)
             if validate == False:
                 print("Wrong format for input, try again")
-            elif validate_if_after == False:
-                print("Arrival date must be set after the departure date, try again")
             elif validate == True:
                 flytime2 = datetime.strptime(destination.flytime,'%H:%M')
                 arrivalDate2 = self.logic_wrapper.calculate_arrival_time(departureDate2, flytime2)
@@ -275,8 +400,15 @@ _|_|______________
                 """)
 
     def display_repeat_voyage_UI(self):
+        """
+        Displays the menu for repeating a voyage
+
+        Example:
+            >>> display_repeat_voyage_UI()
+            Please enter voyage ID:
+        """
         while True:
-            id = input("please enter voyage ID: ")
+            id = input("Please enter voyage ID: ")
             try:
                 id = int(id)
                 break
@@ -373,9 +505,16 @@ _|_|______________
             print("Voyage not found")
 
     def display_get_voyage_on_date_UI(self):
+        """
+        Displays the menu for getting all voyages on a specific date
+
+        Example:
+            >>> display_get_voyage_on_a_date_UI()
+            Please input the date to get all voyages (YYYY-MM-DD):
+        """
         while True:
-            date = input("Please input the date to get all voyages (YYYY-MM-DD): ")
-            if date == "q":
+            date = input("Please input the date to get all voyages (YYYY-MM-DD) (b to go back): ")
+            if date == "b":
                 break
             elif not validate_date_2(date):
                 print("Invalid date format, try again")
@@ -410,6 +549,13 @@ _|_|______________
                 """)
     
     def display_get_voyages_in_a_week_UI(self):
+        """
+        Displays the menu for getting all voyages in a specific week
+
+        Example:
+            >>> display_add_voyage_UI()
+            Please input a date in the week to be checked (YYYY-MM-DD) (q to quit):
+        """
         while True:
             date = input("Please input a date in the week to be checked (YYYY-MM-DD) (q to quit): ")
             if date == "q":
@@ -456,6 +602,13 @@ _|_|______________
 
 
     def display_employee_voyages_in_a_week_UI(self):
+        """
+        Displays the menu for getting all voyages of a specific employee in a specific week
+
+        Example:
+            >>> display_employee_voyages_in_a_week_UI()
+            Please input a date in the week to be checked (YYYY-MM-DD) (q to quit):
+        """
         while True:
             date = input("Please input a date in the week to be checked (YYYY-MM-DD) (b to go back): ")
             if date.lower() == "q":
@@ -485,7 +638,7 @@ _|_|______________
                     for day in week:
                         print(f"{day}:")
                         result = self.logic_wrapper.employee_schedule_checker(day, True)
-                        if len(result) is 0:
+                        if len(result) == 0:
                             print("    Employee not working")
                         else:
                             for elem in result:
@@ -506,9 +659,27 @@ _|_|______________
 
 
     def input_prompt(self):
+        """
+        Displays the main menu for the flight manager
+
+        Example:
+            >>> input_prompt()
+            ===================================================================================
+                          
+                    1. Create new voyage
+                    2. Repeat an existing voyage
+                    3. Get voyage on specific date
+                    4. List voyages in a specific week
+                    5. List an employees voyages in a week
+
+            ===================================================================================
+                                    [B]ack          [Q]uit
+            ===================================================================================
+            Enter an option:
+        """
         while True:
             self.display_flight_manager_UI()
-            command = input("Enter your command: ")
+            command = input("Enter an option: ")
             command = command.lower()
             if command == "b":
                 break

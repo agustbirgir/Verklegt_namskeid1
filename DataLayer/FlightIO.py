@@ -3,6 +3,9 @@ from Models.Flight import Flight
 
 class FlightIO:
     def __init__(self):
+        """
+        Constructor that establishes a connection to the csv file
+        """
         self.file_name = "files/flights.csv"
 
     def add_flight(self, flight):
@@ -38,9 +41,9 @@ class FlightIO:
 
         Examples:
             >>> get_flight(1891)
-            Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891, NA021)
+            Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891)
             >>> get_flight(1891)
-            Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067, NA034)
+            Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067)
         """
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
@@ -58,7 +61,8 @@ class FlightIO:
 
         Examples:
             >>> get_all_flights()
-            [Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891, NA021), Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067, NA034)]
+            [Flight(Keflavik,2023-10-21 12:50:00,2023-10-21 18:20:00,Thorshavn,704), Flight(Thorshavn,2023-10-21 18:20:00,2023-10-21 23:50:00,Keflavík,704), 
+            Flight(Keflavik,1010-11-10 10:20:00,1010-11-10 13:10:00,Nuuk,3891), Flight(Nuuk,1010-11-10 10:30:00,1010-11-10 13:10:00,Keflavik,3891)]
         """
         ret_list = []
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
@@ -75,8 +79,8 @@ class FlightIO:
             list of Flight: A list containing two flights
 
         Examples:
-            >>> get_all_flights()
-            [Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891, NA021), Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067, NA022)]
+            >>> get_voyage_flights()
+            [Flight(Keflavik,2023-10-21 12:50:00,2023-10-21 18:20:00,Thorshavn,704), Flight(Thorshavn,2023-10-21 18:20:00,2023-10-21 23:50:00,Keflavík,704)
         """
         ret_list = []
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:

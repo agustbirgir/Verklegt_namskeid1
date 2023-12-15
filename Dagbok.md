@@ -263,3 +263,15 @@ Við erum komnir með flottan UI hjá okkur allt sýnist vera koma hægt og ról
 
 ### Lok dags
 Kláruðum A kröfur, byrjaðir á B kröfum og kláruðum fyrstu 6 kröfurnar.
+
+
+## 15. Desember
+- Ágúst
+  Heldur áfram með UI og í logic layer eins og þarf, laga skýrslu.
+- Ragnar
+  Fara yfir allann kóðann og finna villur eða eitthvað sem þarf að laga.
+- Sigurður
+  Laga allar villur sem að koma upp í kóðanum, commenta allann kóðann, laga skýrslu, klára UML class diagram.
+
+### Lok dags
+Löguðum allar villur, löguðum skýrsluna, tókum upp vídjó og kláruðum verkefnið alveg.

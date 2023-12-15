@@ -7,6 +7,9 @@ from DataLayer.AircraftIO import AircraftIO
 
 class Data_Wrapper:
     def __init__(self):
+        """
+        Constructor that establishes a connection to the IO classes
+        """
         self.EmployeeIO = EmployeeIO()
         self.DestinationIO = DestinationIO()
         self.VoyageIO = VoyageIO()
@@ -248,7 +251,7 @@ class Data_Wrapper:
         """
         return self.VoyageIO.get_all_voyages()
     
-    def voyage_add_employee(self, employeeList, id):
+    def voyage_add_employees(self, employeeList, id):
         """
         Add new aircraft to a voyage
 
@@ -261,22 +264,7 @@ class Data_Wrapper:
             This call writes the flight "Boeing 737" as the aircraft for the voyage with ID 2 
             
         """
-        return self.VoyageIO.voyage_add_employee(employeeList, id)
-    
-    def voyage_add_flight(self, flight, id):
-        """
-        Add employees to a voyages crew
-
-        Args:
-            employeeList (list): List of employees to be added
-            id (string): Id of the voyage for the employees to be added
-
-        Examples:
-            >>> voyage_add_employee(['John', 'Chad'], "2")
-            This call adds John and Chad to the crew of the voyage with ID 2 
-            
-        """
-        return self.VoyageIO.voyage_add_flight(flight, id)
+        return self.VoyageIO.voyage_add_employees(employeeList, id)
         
 
     # ------- Flight ----------
@@ -330,10 +318,10 @@ class Data_Wrapper:
         Return the two flights that are in a voygae
 
         Returns:
-            list of Flight: A list containing two flights
+            list of Flight: A list containing two flights of a voyage
 
         Examples:
-            >>> get_all_flights()
+            >>> get_voyage_flights()
             [Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891, NA021), Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067, NA022)]
         """
         return self.FlightIO.get_voyage_flights(id)

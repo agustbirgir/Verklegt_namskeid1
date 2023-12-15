@@ -3,6 +3,9 @@ from Models.Employee import Employee
 
 class EmployeeIO:
     def __init__(self):
+        """
+        Constructor that establishes a connection to the csv file
+        """
         self.file_name = "files/employees.csv"
 
     def get_all_employees(self):
@@ -60,8 +63,6 @@ class EmployeeIO:
         Examples:
             >>> find_employee_by_ssn(1090452944)
             Employee(Joi,Head Flight Attendant,1090452944,Sævangur 8,5812345,agust@gmail.com,1234567,[],)
-            >>> get_flight(Thorshavn)
-            Employee(Siggi,Pilot,1214742314,2,3,a@g.is,4,['1010-11-10', '9999-11-11'],Boeing 737)
         """
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
@@ -123,7 +124,7 @@ class EmployeeIO:
             updated_employee (string): Employee to be updated in the csv file
 
         Examples:
-            >>> update_employee(Employee())
+            >>> update_employee(Employee)
             Updates the updated attributes of the employee to the csv file
             
         """
@@ -183,7 +184,7 @@ class EmployeeIO:
             list of Employee: Returns a list of all employees that are attendants
 
         Examples:
-            >>> get_all_pilots()
+            >>> get_all_attendants()
             [Employee(Sigurjon,Head Flight Attendant,9374061953,Sævangur 8,5812345,agust@gmail.com,1234567,[],), Employee(Halli,Attendant,1047283940,Skaggaturn 12,5812345,Halli@gmail.com,8401640,[],)]
             
         """
@@ -193,14 +194,6 @@ class EmployeeIO:
             for row in reader:
                 if row["profession"] == "Attendant" or row["profession"] == "Head Flight Attendant":
                     ret_list.append(Employee(row["name"], row["profession"]))
-        return ret_list
-    
-    def get_all_employees_schedule(self):
-        ret_list = []
-        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=";")
-            for row in reader:
-                ret_list.append(Employee(row["name"], row["profession"], row["scheduled"]))
         return ret_list
     
     def employee_schedule_checker(self, date, working):
@@ -238,22 +231,3 @@ class EmployeeIO:
                     if not is_working_at_date:
                         ret_list.append(Employee(row["name"]))
         return ret_list
-    """
-    def employee_schedule_checker(self, date, working):
-        ret_list = []
-        added_employees = set()  # To keep track of employees already added
-        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=";")
-            for row in reader:
-                schedule_list = [item.strip("'") for item in row["scheduled"][1:-1].split(", ")]
-                is_working_at_date = any(emp_sched == date for emp_sched in schedule_list)
-                
-                if working and is_working_at_date and row["name"] not in added_employees:
-                    ret_list.append(Employee(row["name"], row["profession"]))
-                    added_employees.add(row["name"])
-
-                elif not working and not is_working_at_date and row["name"] not in added_employees:
-                    ret_list.append(Employee(row["name"]))
-                    added_employees.add(row["name"])
-        return ret_list
-            """

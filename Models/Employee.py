@@ -1,5 +1,8 @@
 class Employee:
     def __init__(self, name='', profession='', ssn='', homeAddress='', gsmNumber='', email='', homePhone='', scheduled='', aircraftLicense=''):
+        """
+        Constructor for Employee
+        """
         self.name = name
         self.profession = profession
         self.ssn = ssn
