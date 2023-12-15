@@ -6,45 +6,47 @@ class VoyageLL:
         self.data_wrapper = data_connection
 
     def add_voyage(self, voyage):
-
         """
-        	adds a voyage
+        Add new voyage to the voyage.csv file
 
-            Args: voyage
-        
-            Returns: sends voyage into datalayer to be added
+        Args:
+            voyage (Voyage): Voyage to be written to the file
 
+        Examples:
+            >>> add_voyage(Voyage)
+            This call writes all the attributes of the Voyage object to the voyages.csv file
         """
-
-        """Create a new voyage"""
         self.data_wrapper.add_voyage(voyage)
 
     def get_voyage(self, id):
-
         """
-        	gets a voyage
+        Returns a specific voyage from voyages.csv based on id
 
-            Args: id
-        
-            Returns: sends id into datalayer, gets voyage back to send to the UI layer
+        Args:
+            id (string): The id of the voyage
 
+        Returns:
+            Voyage: returns a voyage
+
+        Examples:
+            >>> get_voyage(2)
+            Voyage(2, 2, ['Siggi', 'Helgi', 'Jonas', 'Halli'], 2, Airbus A330)
+            >>> get_flight(3891)
+            Voyage(3891, 3891, [], 3891, Boeing 737)
         """
-
-        """Return a specific voyage"""
         return self.data_wrapper.get_voyage(id)
 
     def get_all_voyages(self):
-
         """
-        	gets all voyages
+        Returns all flights from flights.csv
 
-            Args: none
-        
-            Returns: gets all voyages from datalayer
+        Returns:
+            list of Voyage: A list containing all voyages
 
+        Examples:
+            >>> get_all_voyages()
+            [Voyage(2, 2, ['Siggi', 'Helgi', 'Jonas', 'Halli'], 2, Airbus A330), Voyage(3891, 3891, [], 3891, Boeing 737)]
         """
-
-        """Return all voyages"""
         return self.data_wrapper.get_all_voyages()
 
     def voyage_add_employee(self, employeeList, id):

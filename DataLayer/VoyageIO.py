@@ -14,7 +14,7 @@ class VoyageIO:
             voyage (Voyage): Voyage to be written to the file
 
         Examples:
-            >>> add_flight(Voyage)
+            >>> add_voyage(Voyage)
             This call writes all the attributes of the Voyage object to the voyages.csv file
         """
         print(voyage)
