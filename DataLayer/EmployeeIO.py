@@ -227,6 +227,23 @@ class EmployeeIO:
                     for emp_sched in schedule_list:
                         if emp_sched == date:
                             is_working_at_date = True
-                        if not is_working_at_date:
-                            ret_list.append(Employee(row["name"]))
+                    if not is_working_at_date:
+                        ret_list.append(Employee(row["name"]))
+        return ret_list
+    """
+    def employee_schedule_checker(self, date, working):
+        ret_list = []
+        added_employees = set()  # To keep track of employees already added
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=";")
+            for row in reader:
+                schedule_list = [item.strip("'") for item in row["scheduled"][1:-1].split(", ")]
+                is_working_at_date = any(emp_sched == date for emp_sched in schedule_list)
+                
+                if working and is_working_at_date and row["name"] not in added_employees:
+                    ret_list.append(Employee(row["name"], row["profession"]))
+                    added_employees.add(row["name"])
+                elif not working and not is_working_at_date and row["name"] not in added_employees:
+                    ret_list.append(Employee(row["name"]))
+                    added_employees.add(row["name"])
         return ret_list

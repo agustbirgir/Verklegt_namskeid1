@@ -1,5 +1,9 @@
 departureFlight;arrivalFlight;crew;id;aircraft
-3891;3891;[];3891;Boeing 737
+3891;3891;['', 'Agust'];3891;Airbus A330
 2;2;['Siggi', 'Helgi', 'Jonas', 'Halli'];2;Airbus A330
 4254;4254;['Siggi', 'Helgi'];4254;Airbus A330
-2067;2067;['Siggi', 'Helgi'];2067
+1538;1538;['', 'Halli', 'Joi', 'Tommy Lee', 'Siggi'];1538;Boeing 737
+3157;3157;[];3157;
+727;727;[];727;
+3576;3576;[];3576
+704;704;[];704

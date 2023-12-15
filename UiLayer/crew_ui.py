@@ -6,6 +6,22 @@ class Crew_UI:
         self.logic_wrapper = logic_connection
 
     def display_pilot_list(self):
+
+        """
+    Displays a list of pilots.
+
+    Args: results, sorted_results
+        
+    Returns: printed list of pilots with proffessions
+
+    Examples:   
+        name: Tommy Lee | profession: Head Pilot
+        name: Helgi | profession: Head Pilot
+
+        Note: sorted by profession
+    """
+
+
         result = self.logic_wrapper.get_all_pilots()
         sorted_result = sorted(result, key=lambda employee: employee.profession)
 
@@ -19,6 +35,21 @@ class Crew_UI:
             """)
 
     def display_attendant_list(self):
+
+        """
+    Displays a list of attendants.
+
+    Args: results, sorted_results
+        
+    Returns: printed list of attendants with proffessions
+
+    Examples:   
+        name: Halli | profession: Attendant
+        name: Joi | profession: Head Flight Attendant
+   
+        Note: sorted by profession
+    """
+
         result = self.logic_wrapper.get_all_attendants()
         sorted_result = sorted(result, key=lambda employee: employee.profession)
 
@@ -31,6 +62,23 @@ class Crew_UI:
 ===================================================================================
             """)
     def display_employee_list(self):
+
+        """
+            Displays a list of employees.
+
+            Args: results, sorted_results
+                
+            Returns: printed list of employees with proffessions
+
+            Examples:   
+                name: Halli | profession: Attendant
+                name: Joi | profession: Head Flight Attendant
+                name: Sigurjon | profession: Head Flight Attendant
+                name: Tommy Lee | profession: Head Pilot
+
+            Note: sorted by profession
+            """
+
         result = self.logic_wrapper.get_all_employees()
         sorted_result = sorted(result, key=lambda employee: employee.profession)
 
@@ -45,41 +93,133 @@ class Crew_UI:
 
 
     def display_employee_schedule_list(self, date, working):
+
+        """
+            Displays a list of employee schedules for a inserted date.
+
+            Args: results, date, working
+                
+            Returns: printed list of employees that are free on inserted day
+
+            Raises: message if no employee found on date for specifications
+
+            Examples:   1111-11-11
+                name: Siggi
+                name: Tommy Lee
+                
+
+           
+            """
+
         result = self.logic_wrapper.employee_schedule_checker(date, working)
         if result == None:
             print("No employees found")
         else:
+            print(f"""
+===================================================================================
+                      List of non-working Employees
+===================================================================================""")
             for elem in result:
-                print(f"name: {elem.name}")
+                print(f"""
+                      name: {elem.name}""")
+            print("""===================================================================================
+                  [B]ack            [Q]uit
+===================================================================================
+            """)
     
     def display_employees_working_list(self, date, working):
+
+        """
+            Displays a list of employee schedules for a inserted date.
+
+            Args: result, date, working, voyages, v_crew
+                
+            Returns: printed list of employees that are busy on inserted day
+
+            Raises: message if no employee found on date for specifications
+
+            Examples:   1010-11-10
+                        name: Siggi, voyage destination: Nuuk
+                        name: Siggi, voyage destination: Nuuk
+                        name: Jonas, voyage destination: Nuuk
+                        name: Jonas, voyage destination: Nuuk
+                
+
+            Note: sorted by profession
+            """
+
         result = self.logic_wrapper.employee_schedule_checker(date, working)
         voyages = self.logic_wrapper.get_all_voyages()
-        if result == None:
+        if not result:
             print("No employees found")
-        ret_list = []
-        for elem in result: # Find the voyages of all the working employees
-            for v in voyages:
-                v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-                if elem.name in v_crew and elem.name not in ret_list:
-                    print(f"name: {elem.name}, voyage destination: {self.logic_wrapper.get_flight(v.id).destination}")
-                    #ret_list.append([elem.name, v.id])
-        #for employee in ret_list:
-        #    print(f"name: {employee[0]}, voyage destination: {self.logic_wrapper.get_flight(employee[1]).destination}")
+            return
+
+        employee_voyages = {}
+        for elem in result:
+            employee_voyages[elem.name] = []
+
+        for v in voyages:
+            v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+            for emp_name in v_crew:
+                if emp_name in employee_voyages:
+                    employee_voyages[emp_name].append(self.logic_wrapper.get_flight(v.id).destination)
+
+        print("""
+===================================================================================
+                    Working list of all employees
+===================================================================================
+        """)
+        for emp_name, destinations in employee_voyages.items():
+            destinations_str = ', '.join(destinations)
+            print(f"""
+                  name: {emp_name}
+                  Voyage destination: {destinations_str}""")
+        print("""
+===================================================================================
+                  [B]ack            [Q]uit
+===================================================================================""")
+
 
     def display_employees_working_status_UI(self):
+
+        """
+            Displays the UI and handles the menu for employee schedules.
+
+            Args: working, date
+                
+            Returns: prints UI for the menu: 5.crew schedules
+
+            Raises: goes back if b is pressed
+
+            Note: q does nothing
+            """
+
         while True:
-            print("1. List working employees at date")
-            print("2. List non working employees at date")
-            print("b to go back")
+            print(f"""
+===================================================================================
+===================================================================================
+                  
+                1. List working employees at date
+                2. List non working employees at date
+
+===================================================================================
+                  [B]ack            [Q]uit
+===================================================================================
+            """)
+
             working = input("Please enter an option: ")
-            if working == "b":
+            if working.lower() == "b":
                 break
+            elif working.lower() == "q":
+                exit(0)
             elif working == "1":
                 while True:
+
                     date = input("Please enter date (YYY-MM-DD) (b to go back): ")
-                    if date == "b":
+                    if date.lower() == "b":
                         break
+                    if date.lower() == "q":
+                        exit(0)
                     elif not validate_date_2(date):
                         print("Invalid date format. Please enter a date in YYYY-MM-DD format, try again")
                     else:
@@ -90,6 +230,8 @@ class Crew_UI:
                     date = input("Please enter date (DD-MM-YYYY) (b to go back): ")
                     if date == "b":
                         break
+                    elif date.lower() == "q":
+                        exit(0)
                     elif not validate_date_2(date):
                         print("Invalid date format. Please enter a date in YYYY-MM-DD format, try again")
                     else:
@@ -99,6 +241,34 @@ class Crew_UI:
                 print("invalid command")
 
     def display_employee(self):
+
+        """
+            Displays the UI and takes in the ssn or name of employee to display.
+
+            Args: command, name, employee, ssn, profession, homeAddress, gsmNumber, email, homePhone
+                
+            Returns: printed employee information
+
+            Examples:   
+===================================================================================
+                            Database of employee
+===================================================================================
+
+                          Name: Siggi
+                          Profession: Pilot
+                          SSN: 1214742314
+                          Home address: 2
+                          Gsm number: 3
+                          Email: a@g.is
+                          HomePhone: 4
+
+===================================================================================
+                            [B]ack          [Q]uit
+===================================================================================
+
+            Note: 
+            """
+
         while True:
             command = input("Search by [name] or [ssn] (b to go back): ").lower()
 
@@ -151,6 +321,18 @@ class Crew_UI:
 
 
     def display_employee_database_UI(self):
+
+        """
+            Displays the UI and handles the menu for the employee database.
+            also functions as the listing function for list all pilots with specific aircraft license
+
+            Args: command, aircraft_menu, aircraft_choice, pilots
+        
+            Raises: goes back if b is pressed and quits when q is pressed
+
+
+            """
+
         while True:
             print(f"""
 ===================================================================================
@@ -205,6 +387,19 @@ class Crew_UI:
                 print("Invalid input")
 
     def display_add_crew_to_voyage_UI(self): 
+
+        """
+            Displays the UI and handles the adding of crew to voyages.
+
+            Args: mode, id, voyage, crew_list, voyages, selected_voyage_departure, aircraft_menu, aircraft_choice, new_crew_list, name, employee, schedule, voyage_date
+                
+            Returns: prints UI for the menu: 5.crew schedules
+
+            Raises: value error if id is not int
+
+            Note: mode 2 (fetching the next unmanned voyage) was redacted for: not working, and if you press it, you are forced to enter a correct ID
+            """
+
         """Display the menu to add crew to voyage"""
         while True:
             #mode = input("do you wish to search for a voyage [1] or do you wish to get the nearest voyage [2]")
@@ -314,6 +509,15 @@ class Crew_UI:
     
 
     def display_unmanned_voyages(self): # i dont know where to place the search and next operations of the unmanned puller
+        """
+            Displays a list of unmanned voyages.
+
+            Args: subroutine, input
+                
+            Returns: list of unmanned voyages
+
+            Example: marked for deletion or redaction, not used in any menu's
+            """
         subroutine = "list"
         input = 0     #input is only for the search, to check if a voyage is empty, if we dont do that, we can remove it
         print(self.logic_wrapper.unmanned_voyage_fetcher(subroutine, input))
@@ -321,6 +525,13 @@ class Crew_UI:
         
 
     def crew_manager_output(self):
+
+        """
+            Displays the UI element for the main menu of the crew manager   
+
+            Note: this is just a single print command
+            """
+
         print("""\n
 ===================================================================================
                         Crew Manager Menu
@@ -338,6 +549,19 @@ class Crew_UI:
         """)
 
     def input_prompt(self):
+
+        """
+            Acts as the main menu input prompt for the crew manager, also functions as the employee maker and updater
+
+            Args: command, ssn, employee, profession, homeAddress, gsmNumber, email, homePhone, choice, scheduled, profession_menu, profession_choice, aircraft_menu, aircraft_choice, aircraftLicense
+                
+            Returns: employee information back into storage
+
+            Raises: goes back if b is pressed, error if input is invalid
+
+            Note: input prompt is heavy, command 3 and 4 have the code in them, command 1 and 2 do it in their own functions.
+            """
+
         while True:
             self.crew_manager_output()
             command = input("Option: ")
@@ -493,6 +717,19 @@ class Crew_UI:
 
 
     def display_update_employee_UI(self):
+
+        """
+            Displays the UI to update the employee
+
+            Args: employee, choice, new_profession, new_home_address, new_gsm_number, new_email, new_home_phone
+                
+            Returns: updated epmloyee information into database
+
+            Raises: error if employee not found
+
+            Note: was this not done in the input_prompt function?
+            """
+
         ssn = input("Enter the SSN of the employee to update: ")
         employee = self.logic_wrapper.find_employee_by_ssn(ssn)
         if employee:

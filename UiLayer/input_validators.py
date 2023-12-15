@@ -78,7 +78,6 @@ def validate_voyage_crew(crew_list, employee_list):
                 else:
                     head_attendant_count += 1
                     attendant_count += 1
-    #print("pilot", pilot_count,"head pilot:",head_pilot_count,"attendant:",attendant_count,"head attendant:",head_pilot_count)
     if pilot_count >= 2 and head_pilot_count >= 1 and attendant_count >= 1 and head_attendant_count >= 1:
         return True
     else:
@@ -94,7 +93,6 @@ def validate_employee_for_voyage(name, selected_voyage_departure, v_crew, v, v_d
         else:
             return True
         
-
 def validate_if_registered_at_date(date1, date2):
     date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M:%S').date()
     date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M:%S').date()

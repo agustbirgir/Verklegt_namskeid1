@@ -6,31 +6,100 @@ class VoyageLL:
         self.data_wrapper = data_connection
 
     def add_voyage(self, voyage):
+
+        """
+        	adds a voyage
+
+            Args: voyage
+        
+            Returns: sends voyage into datalayer to be added
+
+        """
+
         """Create a new voyage"""
         self.data_wrapper.add_voyage(voyage)
 
     def get_voyage(self, id):
+
+        """
+        	gets a voyage
+
+            Args: id
+        
+            Returns: sends id into datalayer, gets voyage back to send to the UI layer
+
+        """
+
         """Return a specific voyage"""
         return self.data_wrapper.get_voyage(id)
 
     def get_all_voyages(self):
+
+        """
+        	gets all voyages
+
+            Args: none
+        
+            Returns: gets all voyages from datalayer
+
+        """
+
         """Return all voyages"""
         return self.data_wrapper.get_all_voyages()
 
     def voyage_add_employee(self, employeeList, id):
+
+        """
+        	adds employees into voyage
+
+            Args: employeeList id
+        
+            Returns: sends id and employeeList into datalayer for it to be added int the voyage database
+
+        """
+
         """Add an employee to a voyage"""
         self.data_wrapper.voyage_add_employee(employeeList, id)
 
     def voyage_add_flight(self, flight, id):
+
+        """
+        	adds a flight to a voyage
+
+            Args: id, flight
+        
+            Returns: sends flight and id into datalayer
+
+        """
+
         """Update a flight in a voyage"""
         self.data_wrapper.voyage_add_flight(flight, id)
     
     def get_crew_of_voyage(self, voyage):
+
+        """
+        	gets crew of a voyage
+
+            Args: voyage
+        
+            Returns: takes voyage and pulls the crew, crew gets sent back to send to the UI layer
+
+        """
+
         """Get the crew of a specific voyage"""
         crew_list = [item.strip("'") for item in voyage.crew[1:-1].split(", ")]
         return crew_list
 
     def get_week_dates(self, date):
+
+        """
+        	gets dates across a week
+
+            Args: date
+        
+            Returns: takes date and makes a week out of it
+
+        """
 
         date = datetime.strptime(date, "%Y-%m-%d")
 
@@ -42,6 +111,16 @@ class VoyageLL:
 
     
     def get_voyages_of_day(self, date_looking):
+
+        """
+        	gets a voyage for a specific day
+
+            Args: date_looking, voyages, ret_list, voyage_flight, date_of_voyage
+        
+            Returns: returns all voyages that have the matching date
+
+        """
+
         voyages = self.data_wrapper.get_all_voyages()
         ret_list = []
         for v in voyages:
@@ -56,6 +135,17 @@ class VoyageLL:
         return ret_list
 
     def unmanned_voyage_fetcher(self, command, input): #command is subroutine (list, search, next), input is for search only
+
+        """
+        	gets unmanned voyages
+
+            Args: command, input, ret_list, voyages, Voyage, crew_list, latest_unmanned_voyage, flight, flight_id, date of voyage, latest_date_of_voyage, first_run, latest_unmanned_voyage
+        
+            Returns: gets all employees and voyages and checks whether or not they are unmanned or missingg crew for a full manning of the vehicle.
+
+            note: command "search" and "next" are non-functioning, specifically "next" which was supposed to pull the next empty voyage based on how soon it is.
+        """
+
         all_employees = self.data_wrapper.get_all_employees()
         voyages = self.data_wrapper.get_all_voyages() #can change if you dont want it all
 
