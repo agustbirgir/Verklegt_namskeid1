@@ -1,5 +1,3 @@
-from Models.Aircraft import Aircraft
-
 class AircraftLL:
     def __init__(self, data_connection):
         self.data_wrapper = data_connection

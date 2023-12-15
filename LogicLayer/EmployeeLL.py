@@ -1,5 +1,3 @@
-import ast
-
 class EmployeeLL:
     def __init__(self, data_connection):
         self.data_wrapper = data_connection
@@ -38,5 +36,20 @@ class EmployeeLL:
 
     def get_schedule_of_employee(self, employee):
         """Get the schedule of a given employee"""
+        if employee is None:
+            return []
         schedule_list = [item.strip("'") for item in employee.scheduled[1:-1].split(", ")]
         return schedule_list
+    
+    def sort_pilots_by_license(self):
+        pilots = self.data_wrapper.get_all_pilots()
+        aircraft = self.data_wrapper.get_all_aircrafts()
+        ret_list = []
+        for a in aircraft:
+            for p in pilots:
+                if p.aircraftLicense == a.name:
+                    ret_list.append(p)
+        return ret_list
+    
+    def get_pilots_by_license(self, license):
+        return self.data_wrapper.get_pilots_by_license(license)

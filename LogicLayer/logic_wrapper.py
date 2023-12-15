@@ -41,6 +41,12 @@ class Logic_Wrapper:
     def get_schedule_of_employee(self, employee):
         return self.EmployeeLL.get_schedule_of_employee(employee)
     
+    def sort_pilots_by_license(self):
+        return self.EmployeeLL.sort_pilots_by_license()
+    
+    def get_pilots_by_license(self, license):
+        return self.EmployeeLL.get_pilots_by_license(license)
+    
     # ------- VOYAGE ------------
 
     def add_voyage(self, voyage):
@@ -55,8 +61,20 @@ class Logic_Wrapper:
     def voyage_add_employee(self, employeeList, id):
         return self.VoyageLL.voyage_add_employee(employeeList, id)
     
+    def voyage_add_flight(self, flight, id):
+        return self.VoyageLL.voyage_add_flight(flight, id)
+    
     def get_crew_of_voyage(self, voyage):
         return self.VoyageLL.get_crew_of_voyage(voyage)
+    
+    def get_week_dates(self, date):
+        return self.VoyageLL.get_week_dates(date)
+    
+    def get_voyages_of_day(self, date_looking):                         #this for flight or crew?
+        return self.VoyageLL.get_voyages_of_day(date_looking)
+    
+    def unmanned_voyage_fetcher(self, command, input):                  #this is like, 90% for crew manager, right?
+        return self.VoyageLL.unmanned_voyage_fetcher(command, input)
     
 
     # ----- DESTINATION -----------
@@ -81,6 +99,9 @@ class Logic_Wrapper:
     def get_all_flights(self):
         return self.FlightLL.get_all_flights()
     
+    def get_voyage_flights(self, id):
+        return self.FlightLL.get_voyage_flights(id)
+
     def calculate_arrival_time(self, date, time):
         return self.FlightLL.calculate_arrival_time(date, time)
     

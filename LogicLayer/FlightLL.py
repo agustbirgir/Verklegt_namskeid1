@@ -1,6 +1,5 @@
-from Models.Flight import Flight
 import random
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 class FlightLL:
     def __init__(self, data_connection):
@@ -17,6 +16,9 @@ class FlightLL:
     def get_all_flights(self):
         """Return all of the flights"""
         return self.data_wrapper.get_all_flights()
+    
+    def get_voyage_flights(self, id):
+        return self.data_wrapper.get_voyage_flights(id)
     
     def calculate_arrival_time(self, date, time):
         """Add together the departing time and the flytime to get arrival time"""

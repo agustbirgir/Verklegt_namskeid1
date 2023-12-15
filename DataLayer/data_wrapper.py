@@ -41,6 +41,9 @@ class Data_Wrapper:
     
     def employee_schedule_checker(self, date, working):
         return self.EmployeeIO.employee_schedule_checker(date, working)
+    
+    def get_pilots_by_license(self, license):
+        return self.EmployeeIO.get_pilots_by_license(license)
 
 
     
@@ -69,6 +72,10 @@ class Data_Wrapper:
     
     def voyage_add_employee(self, employeeList, id):
         return self.VoyageIO.voyage_add_employee(employeeList, id)
+    
+    def voyage_add_flight(self, flight, id):
+        return self.VoyageIO.voyage_add_flight(flight, id)
+        
 
     # ------- Flight ----------
 
@@ -80,6 +87,9 @@ class Data_Wrapper:
     
     def get_all_flights(self):
         return self.FlightIO.get_all_flights()
+    
+    def get_voyage_flights(self, id):
+        return self.FlightIO.get_voyage_flights(id)
     
     # ------ Aircraft ---------
 

@@ -22,8 +22,8 @@ class FlightIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                if (row["id"] == id):
-                    return Flight(row["startingPoint"], row["departureTime"], row["arrivalTime"], row["destination"], row["id"])
+                if (int(row["id"]) == int(id)):
+                    return Flight(row["startingPoint"], row["departureTime"], row["arrivalTime"], row["destination"], row["id"], row["flightNumber"])
         return ("Flight not found")
 
     def get_all_flights(self):
@@ -32,7 +32,7 @@ class FlightIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                ret_list.append(Flight(row["startingPoint"], row["departureTime"], row["arrivalTime"], row["destination"], row["id"]))
+                ret_list.append(Flight(row["startingPoint"], row["departureTime"], row["arrivalTime"], row["destination"], row["id"], row["flightNumber"]))
         return ret_list
     
     def get_voyage_flights(self, id):
@@ -41,6 +41,6 @@ class FlightIO:
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
-                if (row["id"] == id):
+                if (int(row["id"]) == int(id)):
                     ret_list.append(Flight(row["startingPoint"], row["departureTime"], row["arrivalTime"], row["destination"], row["id"]))
         return ret_list

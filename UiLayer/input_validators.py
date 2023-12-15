@@ -1,5 +1,7 @@
 import re
 from datetime import datetime
+#from Models.Employee import Employee
+
 
 class NameLengthException(Exception):
     pass
@@ -45,13 +47,15 @@ def validate_time(time):
 
 def validate_voyage_date(date):
     try:
-        datetime_obj = datetime.strptime(date, '%d-%m-%Y,%H:%M')
+        datetime_obj = datetime.strptime(date, '%Y-%m-%d %H:%M')
         return True, datetime_obj
     except ValueError:
         return False, None
 
-def validate_if_date_after(arrival, departure):
-    return arrival > departure
+def validate_if_date_after(date1, date2):
+    date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M')
+    date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M')
+    return date1 > date2
 
 def validate_if_not_number(str):
     return not str.isdigit()
@@ -96,3 +100,22 @@ def validate_if_registered_at_date(date1, date2):
     date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M:%S').date()
 
     return date1 == date2
+
+def validate_pilot(employee, aircraft_name):
+    if employee.profession == "Pilot" or employee.profession == "Head Pilot":
+        if employee.aircraftLicense == aircraft_name:
+            return True
+        else:
+            return False
+    else:
+        return True
+
+
+
+#------not validators, but it wont work in the ui layer
+
+
+def pull_next_unmanned_voyage(self):  #i will make a temp function for the pull, im not sure how to integrate it as of now, just bear with this abomination for now
+    subroutine = "next"                                 #this should be able to pull in the next empty voyage
+    input = 0                                           #so this should be used in the main function for crew assignment on while loops
+    return self.logic_wrapper.unmanned_voyage_fetcher(subroutine, input) 

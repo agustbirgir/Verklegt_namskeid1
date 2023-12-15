@@ -199,5 +199,67 @@ Unnum bara meira í að klára föll og náðum alveg að klára nokkur
 - Stefán
   Mætti ekki :(
 
+### 11. Desember
+Halda áfram með að klára föll í UML class diagramöinu og bæta föllum eins og þarf.
+- Ágúst  
+  Er í útlöndum
+- Ragnar  
+  Byrja á list employees
+- Sigurður
+  Laga uppsetningu vekefnisins, vinna í add og repeat voyage, list destinations og employees.
+- Theodór
+
+- Stefán
+  Mætti ekki :(
+
 ### Lok dags
-Flight manager kominn langa leið, crew manager líka docs skjal klárað, erum á góðri leið.
+Flight manager eiginlega alveg tilbúinn og í crew manager er assign crew, employee database, update employee, register employee  
+tilbúið svo við vitum allavega.
+
+## 12. Desember
+
+### Morgunfundur
+Vorum allir að tala saman um hverju næstu skref eru fyrir þessa viku og erum allir komnir saman með hvað á að gera og hvernig 
+
+- Ágúst
+  Vinna í að bæta UI-ið, láta lista koma fram í töflum o.s.frv
+- Ragnar
+  Vinna í að lista alla voyages á ákveðnum degi
+- Sigurður
+  Laga list all working og non working employees.
+- Theodór
+
+- Stefán
+  Mætti ekki :(
+
+
+### Lok Dags
+Kláruðum að gera nokkra UI Breytingar og erum sma fastir með Voyages
+
+## 13. Desember
+Allir héldu áfram með sín verkefni eins og í gær og fórum líka að debugga nokkra hluti sem þurfti það
+
+- Ágúst 
+  Lét UI líta betur út núna í Flight UI og er kominn með 80% af Crew UI 
+
+- Ragnar 
+  Fór að vinna í Voyage partin og er að vinna í Repeat Voyage
+
+- Sigurður
+  Lagaði add voyage sem var A krafa hjá okkur og Repeat Voyage
+
+### Lok dags
+Við erum komnir með flottan UI hjá okkur allt sýnist vera koma hægt og rólega en erum enþá smá fastir með Voyages
+
+
+## 14. Desember
+
+- Ágúst
+  Heldur áfram með UI, okkur vantar enn alveg mikið þar.
+- Ragnar
+  Byrja að vinna í að lista hluti í B kröfum
+- Sigurður
+  Klára að lista voyages og starfsmenn í ákveðni viku, byrja að setja upp og gera föll fyrir B kröfur.
+
+### Lok dags
+Kláruðum A kröfur, byrjaðir á B kröfum og kláruðum fyrstu 6 kröfurnar.
