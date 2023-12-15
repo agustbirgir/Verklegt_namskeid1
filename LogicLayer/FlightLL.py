@@ -3,6 +3,9 @@ from datetime import timedelta
 
 class FlightLL:
     def __init__(self, data_connection):
+        """
+        Constructor that establishes a connection to the data wrapper
+        """
         self.data_wrapper = data_connection
 
     def add_flight(self, destination):

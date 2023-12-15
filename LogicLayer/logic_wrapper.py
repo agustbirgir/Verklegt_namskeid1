@@ -7,6 +7,9 @@ from DataLayer.data_wrapper import Data_Wrapper
 
 class Logic_Wrapper:
     def __init__(self):
+        """
+        Constructor that establishes a connection to the data wrapper
+        """
         self.data_wrapper = Data_Wrapper()
         self.EmployeeLL = EmployeeLL(self.data_wrapper)
         self.VoyageLL = VoyageLL(self.data_wrapper)

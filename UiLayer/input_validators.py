@@ -273,7 +273,7 @@ def validate_if_registered_at_date(date1, date2):
         >>> validate_id("2003-12-10", "2003-12-11")
         False
     """
-    date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M:%S').date()
+    date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M').date()
     date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M:%S').date()
 
     return date1 == date2

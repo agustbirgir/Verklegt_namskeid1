@@ -3,6 +3,9 @@ from UiLayer.input_validators import *
 
 class VoyageLL:
     def __init__(self, data_connection):
+        """
+        Constructor that establishes a connection to the data wrapper
+        """
         self.data_wrapper = data_connection
 
     def add_voyage(self, voyage):
