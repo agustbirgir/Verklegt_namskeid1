@@ -17,6 +17,9 @@ def validate_id(id):
 def validate_ssn(ssn):
     return ssn.isdigit() and len(ssn) == 10
 
+def validate_string(string):
+    return string.isdigit()
+
 def validate_phone(phone_number):
     pattern = re.compile(r"^\d{7,15}$")
     return pattern.match(phone_number) is not None

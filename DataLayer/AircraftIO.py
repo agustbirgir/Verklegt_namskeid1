@@ -17,13 +17,13 @@ class AircraftIO:
             This call writes all the attributes of the Aircraft object to the aircrafts.csv file
         """
         with open(self.file_name, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["name", "type", "manufacturer", "noOfPassenger"]
+            fieldnames = ["name", "type", "manufacturer", "noOfPassengers"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             if csvfile.tell() == 0:
                 writer.writeheader()
 
-            writer.writerow({'startingPoint': aircraft.name, 'departureTime': aircraft.type,
-                             'destination': aircraft.manufacturer, 'arrivalTime': aircraft.noOfPassengers})
+            writer.writerow({'name': aircraft.name, 'type': aircraft.type,
+                             'manufacturer': aircraft.manufacturer, 'noOfPassengers': aircraft.noOfPassengers})
 
     def get_aircraft(self, name):
         """
@@ -46,7 +46,7 @@ class AircraftIO:
             for row in reader:
                 if (row["name"] == name):
                     return Aircraft(row["name"], row["type"], row["manufacturer"], row["noOfPassengers"])
-        return ("Flight not found")
+        return None
 
     def get_all_aircrafts(self):
         """

@@ -1,6 +1,7 @@
 from Models.Flight import Flight
 from Models.Destination import Destination
 from Models.Voyage import Voyage
+from Models.Aircraft import Aircraft
 from UiLayer.input_validators import *
 
 class Flight_UI:
@@ -27,6 +28,7 @@ _|_|______________
 
                 1. Create voyage
                 2. Destination database
+                3. Register new aircraft
                 
 
 ===================================================================================
@@ -57,6 +59,31 @@ _|_|______________
                 break
             else:
                 print("Invalid input, try again")
+
+    def display_add_aircraft_UI(self):
+        a = Aircraft()
+        while True:
+            a.name = input("Enter the name of the aircraft: ")
+            try:
+                validate_name(a.name)
+                break
+            except NameLengthException:
+                print("Name was too long")
+
+        a.type = input("Enter the type: ")
+
+        a.manufacturer = input("Enter the manufacturer: ")
+        while validate_string(a.manufacturer):
+            print("Input has to be string, try again")
+            a.manufacturer = input("Enter the manufacturer: ")
+        
+        a.noOfPassengers = input("Enter the number of passengers: ")
+        while not validate_string(a.noOfPassengers):
+            print("Input has to be a number, try again")
+            a.noOfPassengers = input("Enter the manufacturer: ")
+
+        # Add aircraft
+        self.logic_wrapper.add_aircraft(a)
 
     def display_destination_list(self):
         destinations = self.logic_wrapper.get_all_destinations()
@@ -356,12 +383,14 @@ _|_|______________
                 print("Invalid date format, try again")
             else:
                 week = self.logic_wrapper.get_week_dates(date)
-                header = "{:<6} {:<20} {:<20}".format('ID', 'Departure Time', 'Destination')
-                separator_line = '-' * 50
+                header = "{:<6} {:<20} {:<20} {:<20}".format('ID', 'Departure Time', 'Destination', 'Is Manned')
+                separator_line = '-' * 70
 
                 print(separator_line)
                 print(header)
                 print(separator_line)
+                
+                employees = self.logic_wrapper.get_all_employees()
 
                 for day in week:
                     result = self.logic_wrapper.get_voyages_of_day(day)
@@ -369,9 +398,14 @@ _|_|______________
                     for voyage in result:
                         flight = self.logic_wrapper.get_flight(voyage.id)
                         if flight:
-                            print("{:<6} {:<20} {:<20}".format(
-                                flight.id, flight.departureTime, flight.destination
-                            ))
+                            is_manned = "true"
+                            if validate_voyage_crew(self.logic_wrapper.get_crew_of_voyage(voyage), employees) == 1:
+                                is_manned = "True"
+                            else:
+                                is_manned = "False"
+                            print("{:<6} {:<20} {:<20} {:<20}".format(
+                                flight.id, flight.departureTime, flight.destination, is_manned)
+                            )
                             print(separator_line)
                 print("""
 ===================================================================================
@@ -388,12 +422,14 @@ _|_|______________
                 print("Invalid date format, try again")
             else:
                 week = self.logic_wrapper.get_week_dates(date)
-                header = "{:<6} {:<20} {:<20}".format('ID', 'Departure Time', 'Destination')
-                separator_line = '-' * 50
+                header = "{:<6} {:<20} {:<20} {:<20}".format('ID', 'Departure Time', 'Destination', 'Is Manned')
+                separator_line = '-' * 70
 
                 print("===================================================================================")
                 print(header)
                 print(separator_line)
+
+                employees = self.logic_wrapper.get_all_employees()
 
                 for day in week:
                     result = self.logic_wrapper.get_voyages_of_day(day)
@@ -407,9 +443,15 @@ _|_|______________
                         for voyage in result:
                             flight = self.logic_wrapper.get_flight(voyage.id)
                             if flight:
-                                print("{:<6} {:<20} {:<20}".format(
-                                    flight.id, flight.departureTime, flight.destination
-                                ))
+                                is_manned = "true"
+                                if validate_voyage_crew(self.logic_wrapper.get_crew_of_voyage(voyage), employees) == 1:
+                                    is_manned = "True"
+                                else:
+                                    is_manned = "False"
+                                                        
+                                print("{:<6} {:<20} {:<20} {:<20}".format(
+                                    flight.id, flight.departureTime, flight.destination, is_manned)
+                                )
                         print(separator_line)  # Print the separator after listing all voyages of the day
 
                 print("""===================================================================================
@@ -419,7 +461,7 @@ _|_|______________
 
     def display_employee_voyages_in_a_week_UI(self):
         while True:
-            date = input("Please input a date in the week to be checked (YYYY-MM-DD): ")
+            date = input("Please input a date in the week to be checked (YYYY-MM-DD) (b to go back): ")
             if date.lower() == "q":
                 exit(0)
             elif date.lower() == "b":
@@ -427,39 +469,49 @@ _|_|______________
             elif not validate_date_2(date):
                 print("Invalid date format, try again")
             else:
-                week = self.logic_wrapper.get_week_dates(date)
-                voyages = self.logic_wrapper.get_all_voyages()
+                break
+        if date.lower() != "b":
+            while True:
+                name = input("Please input the name of the employee to be checked (b to go back): ")
+                if name.lower() == "b":
+                    break
+                elif validate_string(name):
+                    print("Input has to be a string, try again")
+                else:
+                    week = self.logic_wrapper.get_week_dates(date)
+                    voyages = self.logic_wrapper.get_all_voyages()
 
-                header = "{:<12} {:<20} {:<20}".format('Date', 'Employee Name', 'Voyage Destination')
-                separator = '-' * len(header)
-                print("\n" + header)
-                print(separator)
-
-                for day in week:
-                    print(f"{day}:")
-                    result = self.logic_wrapper.employee_schedule_checker(day, True)
-                    if len(result) is 0:
-                        print("    No employees found")
-                    else:
-                        for elem in result:
-                            
-                            cleaned_name = elem.name.replace("<15", "").strip()
-                            for v in voyages:
-                                
-                                v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-                                if cleaned_name in v_crew:
-                                    
-                                    destination = self.logic_wrapper.get_flight(v.id).destination
-                                    line = "            {:<20} {:<20}".format(cleaned_name, destination)
-                                    print(line)
-                                    break
+                    header = "{:<12} {:<20} {:<20}".format('Date', 'Employee Name', 'Voyage Destination')
+                    separator = '-' * len(header)
+                    print("\n" + header)
                     print(separator)
+
+                    for day in week:
+                        print(f"{day}:")
+                        result = self.logic_wrapper.employee_schedule_checker(day, True)
+                        if len(result) is 0:
+                            print("    Employee not working")
+                        else:
+                            for elem in result:
+                                if elem.name != name:
+                                    break
+                                
+                                cleaned_name = elem.name.replace("<15", "").strip()
+                                for v in voyages:
+                                    
+                                    v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+                                    if cleaned_name in v_crew:
+                                        
+                                        destination = self.logic_wrapper.get_flight(v.id).destination
+                                        line = "            {:<20} {:<20}".format(cleaned_name, destination)
+                                        print(line)
+                                        break
+                        print(separator)
 
 
     def input_prompt(self):
         while True:
             self.display_flight_manager_UI()
-            seperator_line = '=' * 83
             command = input("Enter your command: ")
             command = command.lower()
             if command == "b":
@@ -499,7 +551,7 @@ _|_|______________
             elif command == "2":
                 self.display_destination_database_UI()
             elif command == "3":
-                pass
+                self.display_add_aircraft_UI()
             else:
                 print("Invalid input, try again")
 

@@ -2,6 +2,7 @@ from LogicLayer.EmployeeLL import EmployeeLL
 from LogicLayer.DestinationLL import DestinationLL
 from LogicLayer.VoyageLL import VoyageLL
 from LogicLayer.FlightLL import FlightLL
+from LogicLayer.AircraftLL import AircraftLL
 from DataLayer.data_wrapper import Data_Wrapper
 
 class Logic_Wrapper:
@@ -10,6 +11,7 @@ class Logic_Wrapper:
         self.EmployeeLL = EmployeeLL(self.data_wrapper)
         self.VoyageLL = VoyageLL(self.data_wrapper)
         self.DestinationLL = DestinationLL(self.data_wrapper)
+        self.AircraftLL = AircraftLL(self.data_wrapper)
         self.FlightLL = FlightLL(self.data_wrapper)
 
     # ------ EMPLOYEE ----------
@@ -398,3 +400,13 @@ class Logic_Wrapper:
         """
 
         return self.FlightLL.create_unique_id()
+
+    # ------- Aircraft ----------
+    def add_aircraft(self, flight):
+        self.AircraftLL.add_aircraft(flight)
+    
+    def get_aircraft(self, name):
+        return self.AircraftLL.get_aircraft(name)
+    
+    def get_all_aircraft(self):
+        return self.AircraftLL.get_all_aircraft()
