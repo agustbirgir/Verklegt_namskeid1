@@ -142,37 +142,37 @@ class Crew_UI:
         Examples:   
             >>> voyage_add_employee(1111-11-11, True)
             name: Siggi, voyage destination: Nuuk
-            name: Siggi, voyage destination: Nuuk
-            name: Jonas, voyage destination: Nuuk
             name: Jonas, voyage destination: Nuuk
         """
 
         result = self.logic_wrapper.employee_schedule_checker(date, working)
         voyages = self.logic_wrapper.get_all_voyages()
-        if not result:
+        if result == None:
             print("No employees found")
-            return
-
-        employee_voyages = {}
-        for elem in result:
-            employee_voyages[elem.name] = []
-
-        for v in voyages:
-            v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-            for emp_name in v_crew:
-                if emp_name in employee_voyages:
-                    employee_voyages[emp_name].append(self.logic_wrapper.get_flight(v.id).destination)
+        ret_list = []
+        name_list = []
+        for elem in result: # Find the voyages of all the working employees
+            for v in voyages:
+                v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+                print("v crew")
+                print(v_crew)
+                print("ret list")
+                print(ret_list)
+                print("name list")
+                print(name_list)
+                if elem.name in v_crew and elem.name not in name_list:
+                    print(elem.name)
+                    name_list.append(elem.name)
+                    ret_list.append([elem.name, v.id])
 
         print("""
 ===================================================================================
                     Working list of all employees
 ===================================================================================
         """)
-        for emp_name, destinations in employee_voyages.items():
-            destinations_str = ', '.join(destinations)
-            print(f"""
-                  name: {emp_name}
-                  Voyage destination: {destinations_str}""")
+        for elem in ret_list:
+            print(f"Name: {elem[0]}")
+            print(f"Voyage destination: {self.logic_wrapper.get_flight(elem[1]).destination}")
         print("""
 ===================================================================================
                   [B]ack            [Q]uit
@@ -477,7 +477,6 @@ class Crew_UI:
                             voyage_date = selected_voyage_departure.split(" ")[0]
                             schedule.append(voyage_date)
                             employee.scheduled = schedule
-                            print(employee.aircraftLicense)
                             self.logic_wrapper.update_employee(employee)
                         else:
                             print("Employeee {name} not found")
@@ -510,24 +509,6 @@ class Crew_UI:
                                 new_crew_list.append(employee.name)
                     else:
                         print(f"Employee {name} does not exist, try again")
-                
-    
-
-    def display_unmanned_voyages(self): # i dont know where to place the search and next operations of the unmanned puller
-        """
-            Displays a list of unmanned voyages.
-
-            Args: subroutine, input
-                
-            Returns: list of unmanned voyages
-
-            Example: marked for deletion or redaction, not used in any menu's
-            """
-        subroutine = "list"
-        input = 0     #input is only for the search, to check if a voyage is empty, if we dont do that, we can remove it
-        print(self.logic_wrapper.unmanned_voyage_fetcher(subroutine, input))
-        #input("press any button to leave") # ok, so not sure how i am going to handle this part of the operation...
-        
 
     def crew_manager_output(self):
 

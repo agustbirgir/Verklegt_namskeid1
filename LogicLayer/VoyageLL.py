@@ -50,57 +50,67 @@ class VoyageLL:
         return self.data_wrapper.get_all_voyages()
 
     def voyage_add_employee(self, employeeList, id):
-
         """
-        	adds employees into voyage
+        Add employees to a voyages crew
 
-            Args: employeeList id
-        
-            Returns: sends id and employeeList into datalayer for it to be added int the voyage database
+        Args:
+            employeeList (list): List of employees to be added
+            id (string): Id of the voyage for the employees to be added
 
+        Examples:
+            >>> voyage_add_employee(['John', 'Chad'], "2")
+            This call adds John and Chad to the crew of the voyage with ID 2 
+            
         """
-
-        """Add an employee to a voyage"""
         self.data_wrapper.voyage_add_employee(employeeList, id)
 
     def voyage_add_flight(self, flight, id):
-
         """
-        	adds a flight to a voyage
+        Add new aircraft to a voyage
 
-            Args: id, flight
-        
-            Returns: sends flight and id into datalayer
+        Args:
+            aircraft (string): Name of the aircraft to be added
+            id (string): Id of the voyage for the aircraft to be added
 
+        Examples:
+            >>> voyage_add_flight("Boeing 737", "2")
+            This call writes the flight "Boeing 737" as the aircraft for the voyage with ID 2 
+            
         """
-
-        """Update a flight in a voyage"""
         self.data_wrapper.voyage_add_flight(flight, id)
     
     def get_crew_of_voyage(self, voyage):
 
         """
-        	gets crew of a voyage
+        Gets the crew of a specific voyage
 
-            Args: voyage
+        Args: 
+            voyage (Voyage): Get the crew of this voyage
         
-            Returns: takes voyage and pulls the crew, crew gets sent back to send to the UI layer
+        Returns: 
+            A list of names of employees in a voyage
 
+        Examples:
+            >>> get_crew_of_voyage(2)
+            ['Siggi', 'Agust']
         """
-
-        """Get the crew of a specific voyage"""
         crew_list = [item.strip("'") for item in voyage.crew[1:-1].split(", ")]
         return crew_list
 
     def get_week_dates(self, date):
 
         """
-        	gets dates across a week
+        Gets dates across a week
 
-            Args: date
+        Args: 
+            date (string): Date to be used
         
-            Returns: takes date and makes a week out of it
+        Returns:   
+            A list with the week the date is in
 
+        Examples:
+            >>> get_week_dates(2023-12-15)
+            ['2023-12-11', '2023-12-12', 2023-12-13', 2023-12-14', 2023-12-15', 2023-12-16', 2023-12-17']
         """
 
         date = datetime.strptime(date, "%Y-%m-%d")
