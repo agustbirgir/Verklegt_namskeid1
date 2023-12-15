@@ -585,7 +585,7 @@ class Crew_UI:
                                 v_departure = self.logic_wrapper.get_flight(v.id).departureTime
                                 v_crew = self.logic_wrapper.get_crew_of_voyage(v)
                                 if name in v_crew and in_voyage == False:
-                                    if validate_if_registered_at_date(selected_voyage_departure, v_departure):
+                                    if validate_if_registered_at_date_voyage(selected_voyage_departure, v_departure):
                                         print(f"{name}, is already in voyage {v.id}, at the same date {v_departure}, try again")
                                         in_voyage = True
                                 if name in new_crew_list and in_voyage == False:

@@ -424,7 +424,7 @@ _|_|______________
                     break
                 elif validate == False:
                     print("Invalid date format, try again")
-                elif not validate_if_registered_at_date(repeat_date, self.logic_wrapper.get_flight(get_voyage.id).departureFlight):
+                elif validate_if_registered_at_date(repeat_date, self.logic_wrapper.get_flight(get_voyage.id).departureTime):
                     print("cant repeat voyage on same day as original voyage")
                 elif validate == True:
                     new_id = self.logic_wrapper.create_unique_id() # Create a new id

@@ -303,3 +303,12 @@ def validate_pilot(employee, aircraft_name):
             return False
     else:
         return True
+
+
+
+
+def validate_if_registered_at_date_voyage(date1, date2):
+    date1 = datetime.strptime(date1, '%Y-%m-%d %H:%M:%S').date()
+    date2 = datetime.strptime(date2, '%Y-%m-%d %H:%M:%S').date()
+
+    return date1 == date2
