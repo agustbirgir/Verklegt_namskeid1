@@ -3,6 +3,9 @@ from Models.Aircraft import Aircraft
 
 class AircraftIO: 
     def __init__(self):
+        """
+        Constructor that establishes a connection to the csv file
+        """
         self.file_name = "files/aircrafts.csv"
 
     def add_aircraft(self, aircraft):
@@ -56,7 +59,7 @@ class AircraftIO:
             list of Aircraft: A list containing all aircrafty
 
         Examples:
-            >>> get_all_aircraft()
+            >>> get_all_aircrafts()
             [Aircraft(Airbus A330,A330,Airbus SE,250), Aircraft(Boeing 737,747,Boeing Co,366)]
         """
         ret_list = []

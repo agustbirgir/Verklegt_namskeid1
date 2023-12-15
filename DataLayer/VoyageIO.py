@@ -4,6 +4,9 @@ from Models.Voyage import Voyage
 
 class VoyageIO:
     def __init__(self):
+        """
+        Constructor that establishes a connection to the csv file
+        """
         self.file_name = "files/voyages.csv"
 
     def add_voyage(self, voyage):
@@ -97,7 +100,7 @@ class VoyageIO:
             writer.writeheader()
             writer.writerows(rows)
     
-    def voyage_add_employee(self, employeeList, id):
+    def voyage_add_employees(self, employeeList, id):
         """
         Add employees to a voyages crew
 
@@ -106,7 +109,7 @@ class VoyageIO:
             id (string): Id of the voyage for the employees to be added
 
         Examples:
-            >>> voyage_add_employee(['John', 'Chad'], "2")
+            >>> voyage_add_employees(['John', 'Chad'], "2")
             This call adds John and Chad to the crew of the voyage with ID 2 
             
         """

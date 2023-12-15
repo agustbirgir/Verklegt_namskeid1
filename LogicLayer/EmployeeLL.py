@@ -1,131 +1,153 @@
 class EmployeeLL:
     def __init__(self, data_connection):
+        """
+        Constructor that establishes a connection to the data wrapper
+        """
         self.data_wrapper = data_connection
 
     def add_employee(self, employee):
         """
-        adds employee.
+        Add new employee to the employee.csv file
 
-        Args: 
-            employee
+        Args:
+            employee (Employee): Employee to be written to the file
 
-        Returns: sends employee into datalayer/database
-
-    """
-
-        """Takes in a customer object and forwards it to the data layer"""
+        Examples:
+            >>> add_employee(Employee)
+            This call writes all the attributes of the Employee object to the employee.csv file
+        """
 
         self.data_wrapper.add_employee(employee)
 
     def get_all_employees(self):
-
         """
-        	gets all employees.
+        Returns all employees from employees.csv
 
-            Args: none
-        
-            Returns: list of employees
+        Returns:
+            list of Employee: A list containing all employees
 
+        Examples:
+            >>> get_all_employees()
+            [Employee(Siggi,Pilot,1214742314,2,3,a@g.is,4,['1010-11-10', '9999-11-11'],Boeing 737), Employee(Tommy Lee,Head Pilot,12345678,noatun 8,5812345,tommy@lee.com,1245678,[],Boeing 737)]
         """
-
-        """Returns all employees"""
-
         return self.data_wrapper.get_all_employees()
     
     def get_all_pilots(self):
-
         """
-        	gets all pilots.
+        Get all employees that are pilots in the employees.csv file
 
-            Args: none
-        
-            Returns: list of pilots
+        Returns:
+            list of Employee: Returns a list of all employees that are pilots
 
+        Examples:
+            >>> get_all_pilots()
+            [Employee(Siggi,Pilot,1214742314,as 5,1247402,a@g.is,4,['1010-11-10', '9999-11-11'];Boeing 737), Employee(Tommy Lee;Head Pilot;12345678;noatun 8;5812345;tommy@lee.com;1245678;[];Boeing 737)]
+            
         """
-
-        """Returns all pilots"""
 
         return self.data_wrapper.get_all_pilots()
     
     def get_all_attendants(self):
-
         """
-        	gets all attendants.
+        Get all employees that are attendants in the employees.csv file
 
-            Args: none
-        
-            Returns: list of attendants
+        Returns:
+            list of Employee: Returns a list of all employees that are attendants
 
+        Examples:
+            >>> get_all_pilots()
+            [Employee(Sigurjon,Head Flight Attendant,9374061953,Sævangur 8,5812345,agust@gmail.com,1234567,[],), Employee(Halli,Attendant,1047283940,Skaggaturn 12,5812345,Halli@gmail.com,8401640,[],)]
+            
         """
-
-        """Returns all attendants"""
 
         return self.data_wrapper.get_all_attendants()
     
     def find_employee_by_ssn(self, ssn):
-
         """
-        	gets employee
+        Returns a specific employee from employees.csv based on social security number
 
-            Args: ssn
-        
-            Returns: gets employee with matching ssn from datalayer
+        Args:
+            ssn (string): Social security number of the employee
 
+        Returns:
+            employee (Employee): Employee to be found
+
+        Examples:
+            >>> find_employee_by_ssn(1090452944)
+            Employee(Joi,Head Flight Attendant,1090452944,Sævangur 8,5812345,agust@gmail.com,1234567,[],)
+            >>> get_flight(Thorshavn)
+            Employee(Siggi,Pilot,1214742314,2,3,a@g.is,4,['1010-11-10', '9999-11-11'],Boeing 737)
         """
 
         return self.data_wrapper.find_employee_by_ssn(ssn)
     
     def get_employee_by_name(self, name):
-
         """
-        	gets employee
+        Get employee in the employees.csv file by name
 
-            Args: name
+        Args:
+            name (string): Employee name to be found
         
-            Returns: gets employee with matching name from datalayer
+        Returns:
+            employee (Employee): Returns an employee
 
+        Examples:
+            >>> get_employee_by_name(Siggi)
+            Employee(Siggi,Pilot,1214742314,2,3,a@g.is,4,['1010-11-10', '9999-11-11'],Boeing 737)
+            
         """
 
         return self.data_wrapper.get_employee_by_name(name)
 
     def update_employee(self, employee):
-
         """
-        	updates employee
+        Take in an updated employee and update the employee in the employees.csv file
 
-            Args: employee
-        
-            Returns: sends updated employee information into datalayer
+        Args:
+            updated_employee (string): Employee to be updated in the csv file
 
+        Examples:
+            >>> update_employee(Employee())
+            Updates the updated attributes of the employee to the csv file
+            
         """
 
         self.data_wrapper.update_employee(employee)
 
     def employee_schedule_checker(self, date, working): #working is meant to say if we are checking for non working and working employees
-
         """
-        	checks the schedule of employees on a specific date
+        Return all employees that are not working or are working on a certain date.
 
-            Args: date, working
-        
-            Returns: the working or non-working employess from data layer sent to ui layer
+        Args:
+            date (string): The date to be checked
+            working (boolean): If employee is working or not
 
+        Returns:
+            list of Employee: Returns a list of all employees that are attendants
+
+        Examples:
+            >>> get_all_pilots()
+            [Employee(Sigurjon,Head Flight Attendant,9374061953,Sævangur 8,5812345,agust@gmail.com,1234567,[],), Employee(Halli,Attendant,1047283940,Skaggaturn 12,5812345,Halli@gmail.com,8401640,[],)]
+            
         """
-
         return self.data_wrapper.employee_schedule_checker(date, working)
 
     def get_schedule_of_employee(self, employee):
 
         """
-        	gets schedule pf employee
+        Gets schedule of employee
 
-            Args: employee, schedule_list
+        Args: 
+            employee (Employee): Get shedule of this employee
         
-            Returns: gets employee schedule from the datalayer and sends it back to the ui layer in a suitable format
+        Returns:
+            Gets shcedule of employee
+
+        Examples:
+            >>> get_schedule_of_employee("Siggi")
+            ['1010-11-10', '2023-12-15']
 
         """
-
-        """Get the schedule of a given employee"""
         if employee is None:
             return []
         schedule_list = [item.strip("'") for item in employee.scheduled[1:-1].split(", ")]
@@ -134,11 +156,17 @@ class EmployeeLL:
     def sort_pilots_by_license(self):
 
         """
-        	sorts the pilot list by aircraft license
-
-            Args: pilots, aircraft, ret_list, aircraftLicense
+        Sorts the pilot list by aircraft license
         
-            Returns: a sorted list of pilots and sends it into the ui layer
+        Returns:
+            A list of pilots sorted by their aircraft types
+        
+        Examples:
+            >>> sort_pilots_by_license()
+            name: Siggi, license: Boeing 737
+            name: Tommy Lee, license: Boeing 737
+            name: Agust, license: Airbus A330
+            name: Jonas, license: Airbus A330
 
         """
 
@@ -154,12 +182,17 @@ class EmployeeLL:
     def get_pilots_by_license(self, license):
 
         """
-        	gets pilots who have a matching license
+        Gets pilots based on their license
 
-            Args: license
+        Args: 
+            license (string): Name of the aircraft
         
-            Returns: list of pilots who have the license that was provided as input, sent to the ui layer.
+            Returns: 
+                List of pilots who have the license that was provided as input
 
+            Examples:
+                >>> get_pilots_by_license("Boeing 737")
+                name: Siggi, profession: Pilot, license: Boeing 737
+                name: Tommy Lee, profession: Head Pilot, license: Boeing 737
         """
-
         return self.data_wrapper.get_pilots_by_license(license)

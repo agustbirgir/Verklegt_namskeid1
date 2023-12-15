@@ -1,45 +1,50 @@
 class AircraftLL:
     def __init__(self, data_connection):
+        """
+        Constructor that establishes a connection to the data wrapper
+        """
         self.data_wrapper = data_connection
 
     def add_aircraft(self, aircraft):
-
         """
-        	adds an aircraft.
+        Add new aircraft to the aircrafts.csv file
 
-            Args: aircraft
-        
-            Returns: aircraft sent into datalayer
+        Args:
+            aircraft (Aircraft): Aircraft to be written to the file
 
-    """
-
-        """Add aircraft to the csv file"""
+        Examples:
+            >>> add_aircraft(Aircraft)
+            This call writes all the attributes of the Aircraft object to the aircrafts.csv file
+        """
         self.data_wrapper.add_aircraft(aircraft)
 
     def get_aircraft(self, name):
-
         """
-        	gets aircraft
+        Returns a specific aircraft from aircrafts.csv based on name
 
-            Args: name
-        
-            Returns: uses aircraft name and pulls it from datalayer
+        Args:
+            name (string): The name of the aircraft
 
-    """
+        Returns:
+            Flight: Returns an aircraft
 
-        """Return a specific aircraft"""
+        Examples:
+            >>> get_aircraft(Boeing 737)
+            Aircraft(Boeing 737,747,Boeing Co,366)
+            >>> get_aircraft(Airbus A330)
+            Aircraft(Airbus A330,A330,Airbus SE,250)
+        """
         return self.data_wrapper.get_aircraft(name)
     
     def get_all_aircraft(self):
-
         """
-        	gets all aircraft.
+        Returns all aircraft from aircraft.csv
 
-            Args: none
-        
-            Returns: pulls all the aircraft in datalayer into ui layer
+        Returns:
+            list of Aircraft: A list containing all aircrafty
 
-    """
-
-        """Return all of the aircrafts"""
+        Examples:
+            >>> get_all_aircraft()
+            [Aircraft(Airbus A330,A330,Airbus SE,250), Aircraft(Boeing 737,747,Boeing Co,366)]
+        """
         return self.data_wrapper.get_all_aircrafts()

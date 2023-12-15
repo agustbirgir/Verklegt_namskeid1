@@ -1,45 +1,55 @@
 class DestinationLL:
     def __init__(self, data_connection):
+        """
+        Constructor that establishes a connection to the data wrapper
+        """
         self.data_wrapper = data_connection
 
     def add_destination(self, destination):
-
         """
-        	adds destination.
+        Add new flight to the destinations.csv file
 
-            Args: destination
-        
-            Returns: adds a destination into the datalayer
+        Args:
+            destination (Destination): Destination to be written to the file
 
-    """
-        
-        """Add destination based on location, distance and travel time"""
+        Examples:
+            >>> add_destination(Destination)
+            This call writes all the attributes of the Destination object to the destinations.csv file
+        """
         self.data_wrapper.add_destination(destination)
 
     def get_destination(self, country):
-
         """
-        	gets destination.
+        Returns a specific destination from destinations.csv based on city
 
-            Args: country
-        
-            Returns: gets destination from datalayer
+        Args:
+            city (string): The city of the destination
 
-    """
+        Returns:
+            Destination: Returns a destination
 
-        """Return a specific destination"""
+        Examples:
+            >>> get_flight(Nuuk)
+            Destination(Greenland, Nuuk, Nuuk Airport, 2:40, 2000, john, 12345678, 01)
+            >>> get_flight(Thorshavn)
+            Destination(Faroe Islands, Thorshavn, Vagar Airport, 5:30, 4500, joe, 13579864, 01)
+        """
         return self.data_wrapper.get_destination(country)
     
     def get_all_destinations(self):
-
         """
-        	gets all destinations.
+        Returns a specific destination from destinations.csv based on city
 
-            Args: none
-        
-            Returns: gets all existing destinations
+        Args:
+            city (string): The city of the destination
 
-    """
+        Returns:
+            Destination: Returns a destination
 
-        """Return all of the destinations"""
+        Examples:
+            >>> get_flight(Nuuk)
+            Destination(Greenland, Nuuk, Nuuk Airport, 2:40, 2000, john, 12345678, 01)
+            >>> get_flight(Thorshavn)
+            Destination(Faroe Islands, Thorshavn, Vagar Airport, 5:30, 4500, joe, 13579864, 01)
+        """
         return self.data_wrapper.get_all_destinations()

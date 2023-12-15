@@ -3,91 +3,103 @@ from datetime import timedelta
 
 class FlightLL:
     def __init__(self, data_connection):
+        """
+        Constructor that establishes a connection to the data wrapper
+        """
         self.data_wrapper = data_connection
 
     def add_flight(self, destination):
-
         """
-        	adds flight.
+        Add new flight to the flights.csv file
 
-            Args: destination
-        
-            Returns: moves from destination into datalayer to add a flight
+        Args:
+            flight (Flight): Flight to be written to the file
 
-    """
-
-        """Add flight"""
+        Examples:
+            >>> add_flight(Flight)
+            This call writes all the attributes of the Flight object to the flights.csv file
+        """
         self.data_wrapper.add_flight(destination)
 
     def get_flight(self, country):
-
         """
-        	gets flight.
+        Returns a specific flight from flights.csv based on id
 
-            Args: destination
-        
-            Returns: uses country/destination to get flights from data layer
+        Args:
+            id (string): The id of the flight
 
-    """
+        Returns:
+            Flight: Returns a flight
 
-        """Return a specific flight"""
+        Examples:
+            >>> get_flight(1891)
+            Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891, NA021)
+            >>> get_flight(1891)
+            Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067, NA034)
+        """
         return self.data_wrapper.get_flight(country)
     
     def get_all_flights(self):
-
         """
-        	gets all flights.
+        Returns a specific flight from flights.csv based on id
 
-            Args: none
-        
-            Returns: gets all flights ongoing from datalayer
+        Args:
+            id (string): The id of the flight
 
-    """
+        Returns:
+            Flight: Returns a flight
 
-        """Return all of the flights"""
+        Examples:
+            >>> get_flight(1891)
+            Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891, NA021)
+            >>> get_flight(1891)
+            Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067, NA034)
+        """
         return self.data_wrapper.get_all_flights()
     
     def get_voyage_flights(self, id):
-
         """
-        	gets voyage flights
+        Return the two flights that are in a voygae
 
-            Args: id
-        
-            Returns: voyage flight from data layer
+        Returns:
+            list of Flight: A list containing two flights
 
-    """
-
+        Examples:
+            >>> get_all_flights()
+            [Flight(Keflavik, 1010-11-10 10:20:00, 1010-11-10 13:10:00, Nuuk, 1891, NA021), Flight(Keflavik, 1990-10-12 10:11:00, 1990-10-12 12:51:00, Nuuk, 2067, NA022)]
+        """
         return self.data_wrapper.get_voyage_flights(id)
     
     def calculate_arrival_time(self, date, time):
 
         """
-        	calculates the time it takes to arrive.
+        Adds given time to a date.
 
-            Args: date, time
+            Args: 
+                date (Date): The date to add the time to
+                time (Date): The hours and minutrs to add to the date
         
-            Returns: the addition on the time and travel time for the arrival time
+        Returns: The time added to the date
 
-    """
-
-        """Add together the departing time and the flytime to get arrival time"""
-
+        Examples:
+            >>> calculate_arrival_time(2023-12-15 10:00, 3:00)
+            2023-12-15 13:00
+ 
+        """
         calculate_arrival = date + timedelta(hours=time.hour, minutes=time.minute)
         return calculate_arrival
 
     def create_unique_id(self):
 
         """
-        	creates a unique id.
-
-            Args: none
+        Creates a random id.
         
-            Returns: returns a random number between 0 and 5000
+        Returns: 
+            Returns a random number between 0 and 5000
 
-            note: we might want to check if an id already exists..., but we dont, so fingers crossed
+        Examples:
+            >>> create_unique_id()
+            3028
 
-    """
-
-        """Use a random number as a unique id"""
+        """
         return random.randint(0, 5000)

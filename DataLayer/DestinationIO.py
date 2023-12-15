@@ -3,6 +3,9 @@ from Models.Destination import Destination
 
 class DestinationIO:
     def __init__(self):
+        """
+        Constructor that establishes a connection to the csv file
+        """
         self.file_name = "files/destinations.csv"
 
     def add_destination(self, destination):
