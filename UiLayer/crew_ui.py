@@ -127,56 +127,49 @@ class Crew_UI:
             """)
     
     def display_employees_working_list(self, date, working):
-        """
-        Displays a list of employee schedules for a inserted date.
+            """
+            Displays a list of employee schedules for a inserted date.
 
-        Args:
-            date (string): Date to be searched
-            
-        Returns: 
-            printed list of employees that are busy on inserted day
+            Args:
+                date (string): Date to be searched
+                
+            Returns: 
+                printed list of employees that are busy on inserted day
 
-        Raises: 
-            message if no employee found on date for specifications
+            Raises: 
+                message if no employee found on date for specifications
 
-        Examples:   
-            >>> voyage_add_employee(1111-11-11, True)
-            name: Siggi, voyage destination: Nuuk
-            name: Siggi, voyage destination: Nuuk
-            name: Jonas, voyage destination: Nuuk
-            name: Jonas, voyage destination: Nuuk
-        """
-
-        result = self.logic_wrapper.employee_schedule_checker(date, working)
-        voyages = self.logic_wrapper.get_all_voyages()
-        if not result:
-            print("No employees found")
-            return
-
-        employee_voyages = {}
-        for elem in result:
-            employee_voyages[elem.name] = []
-
-        for v in voyages:
-            v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-            for emp_name in v_crew:
-                if emp_name in employee_voyages:
-                    employee_voyages[emp_name].append(self.logic_wrapper.get_flight(v.id).destination)
-
-        print("""
-===================================================================================
-                    Working list of all employees
-===================================================================================
-        """)
-        for emp_name, destinations in employee_voyages.items():
-            destinations_str = ', '.join(destinations)
-            print(f"""
-                  name: {emp_name}
-                  Voyage destination: {destinations_str}""")
-        print("""
-===================================================================================
-                  [B]ack            [Q]uit
-===================================================================================""")
+            Examples:   
+            voyage_add_employee(1111-11-11, True)
+                name: Siggi, voyage destination: Nuuk
+                name: Jonas, voyage destination: Nuuk
+            """
+    
+            result = self.logic_wrapper.employee_schedule_checker(date, working)
+            voyages = self.logic_wrapper.get_all_voyages()
+            if result == None:
+                print("No employees found")
+            ret_list = []
+            name_list = []
+            for elem in result: # Find the voyages of all the working employees
+                for v in voyages:
+                    v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+                    if elem.name in v_crew and elem.name not in name_list:  
+                        name_list.append(elem.name)
+                        ret_list.append([elem.name, v.id])
+    
+            print("""
+    ===================================================================================
+                        Working list of all employees
+    ===================================================================================
+            """)
+            for elem in ret_list:
+                print(f"Name: {elem[0]}")
+                print(f"Voyage destination: {self.logic_wrapper.get_flight(elem[1]).destination}")
+            print("""
+    ===================================================================================
+                    [B]ack            [Q]uit
+    ===================================================================================""")
 
 
     def display_employees_working_status_UI(self):
@@ -452,6 +445,7 @@ class Crew_UI:
                 aircraft_name = input(f"Select the name of the aircraft: ")
                 aircraft = self.logic_wrapper.get_aircraft(aircraft_name)
                 if aircraft != None:
+                    voyage.aircraft = aircraft_name
                     print(f"You picked: {aircraft.name}")
                     break
                 else:
@@ -499,7 +493,7 @@ class Crew_UI:
                                 v_departure = self.logic_wrapper.get_flight(v.id).departureTime
                                 v_crew = self.logic_wrapper.get_crew_of_voyage(v)
                                 if name in v_crew and in_voyage == False:
-                                    if validate_if_registered_at_date(selected_voyage_departure, v_departure):
+                                    if validate_if_registered_at_date_voyage(selected_voyage_departure, v_departure):
                                         print(f"{name}, is already in voyage {v.id}, at the same date {v_departure}, try again")
                                         in_voyage = True
                                 if name in new_crew_list and in_voyage == False:
