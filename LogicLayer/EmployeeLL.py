@@ -3,13 +3,13 @@ class EmployeeLL:
         self.data_wrapper = data_connection
 
     def add_employee(self, employee):
-
         """
-        	adds employee.
+        adds employee.
 
-            Args: employee
+        Args: 
+            employee
 
-            Returns: sends employee into datalayer/database
+        Returns: sends employee into datalayer/database
 
     """
 

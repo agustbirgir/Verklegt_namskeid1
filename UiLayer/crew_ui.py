@@ -95,22 +95,21 @@ class Crew_UI:
     def display_employee_schedule_list(self, date, working):
 
         """
-            Displays a list of employee schedules for a inserted date.
+        Displays a list of employee schedules for a inserted date.
 
-            Args: results, date, working
+        Args:
+            date (string): date to be checked
+            working (boolean): If employee is working or not
                 
-            Returns: printed list of employees that are free on inserted day
+        Returns: printed list of employees that are free on inserted day
 
-            Raises: message if no employee found on date for specifications
+        Raises: message if no employee found on date for specifications
 
-            Examples:   1111-11-11
-                name: Siggi
-                name: Tommy Lee
-                
-
-           
-            """
-
+        Examples:   
+            >>> voyage_add_employee(1111-11-11, False)
+            name: Siggi
+            name: Tommy Lee   
+        """
         result = self.logic_wrapper.employee_schedule_checker(date, working)
         if result == None:
             print("No employees found")
@@ -128,25 +127,25 @@ class Crew_UI:
             """)
     
     def display_employees_working_list(self, date, working):
-
         """
-            Displays a list of employee schedules for a inserted date.
+        Displays a list of employee schedules for a inserted date.
 
-            Args: result, date, working, voyages, v_crew
-                
-            Returns: printed list of employees that are busy on inserted day
+        Args:
+            date (string): Date to be searched
+            
+        Returns: 
+            printed list of employees that are busy on inserted day
 
-            Raises: message if no employee found on date for specifications
+        Raises: 
+            message if no employee found on date for specifications
 
-            Examples:   1010-11-10
-                        name: Siggi, voyage destination: Nuuk
-                        name: Siggi, voyage destination: Nuuk
-                        name: Jonas, voyage destination: Nuuk
-                        name: Jonas, voyage destination: Nuuk
-                
-
-            Note: sorted by profession
-            """
+        Examples:   
+            >>> voyage_add_employee(1111-11-11, True)
+            name: Siggi, voyage destination: Nuuk
+            name: Siggi, voyage destination: Nuuk
+            name: Jonas, voyage destination: Nuuk
+            name: Jonas, voyage destination: Nuuk
+        """
 
         result = self.logic_wrapper.employee_schedule_checker(date, working)
         voyages = self.logic_wrapper.get_all_voyages()
@@ -377,24 +376,23 @@ class Crew_UI:
             elif command == "4":
                 self.display_employee()
             elif command == "5":
-                aircraft_menu = {
-                        "1": "Boeing 737",
-                        "2": "Airbus A330",
-                    }
-                print()
-                print("Aircraft types:")
-                for key, value in aircraft_menu.items():
-                    print(f"{key}. {value}")
+                aircraft_list = self.logic_wrapper.get_all_aircraft()
+                for elem in aircraft_list:
+                    print(f"name: {elem.name}, type: {elem.type}")
                 while True:
-                    aircraft_choice = input(f"Select the aircraft: ")
-                    if aircraft_choice in aircraft_menu:
-                        pilots = self.logic_wrapper.get_pilots_by_license(aircraft_menu[aircraft_choice])
-                        for elem in pilots:
-                            print(f"name: {elem.name}, profession: {elem.profession}, license: {elem.aircraftLicense}")
-                    elif aircraft_choice.lower() == "b":
+                    aircraft_name = input(f"Select the name of the aircraft (b to go back): ")
+                    aircraft = self.logic_wrapper.get_aircraft(aircraft_name)
+                    if aircraft_name.lower() == "b":
+                        break
+                    elif aircraft != None:
+                        print(f"You picked: {aircraft.name}")
                         break
                     else:
-                        print("invalid input")
+                        print("Wrong input, try again")
+                if aircraft_name.lower() != "b":
+                    pilots = self.logic_wrapper.get_pilots_by_license(aircraft.name)
+                    for elem in pilots:
+                        print(f"name: {elem.name}, profession: {elem.profession}, license: {elem.aircraftLicense}")
             elif command == "6":
                 result = self.logic_wrapper.sort_pilots_by_license()
                 for elem in result:
@@ -422,55 +420,39 @@ class Crew_UI:
 
         """Display the menu to add crew to voyage"""
         while True:
-            #mode = input("do you wish to search for a voyage [1] or do you wish to get the nearest voyage [2]")
-            mode = "1"
-            if mode == "1":
-                while True:
-                    id = input("please enter voyage ID: ")
-                    try:
-                        id = int(id)
-                        break
-                    except ValueError:
-                        print("Invalid ID, please enter a number.")
-                voyage = self.logic_wrapper.get_voyage(id)
-                if isinstance(voyage, str):
-                    print(voyage)
-                    continue
+            id = input("please enter voyage ID (b to go back): ")
+            if id.lower()== "b":
                 break
-            #elif mode == "2":
-            #    voyage = pull_next_unmanned_voyage(self)
-            #    if isinstance(voyage, str):
-            #        print(voyage)
-            #        continue
-            #    break
-            else:
-                print("invalid mode")
+            try:
+                id = int(id)
+                break
+            except ValueError:
+                print("Invalid ID, please enter a number.")
 
-        if voyage == "Voyage not found":
-            print("Invalid input")
+        if id == "b":
+            print()
         else:
             # Voyage Found
 
+            voyage = self.logic_wrapper.get_voyage(id)
+
             voyages = self.logic_wrapper.get_all_voyages()
             crew_list = self.logic_wrapper.get_crew_of_voyage(voyage)
+            aircraft_list = self.logic_wrapper.get_all_aircraft()
             selected_voyage_departure = self.logic_wrapper.get_flight(voyage.id).departureTime
             print("You picked voyage", voyage.id,"which departs at", selected_voyage_departure)
             print("Voyage", id,"crew:", crew_list)
 
             # Register flight
-            aircraft_menu = {
-                "1": "Boeing 737",
-                "2": "Airbus A330",
-            }
             print()
             print("Aircraft types:")
-            for key, value in aircraft_menu.items():
-                print(f"{key}. {value}")
+            for elem in aircraft_list:
+                print(f"name: {elem.name}, type: {elem.type}")
             while True:
-                aircraft_choice = input(f"Select the aircraft type: ")
-                if aircraft_choice in aircraft_menu:
-                    voyage.aircraft = aircraft_menu[aircraft_choice]
-                    self.logic_wrapper.voyage_add_flight(aircraft_menu[aircraft_choice], id)
+                aircraft_name = input(f"Select the name of the aircraft: ")
+                aircraft = self.logic_wrapper.get_aircraft(aircraft_name)
+                if aircraft != None:
+                    print(f"You picked: {aircraft.name}")
                     break
                 else:
                     print("Wrong input, try again")
