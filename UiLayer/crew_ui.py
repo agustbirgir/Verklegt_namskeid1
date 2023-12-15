@@ -215,7 +215,7 @@ class Crew_UI:
             elif working == "1":
                 while True:
 
-                    date = input("Please enter date (YYY-MM-DD) (b to go back): ")
+                    date = input("Please enter date (YYYY-MM-DD) (b to go back): ")
                     if date.lower() == "b":
                         break
                     if date.lower() == "q":
@@ -227,7 +227,7 @@ class Crew_UI:
                         self.display_employees_working_list(date, working)
             elif working == "2":
                 while True:
-                    date = input("Please enter date (DD-MM-YYYY) (b to go back): ")
+                    date = input("Please enter date (YYYY-MM-DD) (b to go back): ")
                     if date == "b":
                         break
                     elif date.lower() == "q":
@@ -308,7 +308,23 @@ class Crew_UI:
                     break
                 employee = self.logic_wrapper.find_employee_by_ssn(ssn)
                 if employee:
-                    print(f"name: {employee.name}, profession: {employee.profession}")
+                    print(f"""
+===================================================================================
+                            Database of employee
+===================================================================================
+
+                          Name: {employee.name}
+                          Profession: {employee.profession}
+                          SSN: {employee.ssn}
+                          Home address: {employee.homeAddress}
+                          Gsm number: {employee.gsmNumber}
+                          Email: {employee.email}
+                          HomePhone: {employee.homePhone}
+
+===================================================================================
+                            [B]ack          [Q]uit
+===================================================================================
+                    """)
                 else:
                     print("SSN invalid")
 
@@ -375,6 +391,10 @@ class Crew_UI:
                         pilots = self.logic_wrapper.get_pilots_by_license(aircraft_menu[aircraft_choice])
                         for elem in pilots:
                             print(f"name: {elem.name}, profession: {elem.profession}, license: {elem.aircraftLicense}")
+                    elif aircraft_choice.lower() == "b":
+                        break
+                    else:
+                        print("invalid input")
             elif command == "6":
                 result = self.logic_wrapper.sort_pilots_by_license()
                 for elem in result:
@@ -496,10 +516,13 @@ class Crew_UI:
                             for v in voyages:
                                 v_departure = self.logic_wrapper.get_flight(v.id).departureTime
                                 v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-                                if name in v_crew:
+                                if name in v_crew and in_voyage == False:
                                     if validate_if_registered_at_date(selected_voyage_departure, v_departure):
                                         print(f"{name}, is already in voyage {v.id}, at the same date {v_departure}, try again")
                                         in_voyage = True
+                                if name in new_crew_list and in_voyage == False:
+                                    print("crewmember already assigned")
+                                    in_voyage = True
                             # Otherwise we add the employee to the voyage
                             if not in_voyage:
                                 new_crew_list.append(employee.name)
@@ -574,8 +597,8 @@ class Crew_UI:
                 self.display_employee_database_UI() 
             elif command == "3":                        #updating employee (im doing this so i can understand this better)
                     while True:
-                        ssn = input("Enter the ssn of the employee to update or 'Q' to quit: ")
-                        if ssn.lower() == 'q':
+                        ssn = input("Enter the ssn of the employee to update or 'b' to quit: ")
+                        if ssn.lower() == 'b':
                             break
 
                         employee = self.logic_wrapper.find_employee_by_ssn(ssn)
@@ -604,7 +627,43 @@ class Crew_UI:
                                 elif choice.lower() == 'b':
                                     break
                                 if choice == "1":
-                                    employee.profession = input("Enter new profession: ")
+                                    profession_menu = {#Profession
+                                        "1": "Pilot",
+                                        "2": "Head Pilot",
+                                        "3": "Flight Attendant",
+                                        "4": "Head Flight Attendant"
+                                    }
+                                    print()
+                                    print("Professions:")
+                                    for key, value in profession_menu.items():
+                                        print(f"{key}. {value}")
+
+                                    while True:
+                                        profession_choice = input("Enter the profession of the employee: ")
+                                        if profession_choice in profession_menu:
+                                            employee.profession = profession_menu[profession_choice]
+                                            break
+                                        else:
+                                            print("Wrong input, try again")
+
+                                    if employee.aircraftLicense == '':
+                                        if profession_menu[profession_choice] == "Pilot" or profession_menu[profession_choice] == "Head Pilot":
+                                            aircraft_menu = {
+                                                "1": "Boeing 737",
+                                                "2": "Airbus A330",
+                                            }
+                                            print()
+                                            print("Aircraft types:")
+                                            for key, value in aircraft_menu.items():
+                                                print(f"{key}. {value}")
+                                            while True:
+                                                aircraft_choice = input(f"Select the aircraft license of the pilot: ")
+                                                if aircraft_choice in aircraft_menu:
+                                                    e.aircraftLicense = aircraft_menu[aircraft_choice]
+                                                    break
+                                                else:
+                                                    print("Wrong input, try again")
+                                    
                                 elif choice == "2":
                                     employee.homeAddress = input("Enter new home address: ")
                                 elif choice == "3":
@@ -714,6 +773,7 @@ class Crew_UI:
                 self.display_employees_working_status_UI()
             else:
                 print("Invalid input try again")
+                
 
 
     def display_update_employee_UI(self):
@@ -761,4 +821,4 @@ class Crew_UI:
         else:
             print("Employee not found.")
 
-
+        

@@ -112,7 +112,7 @@ class EmployeeIO:
             for row in reader:
                 ret_list.append(Employee(row["name"], row["profession"], row["scheduled"]))
         return ret_list
-    """
+    
     def employee_schedule_checker(self, date, working):
         ret_list = []
         with open(self.file_name, newline='', encoding='utf-8') as csvfile:
@@ -146,7 +146,9 @@ class EmployeeIO:
                 if working and is_working_at_date and row["name"] not in added_employees:
                     ret_list.append(Employee(row["name"], row["profession"]))
                     added_employees.add(row["name"])
+
                 elif not working and not is_working_at_date and row["name"] not in added_employees:
                     ret_list.append(Employee(row["name"]))
                     added_employees.add(row["name"])
         return ret_list
+            """

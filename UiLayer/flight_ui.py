@@ -27,7 +27,7 @@ _|_|______________
 
                 1. Create voyage
                 2. Destination database
-                3. Show flight info per week
+                
 
 ===================================================================================
                     [B]ack                [Q]uit
@@ -267,6 +267,8 @@ _|_|______________
                     break
                 elif validate == False:
                     print("Invalid date format, try again")
+                elif not validate_if_registered_at_date(repeat_date, self.logic_wrapper.get_flight(get_voyage.id).departureFlight):
+                    print("cant repeat voyage on same day as original voyage")
                 elif validate == True:
                     new_id = self.logic_wrapper.create_unique_id() # Create a new id
                     voyage_flights = self.logic_wrapper.get_voyage_flights(id) # Get the flights of the selected voyage
@@ -436,14 +438,17 @@ _|_|______________
                 for day in week:
                     print(f"{day}:")
                     result = self.logic_wrapper.employee_schedule_checker(day, True)
-                    if result is None:
+                    if len(result) is 0:
                         print("    No employees found")
                     else:
                         for elem in result:
+                            
                             cleaned_name = elem.name.replace("<15", "").strip()
                             for v in voyages:
+                                
                                 v_crew = self.logic_wrapper.get_crew_of_voyage(v)
                                 if cleaned_name in v_crew:
+                                    
                                     destination = self.logic_wrapper.get_flight(v.id).destination
                                     line = "            {:<20} {:<20}".format(cleaned_name, destination)
                                     print(line)
