@@ -160,6 +160,19 @@ _|_|______________
                 print(destination_menu[command])
                 destination = self.logic_wrapper.get_destination(destination_menu[command])
                 if destination != None:
+                    print(f"""
+===================================================================================
+===================================================================================
+                
+                Selected destination: 
+                    country: {destination.country} 
+                    city: {destination.city}
+                    airport: {destination.airport}
+
+===================================================================================
+                   [B]ack           [Q]uit       
+===================================================================================
+                     """)
                     print(f"Selected destination: country: {destination.country}, city: {destination.city}, airport: {destination.airport}")
                     break
                 else:
