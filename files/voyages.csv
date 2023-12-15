@@ -9,5 +9,11 @@ departureFlight;arrivalFlight;crew;id;aircraft
 704;704;['', 'Sigurjon', 'Tommy Lee', 'Siggi'];704;Boeing 737
 1004;1004;['', 'Sigurjon', 'Tommy Lee', 'Siggi'];1004;
 758;758;['', 'Sigurjon', 'Tommy Lee', 'Siggi'];758;
-1726;1726;[];1726;
-1412;1412;[];1412
+1726;1726;['', 'Agust', 'Jonas', 'Halli', 'Haldora'];1726;
+1412;1412;['', 'Agust', 'Jonas', 'Halli', 'Haldora'];1412;
+4801;4801;[];4801;
+4418;4418;[];4418;
+200;200;['', 'Siggi'];200;
+3299;3299;[];3299;
+4633;4633;[];4633;
+4533;4533;[];4533;
