@@ -173,7 +173,6 @@ _|_|______________
                    [B]ack           [Q]uit       
 ===================================================================================
                      """)
-                    print(f"Selected destination: country: {destination.country}, city: {destination.city}, airport: {destination.airport}")
                     break
                 else:
                     print("Destination does not exist, try again")
