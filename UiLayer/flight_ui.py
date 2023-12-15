@@ -293,17 +293,35 @@ _|_|______________
                     crew_list = self.logic_wrapper.get_crew_of_voyage(get_voyage)
                     for name in crew_list:
                         employee = self.logic_wrapper.get_employee_by_name(name)
-                        schedule = self.logic_wrapper.get_schedule_of_employee(employee)
-                        voyage_date = str(departureDate).split(" ")[0] # Get only the date not the time
-                        schedule.append(voyage_date)
-                        employee.scheduled = schedule
-                        self.logic_wrapper.update_employee(employee)
+                        if employee is not None:
+                            schedule = self.logic_wrapper.get_schedule_of_employee(employee)
+                            voyage_date = str(departureDate).split(" ")[0] # Get only the date not the time
+                            schedule.append(voyage_date)
+                            employee.scheduled = schedule
+                            self.logic_wrapper.update_employee(employee)
+                        else:
+                            print(f"Employee named {name} not found.")
 
 
                     self.logic_wrapper.add_flight(departureFlight)
                     self.logic_wrapper.add_flight(arrivalFlight)
                     self.logic_wrapper.add_voyage(new_voyage)
                     
+                    print(f"""
+===================================================================================
+                    Successfully registered voyage, ID: {id}
+===================================================================================
+                          
+            Departure from Keflavik to {destination.city}: {departureDate}
+            Arrival date from Keflavik to {destination.city}: {arrivalDate}
+            Departure from {destination.city} to Keflavik: {departureDate2}
+            Arrival date from {destination.city} to Keflavik: {arrivalDate2}
+
+===================================================================================
+                        [B]ack          [Q]uit  
+===================================================================================
+
+                        """)
                     print(f"\nSuccessfully registered voyage, ID: {id}")
                     print(f"\nDeparture from Keflavik to {destination.city}:", departureDate)
                     print(f"Arrival date from Keflavik to {destination.city}:", arrivalDate)
@@ -387,24 +405,38 @@ _|_|______________
     def display_employee_voyages_in_a_week_UI(self):
         while True:
             date = input("Please input a date in the week to be checked (YYYY-MM-DD): ")
-            if date == "q":
+            if date.lower() == "q":
+                exit(0)
+            elif date.lower() == "b":
                 break
             elif not validate_date_2(date):
                 print("Invalid date format, try again")
             else:
                 week = self.logic_wrapper.get_week_dates(date)
                 voyages = self.logic_wrapper.get_all_voyages()
+
+                header = "{:<12} {:<20} {:<20}".format('Date', 'Employee Name', 'Voyage Destination')
+                separator = '-' * len(header)
+                print("\n" + header)
+                print(separator)
+
                 for day in week:
-                    print(day)
+                    print(f"{day}:")
                     result = self.logic_wrapper.employee_schedule_checker(day, True)
-                    if result == None:
-                        print("No employees found")
-                    for elem in result: # Find the voyages of all the working employees
-                        for v in voyages:
-                            v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-                            if elem.name in v_crew:
-                                print(f"name: {elem.name}, voyage destination: {self.logic_wrapper.get_flight(v.id).destination}")
-                                break
+                    if result is None:
+                        print("    No employees found")
+                    else:
+                        for elem in result:
+                            cleaned_name = elem.name.replace("<15", "").strip()
+                            for v in voyages:
+                                v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+                                if cleaned_name in v_crew:
+                                    destination = self.logic_wrapper.get_flight(v.id).destination
+                                    line = "            {:<20} {:<20}".format(cleaned_name, destination)
+                                    print(line)
+                                    break
+                    print(separator)
+
 
     def input_prompt(self):
         while True:
@@ -470,7 +502,4 @@ _|_|______________
 
                 else:
                     print("invalid date")
-        
-
-
-
+       

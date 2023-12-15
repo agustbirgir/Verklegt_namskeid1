@@ -116,6 +116,17 @@ class Crew_UI:
             print("No employees found")
         else:
             for elem in result:
+                print(f"""
+===================================================================================
+                      List of non-working Employees
+===================================================================================
+                      
+                      name: {elem.name}
+
+===================================================================================
+                  [B]ack            [Q]uit
+===================================================================================
+                """)
                 print(f"name: {elem.name}")
     
     def display_employees_working_list(self, date, working):
@@ -141,17 +152,35 @@ class Crew_UI:
 
         result = self.logic_wrapper.employee_schedule_checker(date, working)
         voyages = self.logic_wrapper.get_all_voyages()
-        if result == None:
+        if not result:
             print("No employees found")
-        ret_list = []
-        for elem in result: # Find the voyages of all the working employees
-            for v in voyages:
-                v_crew = self.logic_wrapper.get_crew_of_voyage(v)
-                if elem.name in v_crew and elem.name not in ret_list:
-                    print(f"name: {elem.name}, voyage destination: {self.logic_wrapper.get_flight(v.id).destination}")
-                    #ret_list.append([elem.name, v.id])
-        #for employee in ret_list:
-        #    print(f"name: {employee[0]}, voyage destination: {self.logic_wrapper.get_flight(employee[1]).destination}")
+            return
+
+        employee_voyages = {}
+        for elem in result:
+            employee_voyages[elem.name] = []
+
+        for v in voyages:
+            v_crew = self.logic_wrapper.get_crew_of_voyage(v)
+            for emp_name in v_crew:
+                if emp_name in employee_voyages:
+                    employee_voyages[emp_name].append(self.logic_wrapper.get_flight(v.id).destination)
+
+        print("""
+===================================================================================
+                    Working list of all employees
+===================================================================================
+        """)
+        for emp_name, destinations in employee_voyages.items():
+            destinations_str = ', '.join(destinations)
+            print(f"""
+                  name: {emp_name}
+                  Voyage destination: {destinations_str}""")
+        print("""
+===================================================================================
+                  [B]ack            [Q]uit
+===================================================================================""")
+
 
     def display_employees_working_status_UI(self):
 
@@ -168,17 +197,31 @@ class Crew_UI:
             """
 
         while True:
-            print("1. List working employees at date")
-            print("2. List non working employees at date")
-            print("b to go back")
+            print(f"""
+===================================================================================
+===================================================================================
+                  
+                1. List working employees at date
+                2. List non working employees at date
+
+===================================================================================
+                  [B]ack            [Q]uit
+===================================================================================
+            """)
+
             working = input("Please enter an option: ")
-            if working == "b":
+            if working.lower() == "b":
                 break
+            elif working.lower() == "q":
+                exit(0)
             elif working == "1":
                 while True:
-                    date = input("Please enter date (YYYY-MM-DD) (b to go back): ")
-                    if date == "b":
+
+                    date = input("Please enter date (YYY-MM-DD) (b to go back): ")
+                    if date.lower() == "b":
                         break
+                    if date.lower() == "q":
+                        exit(0)
                     elif not validate_date_2(date):
                         print("Invalid date format. Please enter a date in YYYY-MM-DD format, try again")
                     else:
@@ -189,6 +232,8 @@ class Crew_UI:
                     date = input("Please enter date (DD-MM-YYYY) (b to go back): ")
                     if date == "b":
                         break
+                    elif date.lower() == "q":
+                        exit(0)
                     elif not validate_date_2(date):
                         print("Invalid date format. Please enter a date in YYYY-MM-DD format, try again")
                     else:
