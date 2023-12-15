@@ -5,5 +5,8 @@ departureFlight;arrivalFlight;crew;id;aircraft
 1538;1538;['', 'Halli', 'Joi', 'Tommy Lee', 'Siggi'];1538;Boeing 737
 3157;3157;[];3157;
 727;727;[];727;
-3576;3576;[];3576
-704;704;[];704
+3576;3576;[];3576;
+704;704;['', 'Sigurjon', 'Tommy Lee', 'Siggi'];704;Boeing 737
+1004;1004;['', 'Sigurjon', 'Tommy Lee', 'Siggi'];1004
+758;758;['', 'Sigurjon', 'Tommy Lee', 'Siggi'];758
+1726;1726;[];1726
