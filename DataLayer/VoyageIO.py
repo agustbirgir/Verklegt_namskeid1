@@ -35,8 +35,26 @@ class VoyageIO:
                 ret_list.append(Voyage(row["departureFlight"], row["arrivalFlight"], row["crew"], row["id"]))
         return ret_list
     
+    def voyage_add_flight(self, flight, id):
+        """Add employees to a voyage"""
+        rows = []
+        with open(self.file_name, mode='r') as file:
+            reader = csv.DictReader(file, delimiter=";")
+            for row in reader:
+                rows.append(row)
+
+        for row in rows:
+            if int(row['id']) == id:
+                row['aircraft'] = str(flight)
+
+        with open(self.file_name, mode='w', newline='') as file:
+            fieldnames = ["departureFlight", "arrivalFlight", "crew", "id", "aircraft"]
+            writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=";")
+            writer.writeheader()
+            writer.writerows(rows)
+    
     def voyage_add_employee(self, employeeList, id):
-        """Add an employee to a voyage"""
+        """Add employees to a voyage"""
         rows = []
         with open(self.file_name, mode='r') as file:
             reader = csv.DictReader(file, delimiter=";")
@@ -48,13 +66,9 @@ class VoyageIO:
                 row['crew'] = str(employeeList)
 
         with open(self.file_name, mode='w', newline='') as file:
-            fieldnames = ["departureFlight", "arrivalFlight", "crew", "id"]
+            fieldnames = ["departureFlight", "arrivalFlight", "crew", "id", "aircraft"]
             writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=";")
-
-            # Write headers
             writer.writeheader()
-
-            # Write updated data
             writer.writerows(rows)
     
     def voyage_add_attendant(self, attendant):
@@ -71,7 +85,7 @@ class VoyageIO:
                 row['pilots'].append(attendant.name) 
 
         with open(self.file_name, mode='w', newline='') as file:
-            fieldnames = ["departureFlight", "arrivalFlight", "pilots", "attendants"]
+            fieldnames = ["departureFlight", "arrivalFlight", "pilots", "attendants", "aircraft"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
 
             # Write headers

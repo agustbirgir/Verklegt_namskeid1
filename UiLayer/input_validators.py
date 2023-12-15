@@ -101,7 +101,14 @@ def validate_if_registered_at_date(date1, date2):
 
     return date1 == date2
 
-
+def validate_pilot(employee, aircraft_name):
+    if employee.profession == "Pilot" or employee.profession == "Head Pilot":
+        if employee.aircraftLicense == aircraft_name:
+            return True
+        else:
+            return False
+    else:
+        return True
 
 
 
