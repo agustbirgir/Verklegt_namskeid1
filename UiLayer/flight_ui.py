@@ -494,7 +494,7 @@ _|_|______________
 ===================================================================================
 
                         """)
-                    print(f"\nSuccessfully registered voyage, ID: {id}")
+                    print(f"\nSuccessfully registered voyage, ID: {new_id}")
                     print(f"\nDeparture from Keflavik to {destination.city}:", departureDate)
                     print(f"Arrival date from Keflavik to {destination.city}:", arrivalDate)
                     print(f"\nDeparture from {destination.city} to Keflavik:", departureDate2)

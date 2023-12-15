@@ -2,3 +2,6 @@ departureFlight;arrivalFlight;crew;id;aircraft
 3891;3891;[];3891;Airbus A330
 2;2;[];2;Airbus A330
 4254;4254;[];4254;Boeing 737
+1006;1006;['', 'Siggi', 'Helgi'];1006;
+391;391;['', 'Siggi', 'Helgi', 'Sigurjon'];391;
+4196;4196;[];4196;
