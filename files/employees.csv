@@ -1,9 +1,10 @@
 name;profession;ssn;homeAddress;gsmNumber;email;homePhone;scheduled;aircraftLicense
 Siggi;Pilot;1214742314;2;3;a@g.is;4;['1010-11-10', '9999-11-11', '2023-10-18'];Boeing 737
 Tommy Lee;Head Pilot;12345678;noatun 8;5812345;tommy@lee.com;1245678;['', '2023-10-18'];Boeing 737
-Agust;Pilot;2110032350;Sævangur 8;8522607;agustbirgirkarlsson@gmail.com;1234567;[];Airbus A330
+Agust;Pilot;2110032350;Sævangur 8;5812345;agustbirgirkarlsson@gmail.com;1234567;['', '1010-11-10'];Airbus A330
 Joi;Head Flight Attendant;1090452944;Sævangur 8;5812345;agust@gmail.com;1234567;['', '2023-10-18'];
 Jonas;Pilot;1908912675;2;3;a@g.is;123456;['', '1010-11-10', '1010-11-10'];Airbus A330
 Helgi;Head Pilot;1881425342;noatun 8;5812345;tommy@lee.com;12345676;['1010-11-10', '9999-11-11'];
 Halli;Attendant;1047283940;Skaggaturn 12;5812345;Halli@gmail.com;8401640;['', '1010-11-10', '2023-10-18'];
 Sigurjon;Head Flight Attendant;9374061953;Sævangur 8;5812345;agust@gmail.com;1234567;[];
+Haldora;Flight Attendant;1234565431;Skaggatur 30;7800653;haldora@gmail.com;5550874;[];

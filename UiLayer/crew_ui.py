@@ -49,19 +49,17 @@ class Crew_UI:
         if result == None:
             print("No employees found")
         else:
-            for elem in result:
-                print(f"""
+            print(f"""
 ===================================================================================
                       List of non-working Employees
-===================================================================================
-                      
-                      name: {elem.name}
-
-===================================================================================
+===================================================================================""")
+            for elem in result:
+                print(f"""
+                      name: {elem.name}""")
+            print("""===================================================================================
                   [B]ack            [Q]uit
 ===================================================================================
-                """)
-                print(f"name: {elem.name}")
+            """)
     
     def display_employees_working_list(self, date, working):
         result = self.logic_wrapper.employee_schedule_checker(date, working)
