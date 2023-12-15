@@ -1,5 +1,3 @@
-import ast
-
 class EmployeeLL:
     def __init__(self, data_connection):
         self.data_wrapper = data_connection
@@ -44,6 +42,14 @@ class EmployeeLL:
         return schedule_list
     
     def sort_pilots_by_license(self):
-        retlist = self.data_wrapper.get_all_pilots()
-        retlist = sorted(retlist, key = lambda row: (row["aircraftLicense"]))
-        return retlist
+        pilots = self.data_wrapper.get_all_pilots()
+        aircraft = self.data_wrapper.get_all_aircrafts()
+        ret_list = []
+        for a in aircraft:
+            for p in pilots:
+                if p.aircraftLicense == a.name:
+                    ret_list.append(p)
+        return ret_list
+    
+    def get_pilots_by_license(self, license):
+        return self.data_wrapper.get_pilots_by_license(license)

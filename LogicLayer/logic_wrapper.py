@@ -44,6 +44,9 @@ class Logic_Wrapper:
     def sort_pilots_by_license(self):
         return self.EmployeeLL.sort_pilots_by_license()
     
+    def get_pilots_by_license(self, license):
+        return self.EmployeeLL.get_pilots_by_license(license)
+    
     # ------- VOYAGE ------------
 
     def add_voyage(self, voyage):
@@ -57,6 +60,9 @@ class Logic_Wrapper:
     
     def voyage_add_employee(self, employeeList, id):
         return self.VoyageLL.voyage_add_employee(employeeList, id)
+    
+    def voyage_add_flight(self, flight, id):
+        return self.VoyageLL.voyage_add_flight(flight, id)
     
     def get_crew_of_voyage(self, voyage):
         return self.VoyageLL.get_crew_of_voyage(voyage)

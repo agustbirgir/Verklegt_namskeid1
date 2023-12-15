@@ -161,7 +161,8 @@ class Crew_UI:
                   2. List all pilots
                   3. List all attendants
                   4. List specific employee
-                  5. List Pilot sorted by license (temp-test)
+                  5. List pilots with specific aircraft license
+                  6. List pilots sorted by license
 ===================================================================================
                     [B]ack          [Q]uit
 ===================================================================================
@@ -178,7 +179,24 @@ class Crew_UI:
             elif command == "4":
                 self.display_employee()
             elif command == "5":
-                self.logic_wrapper.sort_pilots_by_license()
+                aircraft_menu = {
+                        "1": "Boeing 737",
+                        "2": "Airbus A330",
+                    }
+                print()
+                print("Aircraft types:")
+                for key, value in aircraft_menu.items():
+                    print(f"{key}. {value}")
+                while True:
+                    aircraft_choice = input(f"Select the aircraft: ")
+                    if aircraft_choice in aircraft_menu:
+                        pilots = self.logic_wrapper.get_pilots_by_license(aircraft_menu[aircraft_choice])
+                        for elem in pilots:
+                            print(f"name: {elem.name}, profession: {elem.profession}, license: {elem.aircraftLicense}")
+            elif command == "6":
+                result = self.logic_wrapper.sort_pilots_by_license()
+                for elem in result:
+                    print(f"name: {elem.name}, license: {elem.aircraftLicense}")
             elif command.lower() == "b":
                 break
             elif command.lower() == "q":
@@ -213,19 +231,38 @@ class Crew_UI:
             else:
                 print("invalid mode")
 
-
         if voyage == "Voyage not found":
             print("Invalid input")
         else:
             # Voyage Found
-            print("All NaN Air employees:")
-            self.display_employee_list()
-            all_employees = self.logic_wrapper.get_all_employees()
+
             voyages = self.logic_wrapper.get_all_voyages()
             crew_list = self.logic_wrapper.get_crew_of_voyage(voyage)
             selected_voyage_departure = self.logic_wrapper.get_flight(voyage.id).departureTime
             print("You picked voyage", voyage.id,"which departs at", selected_voyage_departure)
             print("Voyage", id,"crew:", crew_list)
+
+            # Register flight
+            aircraft_menu = {
+                "1": "Boeing 737",
+                "2": "Airbus A330",
+            }
+            print()
+            print("Aircraft types:")
+            for key, value in aircraft_menu.items():
+                print(f"{key}. {value}")
+            while True:
+                aircraft_choice = input(f"Select the aircraft type: ")
+                if aircraft_choice in aircraft_menu:
+                    voyage.aircraft = aircraft_menu[aircraft_choice]
+                    self.logic_wrapper.voyage_add_flight(aircraft_menu[aircraft_choice], id)
+                    break
+                else:
+                    print("Wrong input, try again")
+
+            # Register employees
+            print("All NaN Air employees:")
+            self.display_employee_list()
             new_crew_list = [] # Make sure only newly registered crew gets their schedule updated with the voyage departure date
             
             while True:
@@ -243,6 +280,7 @@ class Crew_UI:
                             voyage_date = selected_voyage_departure.split(" ")[0]
                             schedule.append(voyage_date)
                             employee.scheduled = schedule
+                            print(employee.aircraftLicense)
                             self.logic_wrapper.update_employee(employee)
                         else:
                             print("Employeee {name} not found")
@@ -253,9 +291,10 @@ class Crew_UI:
                     break
                 else:
                     if employee != None:
-                        # Check if employee is already assigned to the selected voyage
-                        if employee.name in crew_list:
-                            print(name,"is already in currently selected voyage,",id,", try again")
+                        if employee.name in crew_list: # Check if employee is already assigned to the selected voyage
+                            print(f"{name}, is already in currently selected voyage {id}, try again")
+                        elif not validate_pilot(employee, voyage.aircraft):
+                            print(f"The pilot {name} doesn't have the license for the voyage aircraft {voyage.aircraft}, try again")
                         else:
                             # Check if employee is already registered on a voyage on same date as selected voyage
                             in_voyage = False

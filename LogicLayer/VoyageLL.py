@@ -20,6 +20,10 @@ class VoyageLL:
     def voyage_add_employee(self, employeeList, id):
         """Add an employee to a voyage"""
         self.data_wrapper.voyage_add_employee(employeeList, id)
+
+    def voyage_add_flight(self, flight, id):
+        """Update a flight in a voyage"""
+        self.data_wrapper.voyage_add_flight(flight, id)
     
     def get_crew_of_voyage(self, voyage):
         """Get the crew of a specific voyage"""

@@ -215,6 +215,7 @@ _|_|______________
                 voyage.arrivalFlight = arrivalFlight.id
                 voyage.crew = []
                 voyage.id = id
+                voyage.aircraft = ''
 
                 self.logic_wrapper.add_flight(departureFlight)
                 self.logic_wrapper.add_flight(arrivalFlight)

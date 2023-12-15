@@ -43,6 +43,15 @@ class EmployeeIO:
                 if row["name"] == name:
                     return Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["scheduled"], row["aircraftLicense"])
         return None
+    
+    def get_pilots_by_license(self, license):
+        with open(self.file_name, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=";")
+            ret_list = []
+            for row in reader:
+                if row["aircraftLicense"] == license:
+                    ret_list.append(Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["scheduled"], row["aircraftLicense"]))
+        return ret_list
 
     def update_employee(self, updated_employee):
         employees = []
@@ -84,7 +93,7 @@ class EmployeeIO:
             reader = csv.DictReader(csvfile, delimiter=";")
             for row in reader:
                 if row["profession"] == "Pilot" or row["profession"] == "Head Pilot":
-                    ret_list.append(Employee(row["name"], row["profession"]))
+                    ret_list.append(Employee(row["name"], row["profession"], row["ssn"], row["homeAddress"], row["gsmNumber"], row["email"], row["homePhone"], row["scheduled"], row["aircraftLicense"]))
         return ret_list
 
     def get_all_attendants(self):
